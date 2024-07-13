@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Service {
+  id          Int             @id @default(autoincrement())
+  name        String
+  description String
+  price       Int
+  category    ServiceCategory
+}
+
+model CustomServiceField {
+  id         Int             @id @default(autoincrement())
+  name       String
+  price      Int
+  category   ServiceCategory
+  maxCount   Int?
+}
+
+model Order {
+  id       Int         @id @default(autoincrement())
+  email    String
+  contents String
+  status   OrderStatus
+}
+
+enum ServiceCategory {
+  TikTok
+  Instagram
+  Inne
+}
+
+enum OrderStatus {
+  Niezrealizowane
+  Zrealizowane
+}
