@@ -35,7 +35,7 @@ const Footer = () => {
      </div>
      <a
       className="hover:text-white w-max"
-      href="/regulamin"
+      href="/terms-of-service"
      >
       Regulamin
      </a>
