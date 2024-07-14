@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  background-image: linear-gradient(rgb(112, 56, 255, 0.3), rgb(255, 255, 255) 10%);
+  background-image: linear-gradient(rgb(112, 56, 255, 0.3), rgb(255, 255, 255) 50vh);
   position: relative;
 }
 
