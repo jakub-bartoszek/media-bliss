@@ -40,7 +40,7 @@ const sections = [
 
 export default function Home() {
  return (
-  <div className="w-full h-full flex flex-col items-center">
+  <>
    <div className="h-screen flex justify-center items-center w-1/2">
     <img
      alt="Media Bliss"
@@ -56,6 +56,6 @@ export default function Home() {
      />
     ))}
    </div>
-  </div>
+  </>
  );
 }
