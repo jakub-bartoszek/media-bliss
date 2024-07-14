@@ -8,12 +8,10 @@ export default function RootLayout({
 }>) {
  return (
   <>
-   <header className="h-14 absolute top-0 w-full flex justify-center">
+   <header className="h-14 flex justify-center bg-white fixed top-0 left-0 w-full shadow-[0_0_30px_#00000050] z-30">
     <Navigation />
    </header>
-   <main className="pt-14 max-w-[1400px]  ml-auto mr-auto min-h-screen h-full">
-    {children}
-   </main>
+   <main className="max-w-[1400px] ml-auto mr-auto">{children}</main>
    <Footer />
   </>
  );
