@@ -12,7 +12,7 @@ export default function RootLayout({
     <Navigation />
    </header>
    <main className="max-w-[1400px] ml-auto mr-auto">
-    <div className="w-full min-h-screen h-full flex flex-col items-center">
+    <div className="w-full min-h-screen h-full flex flex-col items-center pt-14">
      {children}
     </div>
    </main>
