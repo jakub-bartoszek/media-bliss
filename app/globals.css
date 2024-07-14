@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  background-image: linear-gradient(rgb(112, 56, 255, 0.3), rgb(255, 255, 255) 50vh);
+  background-image: linear-gradient(rgb(112, 56, 255, 0.2), rgb(255, 255, 255) 50vh);
   position: relative;
 }
 
@@ -11,4 +11,9 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.prose {
+  max-width: none;
+  width: 100%;
 }
