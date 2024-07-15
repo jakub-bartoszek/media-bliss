@@ -8,7 +8,7 @@ const Footer = () => {
    <div className="w-full h-full max-w-[1400px] flex flex-col">
     <img
      className="w-64 mb-6"
-     src="mb-logo-dark-3.svg"
+     src="/logos/mb-logo-dark-3.svg"
     />
     <div className="flex flex-col justify-between h-full">
      <div className="flex flex-col gap-2">

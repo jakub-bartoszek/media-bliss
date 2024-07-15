@@ -9,7 +9,7 @@ const Navigation = () => {
    >
     <img
      className="w-full h-full"
-     src="mb-logo-light-3.svg"
+     src="/logos/mb-logo-light-3.svg"
     />
    </a>
    <div className="flex gap-4">
