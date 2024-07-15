@@ -10,7 +10,7 @@ const ServiceOthersTile = ({
  price
 }: ServiceOthersTileProps) => {
  return (
-  <div className="bg-white rounded-md border-2 w-[calc(50%-8px)] sm:w-[calc(33%-9px)] xl:w-[calc(16%-5px)] border-black/10 flex flex-col justify-between flex-shrink box-border mb-16">
+  <div className="bg-white rounded-md border-2 w-[calc(50%-8px)] sm:w-[calc(33%-9px)] xl:w-[calc(16%-5px)] border-black/10 flex flex-col justify-between flex-shrink box-border">
    <div className="flex flex-col justify-between h-full">
     <div className="p-4 flex flex-col h-full justify-between">
       <div className="text-lg">{name}</div>
