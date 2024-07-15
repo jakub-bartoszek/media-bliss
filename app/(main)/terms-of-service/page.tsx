@@ -24,7 +24,7 @@ export default async function TermsOfServicePage() {
  const contentHtml = await getTermsOfServiceContent();
 
  return (
-  <div className="w-full">
+  <div className="w-full pt-24">
    <div className="prose p-4">
     <h1>Terms of Service</h1>
     <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
