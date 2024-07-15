@@ -2,12 +2,14 @@ interface ServicePackageTileProps {
  name: string;
  price: number;
  list: string[];
+ onSelect: () => void;
 }
 
 const ServicePackageTile = ({
  name,
  list,
- price
+ price,
+ onSelect
 }: ServicePackageTileProps) => {
  return (
   <div className="bg-white rounded-md border-2 w-full sm:w-[calc(33%-9px)] xl:w-[calc(20%-16px)] border-black/10 flex flex-col justify-between flex-shrink box-border">
@@ -25,7 +27,10 @@ const ServicePackageTile = ({
     </div>
    </div>
    <div className="flex items-center justify-center p-4">
-    <button className="bg-primary py-2 w-full text-white rounded-md hover:bg-primary/90 transition">
+    <button
+     className="bg-primary py-2 w-full text-white rounded-md hover:bg-primary/90 transition"
+     onClick={onSelect}
+    >
      Wybierz
     </button>
    </div>
