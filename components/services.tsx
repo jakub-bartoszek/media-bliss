@@ -7,6 +7,7 @@ import ServicePackageTile from "@/components/service-package-tile";
 import { FaInstagram } from "react-icons/fa";
 import { Service, ServiceCategory } from "@prisma/client";
 import { FaTiktok } from "react-icons/fa6";
+import { nanoid } from "nanoid";
 
 const Services = ({
  services,
@@ -20,11 +21,16 @@ const Services = ({
   useState<Service | null>(null);
 
  const handleProductSelect = (product: Service) => {
+  const uniqueProduct = {
+   ...product,
+   cartId: nanoid()
+  };
+
   setSelectedProduct(product);
   setIsModalOpen(true);
 
   const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-  cart.push(product);
+  cart.push(uniqueProduct);
   localStorage.setItem("cart", JSON.stringify(cart));
  };
 
