@@ -58,7 +58,7 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
       )}
      >
       <a
-       href="/services"
+       href="/services/all"
        className="px-4 py-2 hover:bg-gray-200 rounded-lg"
       >
        Wszystkie
