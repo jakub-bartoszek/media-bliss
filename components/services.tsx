@@ -73,8 +73,7 @@ const Services = ({
          .map((service) => (
           <ServiceOthersTile
            key={service.id}
-           name={service.name}
-           price={service.price}
+           service={service}
            onSelect={() => handleProductSelect(service)}
           />
          ))}
