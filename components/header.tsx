@@ -11,12 +11,8 @@ const Header = () => {
  useEffect(() => {
   const handleScroll = () => {
    const scrollY = window.scrollY;
-   if (scrollY >= 300) {
+   if (scrollY !== 0) {
     setOpacity(100);
-   } else if (scrollY >= 200) {
-    setOpacity(66);
-   } else if (scrollY >= 100) {
-    setOpacity(33);
    } else {
     setOpacity(0);
    }
@@ -42,7 +38,10 @@ const Header = () => {
     !showed && opacity === 0 && "bg-white/0"
    )}
   >
-   <Navigation showed={showed} setShowed={setShowed}/>
+   <Navigation
+    showed={showed}
+    setShowed={setShowed}
+   />
   </header>
  );
 };
