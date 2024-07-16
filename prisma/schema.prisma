@@ -3,28 +3,31 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "cockroachdb"
   url      = env("DATABASE_URL")
 }
 
 model Service {
-  id          Int             @id @default(autoincrement())
+  id          Int             @id @default(sequence())
   name        String
   description String
+  list        String[]
+  image       String
   price       Int
   category    ServiceCategory
+  type        ServiceType
 }
 
 model CustomServiceField {
-  id         Int             @id @default(autoincrement())
-  name       String
-  price      Int
-  category   ServiceCategory
-  maxCount   Int?
+  id       Int             @id @default(sequence())
+  name     String
+  price    Int
+  category ServiceCategory
+  maxCount Int?
 }
 
 model Order {
-  id       Int         @id @default(autoincrement())
+  id       Int         @id @default(sequence())
   email    String
   contents String
   status   OrderStatus
@@ -33,7 +36,12 @@ model Order {
 enum ServiceCategory {
   TikTok
   Instagram
-  Inne
+  Others
+}
+
+enum ServiceType {
+  Package
+  Others
 }
 
 enum OrderStatus {
