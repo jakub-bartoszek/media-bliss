@@ -48,7 +48,7 @@ export default function Home() {
       alt="Media Bliss"
       src="/logos/mb-logo-light-1.svg"
      />
-     <a href="/services">
+     <a href="/services/all">
       <button className="bg-primary rounded-lg py-4 px-6 w-max text-white text-xl font-bold animate-[button-appear_2000ms]">
        Sprawdź naszą ofertę
       </button>
