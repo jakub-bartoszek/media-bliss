@@ -3,12 +3,7 @@ import { Service } from "@prisma/client";
 interface CartModalProps {
  isOpen: boolean;
  onClose: () => void;
- selectedProduct: {
-  name: string;
-  image?: string;
-  list?: string[];
-  price: number;
- };
+ selectedProduct: Service;
 }
 
 const CartModal: React.FC<CartModalProps> = ({
@@ -54,10 +49,16 @@ const CartModal: React.FC<CartModalProps> = ({
       </p>
      </div>
      <div className="w-full flex justify-between gap-24">
-      <button onClick={onClose} className="py-2 px-4 bg-primary text-white rounded-lg whitespace-nowrap">
+      <button
+       onClick={onClose}
+       className="py-2 px-4 bg-primary text-white rounded-lg whitespace-nowrap"
+      >
        Kontynuuj zakupy
       </button>
-      <a href="/cart" className="py-2 px-4 bg-primary text-white rounded-lg">
+      <a
+       href="/cart"
+       className="py-2 px-4 bg-primary text-white rounded-lg"
+      >
        Koszyk
       </a>
      </div>
