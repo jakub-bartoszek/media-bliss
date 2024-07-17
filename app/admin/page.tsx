@@ -1,7 +1,8 @@
-"use client"
+"use client";
 
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
+import { LuLoader2 } from "react-icons/lu";
 
 const AdminRedirect = () => {
  const router = useRouter();
@@ -11,8 +12,9 @@ const AdminRedirect = () => {
  }, []);
 
  return (
-  <div className="bg-surface-200 min-h-screen flex items-center justify-center">
-   Redirecting to login page...
+  <div className="text-white flex flex-col items-center justify-center h-screen gap-2">
+   <LuLoader2 className="animate-spin h-20 w-20 text-primary" />
+   <span className="text-xl">Redirecting to login page...</span>
   </div>
  );
 };
