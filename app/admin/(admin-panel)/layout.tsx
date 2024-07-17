@@ -6,9 +6,9 @@ const AdminPanelLayout = ({
  children: React.ReactNode;
 }>) => {
  return (
-  <div className="w-screen h-screen flex">
+  <div className="w-full h-screen flex overflow-hidden">
    <AdminNavigation />
-   <div className="h-screen w-full">{children}</div>
+   <div className="w-full h-full">{children}</div>
   </div>
  );
 };
