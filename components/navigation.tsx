@@ -30,7 +30,7 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
  }, []);
 
  return (
-  <nav className="max-w-[1400px] w-full h-full p-4 flex justify-between items-center z-30">
+  <nav className="ml-auto mr-auto max-w-[1400px] w-full h-full p-4 flex justify-between items-center z-30">
    <a
     href="/"
     className="h-full"
