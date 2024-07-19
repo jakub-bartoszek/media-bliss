@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export default async function GET(req: any, res: any) {
+export async function GET(req: any, res: any) {
  if (req.method === "GET") {
   try {
    const services = await prisma.service.findMany({
