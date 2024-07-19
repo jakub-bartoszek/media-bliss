@@ -1,10 +1,6 @@
-// app/admin/services/[id]/page.tsx
-import { PrismaClient } from "@prisma/client";
 import ServiceForm from "@/components/admin/admin-service-form";
+import { prisma } from "@/lib/server/database/prisma";
 import { redirect } from "next/navigation";
-
-const prisma = new PrismaClient();
-
 interface ServiceIdPageProps {
  params: {
   id: string;

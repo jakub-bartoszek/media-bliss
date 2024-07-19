@@ -1,6 +1,5 @@
 import { Service } from "@prisma/client";
 import { fetchServices } from "@/lib/fetchServices";
-import Services from "@/components/services";
 
 const AdminServices = async () => {
  const services: Service[] = await fetchServices({});
