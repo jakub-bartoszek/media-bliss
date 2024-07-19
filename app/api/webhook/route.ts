@@ -3,11 +3,26 @@ import { prisma } from "@/lib/server/database/prisma";
 import { stripe } from "@/lib/stripe";
 import Stripe from "stripe";
 
-globalThis.sessions = globalThis.sessions || new Map();
+interface SessionData {
+ content: string;
+}
+
+declare global {
+ var sessions: Map<string, SessionData>;
+}
+
+globalThis.sessions =
+ globalThis.sessions || new Map<string, SessionData>();
 
 export async function POST(req: NextRequest) {
  const payload = await req.text();
  const sig = req.headers.get("stripe-signature");
+
+ if (!sig) {
+  return new NextResponse("Webhook signature missing", {
+   status: 400
+  });
+ }
 
  let event;
 
@@ -15,7 +30,7 @@ export async function POST(req: NextRequest) {
   event = stripe.webhooks.constructEvent(
    payload,
    sig,
-   process.env.STRIPE_WEBHOOK_SECRET
+   process.env.STRIPE_WEBHOOK_SECRET!
   );
   console.log("Event constructed successfully");
  } catch (err: any) {

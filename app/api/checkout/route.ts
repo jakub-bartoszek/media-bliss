@@ -1,12 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
 
-globalThis.sessions = globalThis.sessions || new Map();
+interface CartItem {
+ name: string;
+ price: number;
+}
+
+interface SessionData {
+ content: string;
+}
+
+declare global {
+ var sessions: Map<string, SessionData>;
+}
+
+globalThis.sessions =
+ globalThis.sessions || new Map<string, SessionData>();
 
 export async function POST(req: NextRequest) {
  try {
   const body = await req.json();
-  const cartItems = body.cartItems;
+  const cartItems: CartItem[] = body.cartItems;
 
   if (!Array.isArray(cartItems) || cartItems.length === 0) {
    throw new Error("Cart items are invalid or empty.");
@@ -14,7 +28,7 @@ export async function POST(req: NextRequest) {
 
   const session = await stripe.checkout.sessions.create({
    payment_method_types: ["card"],
-   line_items: cartItems.map((item: any) => ({
+   line_items: cartItems.map((item: CartItem) => ({
     price_data: {
      currency: "pln",
      product_data: {
