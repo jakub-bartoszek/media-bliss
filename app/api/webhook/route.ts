@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { checkoutManager } from "@/lib/checkout-manager";
 import { prisma } from "@/lib/server/database/prisma";
 import { stripe } from "@/lib/stripe";
 import Stripe from "stripe";
+
+globalThis.sessions = globalThis.sessions || new Map();
 
 export async function POST(req: NextRequest) {
  const payload = await req.text();
@@ -14,7 +15,7 @@ export async function POST(req: NextRequest) {
   event = stripe.webhooks.constructEvent(
    payload,
    sig,
-   process.env.STRIPE_WEBHOOK_SECRET // Set this in your environment variables
+   process.env.STRIPE_WEBHOOK_SECRET
   );
   console.log("Event constructed successfully");
  } catch (err: any) {
@@ -35,26 +36,34 @@ export async function POST(req: NextRequest) {
   console.log("Session:", session);
 
   const sessionId = session.id;
-  const customerEmail = session.customer_email;
-  const cartItems = checkoutManager.getSession(sessionId);
+  const customerEmail =
+   session.customer_details?.email || "unknown@example.com";
+  const sessionData = globalThis.sessions.get(sessionId);
 
   console.log("Session ID:", sessionId);
   console.log("Customer Email:", customerEmail);
-  console.log("Cart Items:", cartItems);
+  console.log("Session Data:", sessionData);
+
+  if (!sessionData) {
+   console.error(
+    `Session ID: ${sessionId} has no associated cart items`
+   );
+   return new NextResponse("Session not found", { status: 400 });
+  }
+
+  const cartItems = JSON.parse(sessionData.content);
+  console.log("Deserialized Cart Items:", cartItems);
 
   try {
    await prisma.order.create({
     data: {
-     contents: JSON.stringify(cartItems),
-     email: customerEmail || "unknown@example.com",
+     contents: sessionData.content,
+     email: customerEmail,
      status: "Niezrealizowane"
     }
    });
 
-   checkoutManager.consumeSession(
-    sessionId,
-    customerEmail || "unknown@example.com"
-   );
+   globalThis.sessions.delete(sessionId);
 
    console.log("Order created successfully!");
   } catch (err: any) {
