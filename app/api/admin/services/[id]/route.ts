@@ -1,38 +1,9 @@
-// app/api/services/[id]/route.ts
-
+import { prisma } from "@/lib/server/database/prisma";
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
-
-export async function DELETE(
- req: Request,
- { params }: { params: any }
-) {
- try {
-  const { id } = params;
-  if (!id) {
-   return new NextResponse("Service ID missing", { status: 400 });
-  }
-
-  const service = await prisma.service.delete({
-   where: {
-    id: parseInt(id as string)
-   }
-  });
-
-  return NextResponse.json(service);
- } catch (error) {
-  console.error("[SERVICE_ID_DELETE]", error);
-  return new NextResponse("Internal Error", { status: 500 });
- } finally {
-  await prisma.$disconnect();
- }
-}
 
 export async function PATCH(
  req: Request,
- { params }: { params: any }
+ { params }: { params: { id: string } }
 ) {
  try {
   const { id } = params;
@@ -44,10 +15,10 @@ export async function PATCH(
   }
 
   const updatedService = await prisma.service.update({
-   where: { id: parseInt(id as string) },
+   where: { id: parseInt(id, 10) },
    data: {
     name,
-    price: parseInt(price),
+    price: parseInt(price, 10),
     description,
     list,
     category,
@@ -58,6 +29,32 @@ export async function PATCH(
   return NextResponse.json(updatedService);
  } catch (error) {
   console.error("[SERVICE_ID_PATCH]", error);
+  return new NextResponse("Internal Error", { status: 500 });
+ } finally {
+  await prisma.$disconnect();
+ }
+}
+
+export async function DELETE(
+ req: Request,
+ { params }: { params: { id: string } }
+) {
+ try {
+  const { id } = params;
+
+  if (!id) {
+   return new NextResponse("Service ID missing", { status: 400 });
+  }
+
+  const service = await prisma.service.delete({
+   where: {
+    id: parseInt(id, 10)
+   }
+  });
+
+  return NextResponse.json(service);
+ } catch (error) {
+  console.error("[SERVICE_ID_DELETE]", error);
   return new NextResponse("Internal Error", { status: 500 });
  } finally {
   await prisma.$disconnect();
