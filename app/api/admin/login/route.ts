@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 
-// Read environment variables
 const adminPassword = process.env.ADMIN_PASSWORD;
 const secretKey = process.env.JWT_SECRET || "123";
 
