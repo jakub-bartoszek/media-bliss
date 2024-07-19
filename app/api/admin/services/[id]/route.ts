@@ -7,10 +7,11 @@ export async function PATCH(
 ) {
  try {
   const { id } = params;
-  const { name, price, description, list, image, category, type } =
+  const { name, price, description, list, category, type } =
    await req.json();
 
   if (!id) {
+   console.error("[PATCH] Service ID missing");
    return new NextResponse("Service ID missing", { status: 400 });
   }
 
@@ -43,13 +44,12 @@ export async function DELETE(
   const { id } = params;
 
   if (!id) {
+   console.error("[DELETE] Service ID missing");
    return new NextResponse("Service ID missing", { status: 400 });
   }
 
   const service = await prisma.service.delete({
-   where: {
-    id: parseInt(id, 10)
-   }
+   where: { id: parseInt(id, 10) }
   });
 
   return NextResponse.json(service);
