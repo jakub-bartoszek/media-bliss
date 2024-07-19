@@ -36,6 +36,11 @@ const Cart = () => {
  const handleBuy = async () => {
   const stripe = await stripePromise;
 
+  if (!stripe) {
+   console.error("Stripe has not loaded.");
+   return;
+  }
+
   try {
    const response = await axios.post("/api/checkout", { cartItems });
    const sessionId = response.data.id;
