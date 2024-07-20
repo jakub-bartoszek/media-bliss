@@ -46,7 +46,7 @@ const AdminForm = () => {
     name="password"
     type="password"
     placeholder="Hasło"
-    className="w-full px-4 py-2.5 outline-none bg-surface-100 border-2 border-indigo-600 rounded-xl caret-white text-white"
+    className="w-full px-4 py-2.5 outline-none bg-surface-100 border-2 border-indigo-600 rounded-xl"
    />
    <button
     className="w-full py-2.5 text-white bg-indigo-600 rounded-xl disabled:opacity-50 transition-opacity"

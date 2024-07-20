@@ -37,13 +37,13 @@ const AdminNavigation = () => {
  const pathname = usePathname();
 
  return (
-  <div className="flex flex-col p-4 gap-2 border-r-2 border-white/10">
+  <div className="flex flex-col p-2 md:p-4 gap-2 border-r-2 border-white/10">
    {navData.map((nav, index) => (
     <Link
      key={index}
      href={nav.href}
      className={twMerge(
-      "flex items-center gap-4 text-xl py-4 px-6 rounded-lg text-white hover:bg-zinc-700 cursor-pointer transition",
+      "flex items-center gap-2 md:gap-4 md:text-xl py-2 px-2 md:py-4 md:px-6 rounded-lg text-white hover:bg-zinc-700 cursor-pointer transition",
       index === navData.length - 1 && "mt-auto",
       pathname === nav.href && "bg-primary hover:bg-primary"
      )}

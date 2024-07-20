@@ -32,40 +32,69 @@ const AdminServices = () => {
  const categories = Array.from(
   new Set(services.map((service) => service.category))
  );
+ const types = Array.from(
+  new Set(services.map((service) => service.type))
+ );
+
+ const typeLabels: { [key: string]: string } = {
+  Package: "Pakiety",
+  Service: "Usługi",
+  CustomService: "Niestandardowa usługi"
+ };
 
  return (
-  <div className="text-white w-full h-full flex flex-col overflow-y-scroll p-4">
+  <div className="text-white w-full h-full flex flex-col overflow-y-scroll">
    {services.length === 0 ? (
-    <h1 className="w-full text-center text-zinc-500 text-2xl mb-16">Nie znaleziono żadnych usług</h1>
+    <h1 className="w-full text-center text-zinc-500 text-2xl mb-16">
+     Nie znaleziono żadnych usług
+    </h1>
    ) : (
-    <>
-     {categories.map((category) => (
-      <div key={category}>
-       <h1 className="font-bold text-2xl">{category}</h1>
-       {services
-        .filter((service) => service.category === category)
-        .map((service) => (
-         <a
-          href={`/admin/services/${service.id}`}
-          key={service.id}
-          className="flex mb-2 w-full text-lg gap-4 hover:bg-zinc-800 p-2 rounded-lg transition"
-         >
-          <span className="text-gray-400">{service.id}</span>
-          <span>{service.name}</span>
-          <span className="font-bold mr-0 ml-auto">
-           {!service.price
-            ? "Cena zależna od potrzeb klienta"
-            : `${service.price.toString()} PLN`}
-          </span>
-         </a>
-        ))}
-      </div>
-     ))}
-    </>
+    categories.map((category) => (
+     <div
+      key={category}
+      className="mb-8 p-4"
+     >
+      <h1 className="font-bold text-4xl mb-6 px-4">{category}</h1>
+      {types.map((type) => (
+       <div
+        key={type}
+        className="mb-6"
+       >
+        <h2 className="text-3xl text-primary mb-4 font-bold px-4">
+         {typeLabels[type]}
+        </h2>
+        {services
+         .filter(
+          (service) =>
+           service.category === category && service.type === type
+         )
+         .map((service) => (
+          <a
+           href={`/admin/services/${service.id}`}
+           key={service.id}
+           className="flex mb-2 w-full text-lg gap-4 hover:bg-zinc-800 px-4 py-2 rounded-lg transition"
+          >
+           <span className="text-zinc-600 w-6 text-center hidden md:flex">
+            {service.id}
+           </span>
+           <span className="font-bold overflow-ellipsis whitespace-nowrap overflow-hidden flex-grow w-0">
+            {service.name}
+           </span>
+           <span className="ml-auto mr-0 text-nowrap text-zinc-400">
+            {!service.price
+             ? "Cena zależna od potrzeb klienta"
+             : `${service.price.toString()} PLN`}
+           </span>
+          </a>
+         ))}
+       </div>
+      ))}
+     </div>
+    ))
    )}
 
    <button
-    className="py-2 px-4 font-bold ml-auto mr-auto bg-primary rounded-lg"
+    className="py-3 px-6 font-bold ml-auto mr-auto bg-primary text-white rounded-lg transition hover:bg-primary-dark"
     onClick={() => setIsCreateModalOpen(true)}
    >
     Add New Service
