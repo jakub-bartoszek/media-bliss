@@ -1,34 +1,27 @@
 "use client";
 
+import Error from "@/components/error";
+import Loader from "@/components/loader";
 import Services from "@/components/services";
-import { ServiceWithDecimalPrice } from "@/types";
-import { useEffect, useState } from "react";
+import useServices from "@/lib/hooks/useServices";
 
-const TikTokServicesPage = () => {
- const [services, setServices] = useState<ServiceWithDecimalPrice[]>(
-  []
+const AllServicesPage = () => {
+ const { services, loading, error } = useServices();
+
+ const tiktokServices = services.filter(
+  (service) => service.category === "TikTok"
  );
 
- const fetchServices = async () => {
-  try {
-   const response = await fetch("/api/services");
-   const data = await response.json();
-   setServices(data);
-  } catch (error) {
-   console.error("Failed to fetch services", error);
-  }
- };
+ if (loading) return <Loader />;
 
- useEffect(() => {
-  fetchServices();
- }, []);
+ if (error) return <Error />;
 
  return (
   <Services
    category={"TikTok"}
-   services={services}
+   services={tiktokServices}
   />
  );
 };
 
-export default TikTokServicesPage;
+export default AllServicesPage;

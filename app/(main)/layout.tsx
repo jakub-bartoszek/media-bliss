@@ -6,11 +6,10 @@ export default function RootLayout({
 }: Readonly<{
  children: React.ReactNode;
 }>) {
-
  return (
   <>
-  <Header/>
-   <main className="max-w-[1400px] ml-auto mr-auto pt-14">
+   <Header />
+   <main className="max-w-[1400px] ml-auto mr-auto">
     <div className="w-full min-h-screen h-full flex flex-col items-center">
      {children}
     </div>

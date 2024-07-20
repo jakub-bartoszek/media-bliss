@@ -1,8 +1,7 @@
 "use client";
 
-import { useIsVisible } from "@/hooks/useIsVisible";
-import { useEffect, useRef } from "react";
-import { twMerge } from "tailwind-merge";
+import { useIsVisible } from "@/lib/hooks/useIsVisible";
+import { useRef } from "react";
 
 interface HomeSectionProps {
  header: string;
