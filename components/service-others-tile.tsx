@@ -13,8 +13,8 @@ const ServiceOthersTile = ({
   <div className="bg-white rounded-md border-2 w-[calc(50%-8px)] sm:w-[calc(33%-9px)] xl:w-[calc(16%-5px)] border-black/10 flex flex-col justify-between flex-shrink box-border">
    <div className="flex flex-col justify-between h-full">
     <div className="p-4 flex flex-col h-full justify-between">
-     <div className="text-lg">{service.name}</div>
-     <div className="text-3xl font-bold">{service.price} zł</div>
+     <div className="text-lg font-bold">{service.name}</div>
+     <div className="text-4xl font-bold text-primary">{service.price} zł</div>
     </div>
     <div className="w-full">
      <img

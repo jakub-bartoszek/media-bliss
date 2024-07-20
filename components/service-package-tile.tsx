@@ -12,14 +12,14 @@ const ServicePackageTile = ({
  onSelect
 }: ServicePackageTileProps) => {
  return (
-  <div className="bg-white rounded-md border-2 w-full sm:w-[calc(33%-9px)] xl:w-[calc(20%-16px)] border-black/10 flex flex-col justify-between flex-shrink box-border">
+  <div className="bg-white rounded-md border-2 w-full sm:w-[calc(33%-9px)] xl:w-[calc(20%-16px)] border-primary flex flex-col justify-between flex-shrink box-border">
    <div className="p-4">
     <div className="pb-4">
-     <div className="text-xl">{name}</div>
-     <div className="text-4xl font-bold">{price} zł</div>
+     <div className="text-xl font-bold">{name}</div>
+     <div className="text-4xl font-bold text-primary">{price} PLN</div>
     </div>
     <div className="border-t-2 pt-4">
-     <ul className="list-disc marker:text-primary pl-4">
+     <ul className="list-disc marker:text-zinc-400 pl-4">
       {list.map((item, index) => (
        <li key={index}>{item}</li>
       ))}
@@ -31,7 +31,7 @@ const ServicePackageTile = ({
      className="bg-primary py-2 w-full text-white rounded-md hover:bg-primary/90 transition"
      onClick={onSelect}
     >
-     Wybierz
+     Dodaj do koszyka
     </button>
    </div>
   </div>
