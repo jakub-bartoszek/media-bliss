@@ -176,7 +176,7 @@ const Services = ({
           {customServicePrice.toFixed(2)} PLN
          </p>
         </div>
-        <div>
+        <div className="w-full">
          <input
           type="number"
           className="border-2 p-2 w-full mb-4 rounded-lg border-black/10"
