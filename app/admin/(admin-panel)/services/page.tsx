@@ -55,20 +55,21 @@ const AdminServices = () => {
       className="mb-8 p-4"
      >
       <h1 className="font-bold text-4xl mb-6 px-4">{category}</h1>
-      {types.map((type) => (
-       <div
-        key={type}
-        className="mb-6"
-       >
-        <h2 className="text-3xl text-primary mb-4 font-bold px-4">
-         {typeLabels[type]}
-        </h2>
-        {services
-         .filter(
-          (service) =>
-           service.category === category && service.type === type
-         )
-         .map((service) => (
+      {types.map((type) => {
+       const servicesOfType = services.filter(
+        (service) =>
+         service.category === category && service.type === type
+       );
+
+       return servicesOfType.length > 0 ? (
+        <div
+         key={type}
+         className="mb-6"
+        >
+         <h2 className="text-3xl text-primary mb-4 font-bold px-4">
+          {typeLabels[type]}
+         </h2>
+         {servicesOfType.map((service) => (
           <a
            href={`/admin/services/${service.id}`}
            key={service.id}
@@ -87,17 +88,18 @@ const AdminServices = () => {
            </span>
           </a>
          ))}
-       </div>
-      ))}
+        </div>
+       ) : null;
+      })}
      </div>
     ))
    )}
 
    <button
-    className="py-3 px-6 font-bold ml-auto mr-auto bg-primary text-white rounded-lg transition hover:bg-primary-dark"
+    className="py-3 px-6 font-bold absolute bottom-8 left-1/2 bg-primary text-white rounded-lg transition hover:bg-primary-light"
     onClick={() => setIsCreateModalOpen(true)}
    >
-    Add New Service
+    Dodaj usługę
    </button>
 
    {isCreateModalOpen && (
