@@ -1,22 +1,27 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import ServiceCreateForm from "@/components/create-service-modal";
+import ServiceCreateForm from "@/components/admin/create-service-modal";
 import { ServiceWithDecimalPrice } from "@/types";
+import { LuLoader2 } from "react-icons/lu";
 
 const AdminServices = () => {
  const [services, setServices] = useState<ServiceWithDecimalPrice[]>(
   []
  );
  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+ const [isLoading, setIsLoading] = useState(false);
 
  const fetchServices = async () => {
   try {
-   const response = await fetch("/api/admin/services");
+   setIsLoading(true);
+   const response = await fetch("/api/services");
    const data = await response.json();
    setServices(data);
   } catch (error) {
    console.error("Failed to fetch services", error);
+  } finally {
+   setIsLoading(false);
   }
  };
 
@@ -43,8 +48,12 @@ const AdminServices = () => {
  };
 
  return (
-  <div className="text-white w-full h-full flex flex-col overflow-y-scroll">
-   {services.length === 0 ? (
+  <div className="text-white w-full h-full flex items-center flex-col overflow-y-auto">
+   {isLoading ? (
+    <div className="w-full h-full flex items-center justify-center">
+     <LuLoader2 className="animate-spin text-5xl text-primary" />
+    </div>
+   ) : services.length === 0 ? (
     <h1 className="w-full text-center text-zinc-500 text-2xl mb-16">
      Nie znaleziono żadnych usług
     </h1>
@@ -52,7 +61,7 @@ const AdminServices = () => {
     categories.map((category) => (
      <div
       key={category}
-      className="mb-8 p-4"
+      className="mb-8 p-4 w-full"
      >
       <h1 className="font-bold text-4xl mb-6 px-4">{category}</h1>
       {types.map((type) => {
@@ -96,7 +105,7 @@ const AdminServices = () => {
    )}
 
    <button
-    className="py-3 px-6 font-bold absolute bottom-8 left-1/2 bg-primary text-white rounded-lg transition hover:bg-primary-light"
+    className="py-3 px-6 font-bold absolute bottom-8 bg-primary text-white rounded-lg transition hover:bg-primary-light shadow-lg"
     onClick={() => setIsCreateModalOpen(true)}
    >
     Dodaj usługę
