@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/server/database/prisma";
 import { NextRequest, NextResponse } from "next/server";
-import { ServiceCategory } from "@prisma/client"; // Import the enum type
+import { ServiceCategory } from "@prisma/client";
 
 export async function GET(request: Request) {
  const categoryParam = new URL(request.url).searchParams.get(

@@ -18,13 +18,13 @@ const ServiceCreateForm = ({
  const [image, setImage] = useState("");
  const [category, setCategory] = useState("");
  const [type, setType] = useState("");
- const [isSubmitting, setIsSubmitting] = useState(false); // Loading state
+ const [isSubmitting, setIsSubmitting] = useState(false);
 
  const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
-  if (isSubmitting) return; // Prevent further submissions if already submitting
+  if (isSubmitting) return;
 
-  setIsSubmitting(true); // Set loading state
+  setIsSubmitting(true);
 
   try {
    await fetch("/api/admin/services", {
@@ -42,18 +42,18 @@ const ServiceCreateForm = ({
      type
     })
    });
-   onServiceAdded(); // Call callback to update the list
-   onClose(); // Close the modal after successful submission
+   onServiceAdded();
+   onClose();
   } catch (error) {
    console.error("Failed to create service", error);
   } finally {
-   setIsSubmitting(false); // Reset loading state
+   setIsSubmitting(false);
   }
  };
 
  const handleClose = () => {
   onClose();
-  resetForm(); // Reset form state on close
+  resetForm();
  };
 
  const resetForm = () => {
@@ -207,7 +207,7 @@ const ServiceCreateForm = ({
       <button
        type="submit"
        className="px-4 py-2 bg-green-500 text-white rounded-lg"
-       disabled={isSubmitting} // Disable button when submitting
+       disabled={isSubmitting}
       >
        {isSubmitting ? "Submitting..." : "Stwórz"}
       </button>

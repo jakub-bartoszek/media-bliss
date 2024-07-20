@@ -48,7 +48,7 @@ const Services = ({
    ...selectedService,
    cartId: nanoid(),
    name: `${quantity}x ${selectedService.name}`,
-   price: customServicePrice // Use the total price
+   price: customServicePrice
   };
 
   const cart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -69,7 +69,6 @@ const Services = ({
    (service) => service.id.toString() === customServiceId
   );
   if (selectedService) {
-   // Calculate the total price based on quantity
    setCustomServicePrice(qty * selectedService.price);
   }
  };

@@ -1,5 +1,3 @@
-// /(main)/success/page.tsx
-
 const Success = () => {
  return (
   <div>

@@ -36,7 +36,6 @@ const Cart = () => {
  };
 
  const calculateTotal = () => {
-  // Ensure `price` is treated as a number
   return cartItems.reduce((total, item) => {
    const price =
     typeof item.price === "number" ? item.price : Number(item.price);
