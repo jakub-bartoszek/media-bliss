@@ -9,6 +9,7 @@ html {
 body {
   background-color: white;
   position: relative;
+  color: #27272a
 }
 
 @layer utilities {
