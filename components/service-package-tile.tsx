@@ -12,7 +12,7 @@ const ServicePackageTile = ({
  onSelect
 }: ServicePackageTileProps) => {
  return (
-  <div className="bg-white rounded-md border-2 w-full sm:w-[calc(33%-9px)] xl:w-[calc(20%-16px)] border-primary flex flex-col justify-between flex-shrink box-border">
+  <div className="bg-white rounded-md border-2 w-full md:min-w-[260px] md:basis-0 border-primary flex flex-col justify-between flex-shrink box-border">
    <div className="p-4">
     <div className="pb-4">
      <div className="text-xl font-bold">{name}</div>

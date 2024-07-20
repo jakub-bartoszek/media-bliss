@@ -10,7 +10,7 @@ const ServiceOthersTile = ({
  onSelect
 }: ServiceOthersTileProps) => {
  return (
-  <div className="bg-white rounded-md border-2 border-black/10 flex flex-col justify-between flex-shrink box-border overflow-hidden w-full md:w-[200px]">
+  <div className="bg-white rounded-md border-2 border-black/10 flex flex-col justify-between flex-shrink box-border overflow-hidden w-full md:min-w-[214px] md:basis-0">
    <div className="flex flex-row-reverse md:flex-col justify-between h-full border-b-2">
     <div className="p-2 flex flex-col h-full w-full justify-between gap-4">
      <div className="font-bold text-xl">{service.name}</div>
