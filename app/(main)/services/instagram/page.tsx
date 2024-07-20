@@ -11,7 +11,7 @@ const InstagramServicesPage = () => {
 
  const fetchServices = async () => {
   try {
-   const response = await fetch("/api/admin/services");
+   const response = await fetch("/api/services");
    const data = await response.json();
    setServices(data);
   } catch (error) {
