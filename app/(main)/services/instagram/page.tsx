@@ -1,13 +1,34 @@
-import { fetchServices } from "@/lib/fetchServices";
+"use client";
+
 import Services from "@/components/services";
 import { ServiceWithDecimalPrice } from "@/types";
+import { useEffect, useState } from "react";
 
-const InstagramServicesPage = async () => {
- const services: ServiceWithDecimalPrice[] = await fetchServices({
-  category: "Instagram"
- });
+const InstagramServicesPage = () => {
+ const [services, setServices] = useState<ServiceWithDecimalPrice[]>(
+  []
+ );
 
- return <Services category={"Instagram"} services={services} />;
+ const fetchServices = async () => {
+  try {
+   const response = await fetch("/api/admin/services");
+   const data = await response.json();
+   setServices(data);
+  } catch (error) {
+   console.error("Failed to fetch services", error);
+  }
+ };
+
+ useEffect(() => {
+  fetchServices();
+ }, []);
+
+ return (
+  <Services
+   category={"Instagram"}
+   services={services}
+  />
+ );
 };
 
 export default InstagramServicesPage;

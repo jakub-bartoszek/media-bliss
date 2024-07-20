@@ -7,7 +7,7 @@ export async function PATCH(
 ) {
  try {
   const { id } = params;
-  const { name, price, description, list, category, type } =
+  const { name, price, description, list, category, type, image } =
    await req.json();
 
   if (!id) {
@@ -18,14 +18,16 @@ export async function PATCH(
   const updatedService = await prisma.service.update({
    where: { id: parseInt(id, 10) },
    data: {
-    name,
-    price: parseInt(price, 10),
-    description,
-    list,
-    category,
-    type
+     name,
+     price: parseInt(price, 10),
+     description,
+     list,
+     category,
+     type,
+     image
    }
-  });
+ });
+ 
 
   return NextResponse.json(updatedService);
  } catch (error) {

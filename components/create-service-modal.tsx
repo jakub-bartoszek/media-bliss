@@ -121,7 +121,6 @@ const ServiceCreateForm = ({
        onChange={(e) => setDescription(e.target.value)}
        className="w-full rounded-lg border-2 border-white/20 bg-black p-2"
        rows={4}
-       required
       />
      </div>
      <div>
