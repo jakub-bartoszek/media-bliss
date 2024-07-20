@@ -24,7 +24,7 @@ const Footer = () => {
        <div>
         <BiPhone className="w-6 h-6" />
        </div>
-       <a href="tel:+48536-951-44">+48 536 951 442</a>
+       <a href="tel:+48536-951-442">+48 536 951 442</a>
       </div>
       <div className="flex gap-2 items-center hover:text-white w-max">
        <div>
