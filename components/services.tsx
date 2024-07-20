@@ -185,7 +185,7 @@ const Services = ({
           onChange={handleQuantityChange}
          />
          <button
-          className="px-4 py-2 w-full bg-primary hover:bg-primary-light text-white rounded-lg"
+          className="px-4 py-2 w-full bg-primary hover:bg-primary-light transition text-white rounded-lg"
           onClick={handleAddCustomService}
          >
           Dodaj do koszyka
