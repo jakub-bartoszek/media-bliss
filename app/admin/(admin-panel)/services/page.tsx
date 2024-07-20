@@ -36,7 +36,7 @@ const AdminServices = () => {
  return (
   <div className="text-white w-full h-full flex flex-col overflow-y-scroll p-4">
    {services.length === 0 ? (
-    "Nie znaleziono żadnych usług"
+    <h1 className="w-full text-center text-zinc-500 text-2xl mb-16">Nie znaleziono żadnych usług</h1>
    ) : (
     <>
      {categories.map((category) => (
