@@ -68,7 +68,7 @@ const Cart = () => {
  };
 
  return (
-  <div className="w-full h-full p-4">
+  <div className="w-full h-full p-4 pt-16">
    <h1 className="text-3xl font-bold mb-4">Your Cart</h1>
    {cartItems.length > 0 ? (
     <div className="flex flex-col gap-4">
