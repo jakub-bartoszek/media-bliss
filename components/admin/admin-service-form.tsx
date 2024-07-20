@@ -1,16 +1,15 @@
-// app/admin/services/[id]/ServiceForm.tsx
 "use client";
 
 import { useState } from "react";
-import {
- Service,
- ServiceCategory,
- ServiceType
-} from "@prisma/client";
+import { ServiceCategory, ServiceType } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { ServiceWithDecimalPrice } from "@/types";
 
-const ServiceForm = ({ service }: { service: ServiceWithDecimalPrice }) => {
+const ServiceForm = ({
+ service
+}: {
+ service: ServiceWithDecimalPrice;
+}) => {
  const [formState, setFormState] = useState({
   name: service.name,
   price: service.price,
@@ -43,7 +42,6 @@ const ServiceForm = ({ service }: { service: ServiceWithDecimalPrice }) => {
   if (response.ok) {
    router.refresh();
   } else {
-   // Handle error
   }
  };
 
@@ -57,9 +55,8 @@ const ServiceForm = ({ service }: { service: ServiceWithDecimalPrice }) => {
   });
 
   if (response.ok) {
-   router.push("/admin/home");
+   router.push("/admin/services");
   } else {
-   // Handle error
   }
  };
 
