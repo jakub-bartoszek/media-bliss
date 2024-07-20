@@ -34,42 +34,42 @@ const AdminServices = () => {
  );
 
  return (
-  <div className="text-white w-full h-full overflow-y-scroll">
+  <div className="text-white w-full h-full flex flex-col overflow-y-scroll p-4">
    {services.length === 0 ? (
-    <div>Nie znaleziono żadnych usług</div>
+    "Nie znaleziono żadnych usług"
    ) : (
-    categories.map((category) => (
-     <div
-      key={category}
-      className="p-2 flex items-center justify-center flex-col"
-     >
-      <h1 className="text-4xl font-bold mb-2">{category}</h1>
-      {services
-       .filter((service) => service.category === category)
-       .map((service) => (
-        <a
-         href={`/admin/services/${service.id}`}
-         key={service.id}
-         className="flex mb-2 w-full text-lg gap-4 hover:bg-zinc-800 p-2 rounded-lg transition"
-        >
-         <span className="text-gray-400">{service.id}</span>
-         <span>{service.name}</span>
-         <span className="font-bold mr-0 ml-auto">
-          {!service.price
-           ? "Cena zależna od potrzeb klienta"
-           : `${service.price.toString()} PLN`}
-         </span>
-        </a>
-       ))}
-      <button
-       className="py-2 px-4 font-bold ml-auto mr-auto bg-primary rounded-lg"
-       onClick={() => setIsCreateModalOpen(true)}
-      >
-       Add New Service
-      </button>
-     </div>
-    ))
+    <>
+     {categories.map((category) => (
+      <div key={category}>
+       <h1 className="font-bold text-2xl">{category}</h1>
+       {services
+        .filter((service) => service.category === category)
+        .map((service) => (
+         <a
+          href={`/admin/services/${service.id}`}
+          key={service.id}
+          className="flex mb-2 w-full text-lg gap-4 hover:bg-zinc-800 p-2 rounded-lg transition"
+         >
+          <span className="text-gray-400">{service.id}</span>
+          <span>{service.name}</span>
+          <span className="font-bold mr-0 ml-auto">
+           {!service.price
+            ? "Cena zależna od potrzeb klienta"
+            : `${service.price.toString()} PLN`}
+          </span>
+         </a>
+        ))}
+      </div>
+     ))}
+    </>
    )}
+
+   <button
+    className="py-2 px-4 font-bold ml-auto mr-auto bg-primary rounded-lg"
+    onClick={() => setIsCreateModalOpen(true)}
+   >
+    Add New Service
+   </button>
 
    {isCreateModalOpen && (
     <ServiceCreateForm
