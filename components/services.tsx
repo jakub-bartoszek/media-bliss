@@ -23,6 +23,8 @@ const Services = ({
  const [quantity, setQuantity] = useState<number>(0);
  const [customServicePrice, setCustomServicePrice] =
   useState<number>(0);
+ const [customServiceName, setCustomServiceName] =
+  useState<string>("");
 
  const handleProductSelect = (product: ServiceWithDecimalPrice) => {
   const uniqueProduct: CartItem = {
@@ -74,8 +76,8 @@ const Services = ({
  };
 
  return (
-  <div className="w-full h-full p-4 pt-32">
-   {services && (
+  <div className="w-full h-full p-4 pt-16">
+   {services.length !== 0 && (
     <>
      <h1 className="w-full flex flex-col items-center text-5xl font-bold mb-8 gap-4">
       {category === "Instagram" ? (
@@ -127,16 +129,32 @@ const Services = ({
      )}
      {services.filter((service) => service.type === "CustomService")
       .length !== 0 && (
-      <>
-       <h2 className="w-full text-center text-4xl font-bold mb-4 text-primary">
-        Custom Services
-       </h2>
-       <div className="flex flex-col items-center gap-4 mb-16">
+      <div className="flex flex-col md:flex-row justify-between gap-16 items-center text-zinc-700">
+       <div className="w-full md:w-2/3">
+        <h2 className="w-full text-5xl text-center md:text-left font-bold mb-4 text-primary">
+         Własna usługa
+        </h2>
+        <p className="text-lg mb-8">
+         Pakiety nie spełniają twoich oczekiwań? Przygotowaliśmy dla
+         ciebie możliwość dostosowania naszych usług do twoich
+         potrzeb.
+        </p>
         <select
-         className="border-2 p-2"
-         onChange={(e) => setCustomServiceId(e.target.value)}
+         className="border-2 p-2 rounded-lg w-full"
+         onChange={(e) => {
+          setCustomServiceId(e.target.value);
+          const selectedService = services.find(
+           (service) => service.id.toString() === e.target.value
+          );
+          if (selectedService) {
+           setCustomServiceName(selectedService.name);
+           setCustomServicePrice(0);
+           setQuantity(0);
+          }
+         }}
+         value={customServiceId}
         >
-         <option value="">Select a custom service</option>
+         <option value="">Wybierz usługę</option>
          {services
           .filter((service) => service.type === "CustomService")
           .map((service) => (
@@ -148,24 +166,33 @@ const Services = ({
            </option>
           ))}
         </select>
-        <input
-         type="number"
-         className="border-2 p-2"
-         placeholder="Quantity"
-         value={quantity}
-         onChange={handleQuantityChange}
-        />
-        <p className="text-lg">
-         Price: {customServicePrice.toFixed(2)} PLN
-        </p>
-        <button
-         className="px-4 py-2 bg-green-500 text-white rounded-lg"
-         onClick={handleAddCustomService}
-        >
-         Add to Cart
-        </button>
        </div>
-      </>
+       <div className="flex flex-col items-center p-4 rounded-lg border-2 justify-between border-black/10 w-[300px] h-[300px]">
+        <div className="w-full mb-16">
+         <p className="w-full text-xl font-bold text-nowrap">
+          {customServiceName ? customServiceName : "Twoja usługa"}
+         </p>
+         <p className="w-full text-3xl font-bold">
+          {customServicePrice.toFixed(2)} PLN
+         </p>
+        </div>
+        <div>
+         <input
+          type="number"
+          className="border-2 p-2 w-full mb-4 rounded-lg border-black/10"
+          placeholder="Quantity"
+          value={quantity}
+          onChange={handleQuantityChange}
+         />
+         <button
+          className="px-4 py-2 w-full bg-primary text-white rounded-lg"
+          onClick={handleAddCustomService}
+         >
+          Dodaj do koszyka
+         </button>
+        </div>
+       </div>
+      </div>
      )}
     </>
    )}
