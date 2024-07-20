@@ -2,7 +2,7 @@ import { ServiceWithDecimalPrice } from "@/types";
 
 interface ServiceOthersTileProps {
  service: ServiceWithDecimalPrice;
- onSelect: () => void;
+ onSelect?: () => void;
 }
 
 const ServiceOthersTile = ({
