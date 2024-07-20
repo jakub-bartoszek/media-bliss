@@ -50,13 +50,13 @@ const CartModal: React.FC<CartModalProps> = ({
      <div className="w-full flex gap-4">
       <button
        onClick={onClose}
-       className="px-4 py-2 bg-primary text-white rounded-lg"
+       className="px-4 py-2 bg-primary hover:bg-primary-light text-white rounded-lg"
       >
        Kontynuuj zakupy
       </button>
       <a
        href="/cart"
-       className="w-full flex justify-center items-center px-4 py-2 bg-primary text-white rounded-lg"
+       className="w-full flex justify-center items-center px-4 py-2 bg-primary hover:bg-primary-light text-white rounded-lg"
       >
        <button className="w-full h-full">Zobacz koszyk</button>
       </a>

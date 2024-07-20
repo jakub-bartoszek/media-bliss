@@ -41,7 +41,7 @@ const sections = [
 export default function Home() {
  return (
   <>
-   <div className="h-screen flex justify-center items-center w-1/2">
+   <div className="h-screen flex justify-center items-center w-2/3 md:w-1/2">
     <div className="flex flex-col w-full items-center gap-8">
      <img
       className="animate-[logo-appear_2000ms]"
@@ -49,13 +49,13 @@ export default function Home() {
       src="/logos/mb-logo-light-1.svg"
      />
      <a href="/services/all">
-      <button className="bg-primary rounded-lg py-4 px-6 w-max text-white text-xl font-bold animate-[button-appear_2000ms]">
+      <button className="bg-primary rounded-lg py-2 px-4 md:py-4 md:px-6 w-max text-white text-lg md:text-xl font-bold animate-[button-appear_2000ms] hover:bg-primary-light transition">
        Sprawdź naszą ofertę
       </button>
      </a>
     </div>
    </div>
-   <div>
+   <div className="p-4">
     {sections.map((section, index) => (
      <HomeSection
       key={index}

@@ -40,7 +40,7 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
      src="/logos/mb-logo-light-3.svg"
     />
    </a>
-   <div className="flex items-center gap-8">
+   <div className="flex items-center gap-4 md:gap-8">
     <div
      className="relative flex flex-col items-center justify-center"
      ref={dropdownRef}

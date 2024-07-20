@@ -45,7 +45,7 @@ const AdminNavigation = () => {
      className={twMerge(
       "flex items-center gap-2 md:gap-4 md:text-xl py-2 px-2 md:py-4 md:px-6 rounded-lg text-white hover:bg-zinc-700 cursor-pointer transition",
       index === navData.length - 1 && "mt-auto",
-      pathname === nav.href && "bg-primary hover:bg-primary"
+      pathname === nav.href && "bg-primary hover:bg-primary-light"
      )}
     >
      {nav.icon}
