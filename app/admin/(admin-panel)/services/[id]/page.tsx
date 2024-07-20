@@ -17,8 +17,12 @@ const ServiceIdPage = async ({ params }: ServiceIdPageProps) => {
  if (!service) {
   redirect(`/admin/home`);
  }
+ const serviceWithNumberPrice = {
+  ...service,
+  price: service.price.toNumber()
+ };
 
- return <ServiceForm service={service} />;
+ return <ServiceForm service={serviceWithNumberPrice} />;
 };
 
 export default ServiceIdPage;

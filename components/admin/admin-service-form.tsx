@@ -8,8 +8,9 @@ import {
  ServiceType
 } from "@prisma/client";
 import { useRouter } from "next/navigation";
+import { ServiceWithDecimalPrice } from "@/types";
 
-const ServiceForm = ({ service }: { service: Service }) => {
+const ServiceForm = ({ service }: { service: ServiceWithDecimalPrice }) => {
  const [formState, setFormState] = useState({
   name: service.name,
   price: service.price,

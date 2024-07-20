@@ -5,26 +5,27 @@ import CartModal from "@/components/cart-modal";
 import ServiceOthersTile from "@/components/service-others-tile";
 import ServicePackageTile from "@/components/service-package-tile";
 import { FaInstagram, FaTiktok } from "react-icons/fa";
-import { Service, ServiceCategory } from "@prisma/client";
+import { ServiceCategory } from "@prisma/client";
 import { nanoid } from "nanoid";
+import { CartItem, ServiceWithDecimalPrice } from "@/types";
 
 const Services = ({
  services,
  category
 }: {
- services: Service[];
+ services: ServiceWithDecimalPrice[];
  category: ServiceCategory;
 }) => {
  const [isModalOpen, setIsModalOpen] = useState(false);
  const [selectedProduct, setSelectedProduct] =
-  useState<Service | null>(null);
+  useState<ServiceWithDecimalPrice | null>(null);
  const [customServiceId, setCustomServiceId] = useState<string>("");
  const [quantity, setQuantity] = useState<number>(0);
  const [customServicePrice, setCustomServicePrice] =
   useState<number>(0);
 
- const handleProductSelect = (product: Service) => {
-  const uniqueProduct = {
+ const handleProductSelect = (product: ServiceWithDecimalPrice) => {
+  const uniqueProduct: CartItem = {
    ...product,
    cartId: nanoid()
   };
@@ -43,11 +44,11 @@ const Services = ({
   );
   if (!selectedService) return;
 
-  const customProduct = {
+  const customProduct: CartItem = {
    ...selectedService,
    cartId: nanoid(),
    name: `${quantity}x ${selectedService.name}`,
-   price: customServicePrice
+   price: customServicePrice // Use the total price
   };
 
   const cart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -63,10 +64,12 @@ const Services = ({
  ) => {
   const qty = parseInt(e.target.value);
   setQuantity(qty);
+
   const selectedService = services.find(
    (service) => service.id.toString() === customServiceId
   );
   if (selectedService) {
+   // Calculate the total price based on quantity
    setCustomServicePrice(qty * selectedService.price);
   }
  };

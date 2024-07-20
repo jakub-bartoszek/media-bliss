@@ -1,9 +1,9 @@
-import { Service } from "@prisma/client";
+import { ServiceWithDecimalPrice } from "@/types";
 
 interface CartModalProps {
  isOpen: boolean;
  onClose: () => void;
- selectedProduct: Service;
+ selectedProduct: ServiceWithDecimalPrice;
 }
 
 const CartModal: React.FC<CartModalProps> = ({
@@ -30,7 +30,6 @@ const CartModal: React.FC<CartModalProps> = ({
      </h1>
      <div className="border-2 rounded-lg p-4 flex flex-col gap-4">
       <p className="text-xl text-center">{selectedProduct.name}</p>
-
       {selectedProduct.image && (
        <img
         className="w-full"
@@ -38,28 +37,28 @@ const CartModal: React.FC<CartModalProps> = ({
        />
       )}
       {selectedProduct.list && (
-       <ul className="list-disc marker:text-primary pl-4">
+       <ul className="list-disc text-lg">
         {selectedProduct.list.map((item, index) => (
          <li key={index}>{item}</li>
         ))}
        </ul>
       )}
-      <p className="text-3xl font-bold text-center">
-       {selectedProduct.price} zł
+      <p className="text-lg text-center">
+       Cena: {selectedProduct.price} PLN
       </p>
      </div>
-     <div className="w-full flex justify-between gap-24">
+     <div className="w-full flex gap-4">
       <button
        onClick={onClose}
-       className="py-2 px-4 bg-primary text-white rounded-lg whitespace-nowrap"
+       className="px-4 py-2 bg-primary text-white rounded-lg"
       >
        Kontynuuj zakupy
       </button>
       <a
        href="/cart"
-       className="py-2 px-4 bg-primary text-white rounded-lg"
+       className="w-full flex justify-center items-center px-4 py-2 bg-primary text-white rounded-lg"
       >
-       Koszyk
+       <button className="w-full h-full">Zobacz koszyk</button>
       </a>
      </div>
     </div>

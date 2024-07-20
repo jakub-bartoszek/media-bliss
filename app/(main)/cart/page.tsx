@@ -3,19 +3,16 @@
 import { useEffect, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
-import { Service } from "@prisma/client";
-
-interface CartItem extends Service {
- cartId: string;
- accountLink: string;
-}
+import { CartItemWithAccountLink } from "@/types";
 
 const stripePromise = loadStripe(
  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ""
 );
 
 const Cart = () => {
- const [cartItems, setCartItems] = useState<CartItem[]>([]);
+ const [cartItems, setCartItems] = useState<
+  CartItemWithAccountLink[]
+ >([]);
 
  useEffect(() => {
   const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -39,7 +36,12 @@ const Cart = () => {
  };
 
  const calculateTotal = () => {
-  return cartItems.reduce((total, item) => total + item.price, 0);
+  // Ensure `price` is treated as a number
+  return cartItems.reduce((total, item) => {
+   const price =
+    typeof item.price === "number" ? item.price : Number(item.price);
+   return total + price;
+  }, 0);
  };
 
  const handleBuy = async () => {
@@ -78,7 +80,9 @@ const Cart = () => {
       >
        <div>
         <h2 className="text-xl font-semibold">{item.name}</h2>
-        <p className="text-lg text-gray-500">{item.price} PLN</p>
+        <p className="text-lg text-gray-500">
+         {Number(item.price).toFixed(2)} PLN
+        </p>
        </div>
        {item.type === "Service" || item.type === "CustomService" ? (
         <input

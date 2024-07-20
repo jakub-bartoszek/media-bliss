@@ -13,5 +13,9 @@ export const fetchServices = async ({
    price: "desc"
   }
  });
- return services;
+
+ return services.map((service) => ({
+  ...service,
+  price: service.price.toNumber()
+ }));
 };

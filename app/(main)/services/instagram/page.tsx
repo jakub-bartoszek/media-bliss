@@ -1,9 +1,9 @@
-import { Service } from "@prisma/client";
 import { fetchServices } from "@/lib/fetchServices";
 import Services from "@/components/services";
+import { ServiceWithDecimalPrice } from "@/types";
 
 const InstagramServicesPage = async () => {
- const services: Service[] = await fetchServices({
+ const services: ServiceWithDecimalPrice[] = await fetchServices({
   category: "Instagram"
  });
 

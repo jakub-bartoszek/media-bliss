@@ -1,7 +1,7 @@
-import { Service } from "@prisma/client";
+import { ServiceWithDecimalPrice } from "@/types";
 
 interface ServiceOthersTileProps {
- service: Service;
+ service: ServiceWithDecimalPrice;
  onSelect: () => void;
 }
 
