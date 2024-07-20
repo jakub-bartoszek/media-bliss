@@ -18,21 +18,6 @@ model Service {
   type        ServiceType
 }
 
-model CustomServiceField {
-  id       Int             @id @default(sequence())
-  name     String
-  price    Int
-  category ServiceCategory
-  maxCount Int?
-}
-
-model Order {
-  id       Int         @id @default(sequence())
-  email    String
-  contents String
-  status   OrderStatus
-}
-
 enum ServiceCategory {
   TikTok
   Instagram
@@ -41,7 +26,24 @@ enum ServiceCategory {
 
 enum ServiceType {
   Package
-  Others
+  Service
+  CustomService
+}
+
+model Customer {
+  id     Int     @id @default(sequence())
+  email  String  @unique
+  orders Order[]
+}
+
+model Order {
+  id         Int         @id @default(sequence())
+  email      String
+  contents   String
+  customerName String
+  status     OrderStatus
+  customerId Int?
+  customer   Customer?   @relation(fields: [customerId], references: [id])
 }
 
 enum OrderStatus {

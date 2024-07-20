@@ -4,6 +4,7 @@ import { stripe } from "@/lib/stripe";
 interface CartItem {
  name: string;
  price: number;
+ accountLink: string;
 }
 
 interface SessionData {
@@ -32,7 +33,10 @@ export async function POST(req: NextRequest) {
     price_data: {
      currency: "pln",
      product_data: {
-      name: item.name
+      name: item.name,
+      metadata: {
+       accountLink: item.accountLink
+      }
      },
      unit_amount: item.price * 100
     },

@@ -7,6 +7,7 @@ import { Service } from "@prisma/client";
 
 interface CartItem extends Service {
  cartId: string;
+ accountLink: string;
 }
 
 const stripePromise = loadStripe(
@@ -29,6 +30,14 @@ const Cart = () => {
   localStorage.setItem("cart", JSON.stringify(updatedCart));
  };
 
+ const updateAccountLink = (cartId: string, accountLink: string) => {
+  const updatedCart = cartItems.map((item) =>
+   item.cartId === cartId ? { ...item, accountLink } : item
+  );
+  setCartItems(updatedCart);
+  localStorage.setItem("cart", JSON.stringify(updatedCart));
+ };
+
  const calculateTotal = () => {
   return cartItems.reduce((total, item) => total + item.price, 0);
  };
@@ -42,7 +51,13 @@ const Cart = () => {
   }
 
   try {
-   const response = await axios.post("/api/checkout", { cartItems });
+   const response = await axios.post("/api/checkout", {
+    cartItems: cartItems.map(({ name, price, accountLink }) => ({
+     name,
+     price,
+     accountLink
+    }))
+   });
    const sessionId = response.data.id;
 
    await stripe.redirectToCheckout({ sessionId });
@@ -65,6 +80,18 @@ const Cart = () => {
         <h2 className="text-xl font-semibold">{item.name}</h2>
         <p className="text-lg text-gray-500">{item.price} PLN</p>
        </div>
+       {item.type === "Service" || item.type === "CustomService" ? (
+        <input
+         className="border-2"
+         placeholder="Link do konta"
+         value={item.accountLink}
+         onChange={(e) =>
+          updateAccountLink(item.cartId, e.target.value)
+         }
+        />
+       ) : (
+        "Produkt zostanie dostarczony na email"
+       )}
        <button
         className="px-4 py-2 bg-red-500 text-white rounded-lg"
         onClick={() => removeItemFromCart(item.cartId)}

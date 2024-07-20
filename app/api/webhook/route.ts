@@ -3,6 +3,12 @@ import { prisma } from "@/lib/server/database/prisma";
 import { stripe } from "@/lib/stripe";
 import Stripe from "stripe";
 
+interface CartItem {
+ name: string;
+ price: number;
+ accountLink: string;
+}
+
 interface SessionData {
  content: string;
 }
@@ -53,6 +59,7 @@ export async function POST(req: NextRequest) {
   const sessionId = session.id;
   const customerEmail =
    session.customer_details?.email || "unknown@example.com";
+  const customerName = session.customer_details?.name || "Nie podano";
   const sessionData = globalThis.sessions.get(sessionId);
 
   console.log("Session ID:", sessionId);
@@ -66,15 +73,23 @@ export async function POST(req: NextRequest) {
    return new NextResponse("Session not found", { status: 400 });
   }
 
-  const cartItems = JSON.parse(sessionData.content);
+  const cartItems: CartItem[] = JSON.parse(sessionData.content);
   console.log("Deserialized Cart Items:", cartItems);
 
   try {
+   const customer = await prisma.customer.upsert({
+    where: { email: customerEmail },
+    update: {},
+    create: { email: customerEmail }
+   });
+
    await prisma.order.create({
     data: {
      contents: sessionData.content,
      email: customerEmail,
-     status: "Niezrealizowane"
+     customerName: customerName,
+     status: "Niezrealizowane",
+     customer: { connect: { id: customer.id } }
     }
    });
 
