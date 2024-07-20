@@ -76,10 +76,10 @@ const Services = ({
  };
 
  return (
-  <div className="w-full h-full p-4 pt-16">
+  <div className="w-full h-full p-4 pt-16 mb-16">
    {services.length !== 0 && (
     <>
-     <h1 className="w-full flex flex-col items-center text-5xl font-bold mb-8 gap-4">
+     <h1 className="w-full flex flex-col items-center text-center text-5xl font-bold mb-8 gap-4">
       {category === "Instagram" ? (
        <FaInstagram className="w-24 h-24" />
       ) : (
@@ -167,7 +167,7 @@ const Services = ({
           ))}
         </select>
        </div>
-       <div className="flex flex-col items-center p-4 rounded-lg border-2 justify-between border-black/10 w-[300px] h-[300px]">
+       <div className="flex flex-col items-center p-4 rounded-lg border-2 justify-between border-black/10 w-full md:w-[300px] h-[300px]">
         <div className="w-full mb-16">
          <p className="w-full text-xl font-bold text-nowrap">
           {customServiceName ? customServiceName : "Twoja usługa"}
@@ -185,7 +185,7 @@ const Services = ({
           onChange={handleQuantityChange}
          />
          <button
-          className="px-4 py-2 w-full bg-primary text-white rounded-lg"
+          className="px-4 py-2 w-full bg-primary hover:bg-primary-light text-white rounded-lg"
           onClick={handleAddCustomService}
          >
           Dodaj do koszyka

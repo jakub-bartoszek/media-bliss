@@ -28,7 +28,7 @@ const ServicePackageTile = ({
    </div>
    <div className="flex items-center justify-center p-4">
     <button
-     className="bg-primary py-2 w-full text-white rounded-md hover:bg-primary/90 transition"
+     className="bg-primary py-2 w-full text-white rounded-md hover:bg-primary-light transition"
      onClick={onSelect}
     >
      Dodaj do koszyka
