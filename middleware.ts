@@ -8,7 +8,12 @@ export async function middleware(request: NextRequest) {
  const { pathname } = request.nextUrl;
  const authCookie = request.cookies.get("auth");
 
- if (pathname.startsWith("/admin/home")) {
+ const excludedPaths = ["/admin/login", "/admin/logout"];
+
+ if (
+  pathname.startsWith("/admin") &&
+  !excludedPaths.includes(pathname)
+ ) {
   if (!authCookie) {
    console.log("Redirecting to login");
    return NextResponse.redirect(new URL("/admin/login", request.url));
