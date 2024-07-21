@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import ServiceCreateForm from "@/components/admin/create-service-modal";
-import { LuLoader2 } from "react-icons/lu";
 import useServices from "@/lib/hooks/useServices";
 import Loader from "@/components/loader";
 
@@ -30,8 +29,8 @@ const AdminServices = () => {
  return (
   <div className="text-white w-full h-full flex items-center flex-col overflow-y-auto">
    {loading && <Loader />}
-   {categories.length === 0 && (
-    <h1 className="w-full text-center text-zinc-500 text-2xl mb-16">
+   {!loading && categories.length === 0 && (
+    <h1 className="w-full h-screen flex items-center justify-center text-zinc-500 text-2xl">
      Nie znaleziono żadnych usług
     </h1>
    )}
