@@ -2,7 +2,7 @@
 
 import Error from "@/components/error";
 import Loader from "@/components/loader";
-import Services from "@/components/services";
+import Services from "@/components/services/services";
 import useServices from "@/lib/hooks/useServices";
 
 const AllServicesPage = () => {

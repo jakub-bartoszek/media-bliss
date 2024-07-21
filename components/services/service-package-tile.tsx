@@ -1,22 +1,33 @@
+import { twMerge } from "tailwind-merge";
+
 interface ServicePackageTileProps {
  name: string;
  price: number;
  list: string[];
- onSelect: () => void;
+ className?: string;
+ onSelect?: () => void;
 }
 
 const ServicePackageTile = ({
  name,
  list,
  price,
+ className,
  onSelect
 }: ServicePackageTileProps) => {
  return (
-  <div className="bg-white rounded-md border-2 w-full md:min-w-[260px] md:basis-0 border-primary flex flex-col justify-between flex-shrink box-border">
+  <div
+   className={twMerge(
+    "bg-white rounded-md border-2 w-full md:min-w-[260px] md:basis-0 border-primary flex flex-col justify-between flex-shrink box-border",
+    className
+   )}
+  >
    <div className="p-4">
     <div className="pb-4">
      <div className="text-xl font-bold">{name}</div>
-     <div className="text-4xl font-bold text-primary">{price} PLN</div>
+     <div className="text-4xl font-bold text-primary">
+      {price} PLN
+     </div>
     </div>
     <div className="border-t-2 pt-4">
      <ul className="list-disc marker:text-zinc-400 pl-4">

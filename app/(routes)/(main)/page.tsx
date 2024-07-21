@@ -1,4 +1,4 @@
-import HomeSection from "@/components/home-section";
+import HomeSection from "@/components/home/home-section";
 
 const sections = [
  {
