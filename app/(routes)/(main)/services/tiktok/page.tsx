@@ -5,7 +5,7 @@ import Loader from "@/components/loader";
 import Services from "@/components/services";
 import useServices from "@/lib/hooks/useServices";
 
-const AllServicesPage = () => {
+const TikTokServicesPage = () => {
  const { services, loading, error } = useServices();
 
  const tiktokServices = services.filter(
@@ -24,4 +24,4 @@ const AllServicesPage = () => {
  );
 };
 
-export default AllServicesPage;
+export default TikTokServicesPage;

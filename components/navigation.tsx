@@ -82,6 +82,12 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
     >
      TikTok
     </a>
+    <a
+     href="/services/other"
+     className="px-4 py-2 hover:bg-gray-200 rounded-lg"
+    >
+     Pozostałe
+    </a>
    </div>
   </nav>
  );
