@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import axios from "axios";
 import { ServiceCategory, ServiceType } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { ServiceWithDecimalPrice } from "@/types";
@@ -31,32 +32,44 @@ const ServiceForm = ({
  };
 
  const handleSave = async () => {
-  const response = await fetch(`/api/admin/services/${service.id}`, {
-   method: "PATCH",
-   headers: {
-    "Content-Type": "application/json"
-   },
-   body: JSON.stringify(formState)
-  });
+  try {
+   const response = await axios.patch(
+    `/api/admin/services/${service.id}`,
+    formState,
+    {
+     headers: {
+      "Content-Type": "application/json"
+     }
+    }
+   );
 
-  if (response.ok) {
-   router.refresh();
-  } else {
+   if (response.status === 200) {
+    router.refresh();
+   } else {
+   }
+  } catch (error) {
+   console.error("Error saving service:", error);
   }
  };
 
  const handleDelete = async () => {
-  const response = await fetch(`/api/admin/services/${service.id}`, {
-   method: "DELETE",
-   headers: {
-    "Content-Type": "application/json"
-   },
-   body: JSON.stringify({ serviceId: service.id })
-  });
+  try {
+   const response = await axios.delete(
+    `/api/admin/services/${service.id}`,
+    {
+     headers: {
+      "Content-Type": "application/json"
+     },
+     data: { serviceId: service.id }
+    }
+   );
 
-  if (response.ok) {
-   router.push("/admin/services");
-  } else {
+   if (response.status === 200) {
+    router.push("/admin/services");
+   } else {
+   }
+  } catch (error) {
+   console.error("Error deleting service:", error);
   }
  };
 

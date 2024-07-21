@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 import { LuLoader2 } from "react-icons/lu";
 
 const LogoutPage = () => {
@@ -10,11 +11,9 @@ const LogoutPage = () => {
  useEffect(() => {
   const logout = async () => {
    try {
-    const response = await fetch("/api/admin/logout", {
-     method: "GET"
-    });
+    const response = await axios.get("/api/admin/logout");
 
-    if (response.ok) {
+    if (response.status === 200) {
      router.push("/admin/login");
     } else {
      console.error("Failed to log out");

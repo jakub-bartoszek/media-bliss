@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 interface ServiceCreateFormProps {
  isOpen: boolean;
@@ -27,12 +28,9 @@ const ServiceCreateForm = ({
   setIsSubmitting(true);
 
   try {
-   await fetch("/api/admin/services", {
-    method: "POST",
-    headers: {
-     "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
+   await axios.post(
+    "/api/admin/services",
+    {
      name,
      price: parseFloat(price),
      description,
@@ -40,10 +38,16 @@ const ServiceCreateForm = ({
      image,
      category,
      type
-    })
-   });
+    },
+    {
+     headers: {
+      "Content-Type": "application/json"
+     }
+    }
+   );
+
    onServiceAdded();
-   onClose();
+   handleClose();
   } catch (error) {
    console.error("Failed to create service", error);
   } finally {

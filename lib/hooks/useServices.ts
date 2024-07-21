@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import axios from "axios";
 import { ServiceWithDecimalPrice } from "@/types";
 
 const useServices = () => {
@@ -13,12 +14,11 @@ const useServices = () => {
  const fetchServices = async () => {
   try {
    setLoading(true);
-   const response = await fetch("/api/services");
-   const data = await response.json();
-   setServices(data);
+   const response = await axios.get("/api/services");
+   setServices(response.data);
   } catch (error) {
    setError("Failed to fetch services");
-   console.error(error);
+   console.error("Error fetching services:", error);
   } finally {
    setLoading(false);
   }

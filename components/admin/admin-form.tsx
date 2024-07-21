@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import axios from "axios";
 
 const AdminForm = () => {
  const [error, setError] = useState(false);
@@ -14,13 +15,7 @@ const AdminForm = () => {
   const password = formData.get("password");
 
   try {
-   const res = await fetch("/api/admin/login", {
-    method: "POST",
-    headers: {
-     "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ password })
-   });
+   const res = await axios.post("/api/admin/login", { password });
 
    setAwaiting(false);
 
@@ -32,6 +27,7 @@ const AdminForm = () => {
    }
   } catch (error) {
    console.error("Error:", error);
+   setAwaiting(false);
    setError(true);
   }
  };
