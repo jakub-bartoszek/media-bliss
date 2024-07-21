@@ -30,55 +30,57 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
  }, []);
 
  return (
-  <nav className="ml-auto mr-auto max-w-[1400px] w-full h-full p-4 flex justify-between items-center z-30">
-   <a
-    href="/"
-    className="h-full"
-   >
-    <img
-     className="w-full h-full"
-     src="/logos/mb-logo-light-3.svg"
-    />
-   </a>
-   <div className="flex items-center gap-4 md:gap-8">
-    <div
-     className="relative flex flex-col items-center justify-center"
-     ref={dropdownRef}
+  <nav className="ml-auto mr-auto max-w-[1400px] w-full h-full z-30 relative">
+   <div className="w-full h-full p-4 flex justify-between items-center bg-white">
+    <a
+     href="/"
+     className="h-full"
     >
-     <button
-      className="px-4 py-2"
-      onClick={() => setShowed(!showed)}
-     >
-      Usługi
-     </button>
+     <img
+      className="w-full h-full"
+      src="/logos/mb-logo-light-3.svg"
+     />
+    </a>
+    <div className="flex items-center gap-4 md:gap-8">
      <div
-      className={twMerge(
-       "absolute top-[48px] bg-white p-2 flex flex-col gap-2 rounded-[0_0_8px_8px] opacity-0 transition duration-500 origin-top scale-y-0 shadow-[0_10px_40px_rgba(0,0,0,0.2)]",
-       showed && "opacity-100 scale-y-100"
-      )}
+      className="relative flex flex-col items-center justify-center"
+      ref={dropdownRef}
      >
-      <a
-       href="/services/all"
-       className="px-4 py-2 hover:bg-gray-200 rounded-lg"
+      <button
+       className="px-4 py-2"
+       onClick={() => setShowed(!showed)}
       >
-       Wszystkie
-      </a>
-      <a
-       href="/services/instagram"
-       className="px-4 py-2 hover:bg-gray-200 rounded-lg"
-      >
-       Instagram
-      </a>
-      <a
-       href="/services/tiktok"
-       className="px-4 py-2 hover:bg-gray-200 rounded-lg"
-      >
-       TikTok
-      </a>
+       Usługi
+      </button>
      </div>
+     <a href="/cart">
+      <FaShoppingBag className="h-6 w-6" />
+     </a>
     </div>
-    <a href="/cart">
-     <FaShoppingBag className="h-6 w-6" />
+   </div>
+   <div
+    className={twMerge(
+     "absolute top-[54px] right-[50px] bg-white p-2 flex flex-col gap-2 rounded-[0_0_8px_8px] opacity-0 transition duration-500 origin-top scale-y-0 z-[-1] shadow-[0_10px_40px_rgba(0,0,0,0.2)]",
+     showed && "opacity-100 scale-y-100"
+    )}
+   >
+    <a
+     href="/services/all"
+     className="px-4 py-2 hover:bg-gray-200 rounded-lg"
+    >
+     Wszystkie
+    </a>
+    <a
+     href="/services/instagram"
+     className="px-4 py-2 hover:bg-gray-200 rounded-lg"
+    >
+     Instagram
+    </a>
+    <a
+     href="/services/tiktok"
+     className="px-4 py-2 hover:bg-gray-200 rounded-lg"
+    >
+     TikTok
     </a>
    </div>
   </nav>
