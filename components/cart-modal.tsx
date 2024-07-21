@@ -1,6 +1,4 @@
 import { ServiceWithDecimalPrice } from "@/types";
-import ServiceOthersTile from "../service-others-tile";
-
 interface CartModalProps {
  isOpen: boolean;
  onClose: () => void;
