@@ -10,12 +10,13 @@ datasource db {
 model Service {
   id          Int             @id @default(sequence())
   name        String
-  description String
+  description String?
   list        String[]
-  image       String
+  image       String?
   price       Decimal
   category    ServiceCategory
   type        ServiceType
+  requireLink String?
 }
 
 enum ServiceCategory {
@@ -37,13 +38,13 @@ model Customer {
 }
 
 model Order {
-  id         Int         @id @default(sequence())
-  email      String
-  contents   String
+  id           Int         @id @default(sequence())
+  email        String
+  contents     String
   customerName String
-  status     OrderStatus
-  customerId Int?
-  customer   Customer?   @relation(fields: [customerId], references: [id])
+  status       OrderStatus
+  customerId   Int?
+  customer     Customer?   @relation(fields: [customerId], references: [id])
 }
 
 enum OrderStatus {
