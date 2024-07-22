@@ -13,6 +13,7 @@ const Cart = () => {
  const [cartItems, setCartItems] = useState<
   CartItemWithAccountLink[]
  >([]);
+ const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
  useEffect(() => {
   const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -33,6 +34,34 @@ const Cart = () => {
   );
   setCartItems(updatedCart);
   localStorage.setItem("cart", JSON.stringify(updatedCart));
+ };
+
+ const validateAccountLink = (
+  cartId: string,
+  accountLink: string,
+  category: string
+ ) => {
+  let regex: RegExp | undefined;
+  let errorMessage = "";
+
+  if (category === "Instagram") {
+   regex =
+    /^(https?:\/\/)?(www\.)?instagram\.com\/[a-zA-Z0-9(_)\.]+\/?$/;
+   errorMessage = "Please enter a valid Instagram account link.";
+  } else if (category === "TikTok") {
+   regex =
+    /^(https?:\/\/)?(www\.)?tiktok\.com\/@[a-zA-Z0-9(_)\.]+\/?$/;
+   errorMessage = "Please enter a valid TikTok account link.";
+  }
+
+  if (regex && !regex.test(accountLink)) {
+   setErrors((prev) => ({ ...prev, [cartId]: errorMessage }));
+  } else {
+   setErrors((prev) => {
+    const { [cartId]: _, ...rest } = prev;
+    return rest;
+   });
+  }
  };
 
  const calculateTotal = () => {
@@ -82,23 +111,35 @@ const Cart = () => {
          className="flex justify-between items-center p-4 border rounded-lg gap-4"
         >
          <div className="w-1/2">
-          <h2 className="text-xl font-semibold ">{item.name}</h2>
+          <h2 className="text-xl font-semibold">{item.name}</h2>
           <p className="text-sm text-gray-500">{item.category}</p>
           <span className="text-lg font-semibold mr-4 text-primary">
            {Number(item.price).toFixed(2)} PLN
           </span>
          </div>
          <div className="flex items-center w-1/2 justify-between">
-          {item.type === "Service" ||
-          item.type === "CustomService" ? (
-           <input
-            className="p-2 border border-gray-300 rounded-md text-gray-700 w-full"
-            placeholder="Link do konta"
-            value={item.accountLink}
-            onChange={(e) =>
-             updateAccountLink(item.cartId, e.target.value)
-            }
-           />
+          {item.category === "Instagram" ||
+          item.category === "TikTok" ? (
+           <div className="w-full">
+            <input
+             className="p-2 border border-gray-300 rounded-md text-gray-700 w-full"
+             placeholder="Link do konta"
+             value={item.accountLink}
+             onChange={(e) => {
+              updateAccountLink(item.cartId, e.target.value);
+              validateAccountLink(
+               item.cartId,
+               e.target.value,
+               item.category
+              );
+             }}
+            />
+            {errors[item.cartId] && (
+             <p className="text-red-500 text-sm mt-1">
+              {errors[item.cartId]}
+             </p>
+            )}
+           </div>
           ) : (
            <p className="text-gray-500">
             Produkt zostanie dostarczony na email
@@ -139,10 +180,6 @@ const Cart = () => {
         <span>Wartość produktów</span>
         <span>{calculateTotal().toFixed(2)} PLN</span>
        </div>
-       <div className="flex justify-between mt-2">
-        <span>Dostawa</span>
-        <span>0.00 PLN</span>
-       </div>
       </div>
       <div className="flex justify-between items-center mt-4 pt-4 border-t border-gray-300">
        <span className="text-xl font-bold">Razem</span>
@@ -153,6 +190,7 @@ const Cart = () => {
       <button
        className="mt-6 w-full px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-light transition"
        onClick={handleBuy}
+       disabled={Object.keys(errors).length > 0}
       >
        Zapłać
       </button>
