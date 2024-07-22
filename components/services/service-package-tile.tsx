@@ -18,10 +18,15 @@ const ServicePackageTile = ({
  return (
   <div
    className={twMerge(
-    "bg-white rounded-md border-2 w-full md:min-w-[260px] md:basis-0 border-primary flex flex-col justify-between flex-shrink box-border",
+    "bg-white rounded-md border-2 w-full md:min-w-[260px] md:basis-0 border-primary flex flex-col justify-between flex-shrink box-border relative overflow-hidden",
     className
    )}
   >
+   {name === "Pakiet High" && (
+    <div className="absolute top-4 -right-8 rotate-45 bg-primary text-white py-1 px-8 text-xs w-fit">
+     Bestseller
+    </div>
+   )}
    <div className="p-4">
     <div className="pb-4">
      <div className="text-xl font-bold">{name}</div>
