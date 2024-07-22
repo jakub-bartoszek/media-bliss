@@ -65,6 +65,13 @@ const CustomServiceSection = ({
    }
   }
  };
+ const customServices = services.filter(
+  (service) => service.type === "CustomService"
+ );
+
+ if (customServices.length === 0) {
+  return null;
+ }
 
  return (
   <section className="flex flex-col md:flex-row justify-between gap-16 items-center text-zinc-700">
@@ -80,7 +87,7 @@ const CustomServiceSection = ({
      className="border-2 p-2 rounded-lg w-full"
      onChange={(e) => {
       setCustomServiceId(e.target.value);
-      const selectedService = services.find(
+      const selectedService = customServices.find(
        (service) => service.id.toString() === e.target.value
       );
       if (selectedService) {
@@ -92,16 +99,14 @@ const CustomServiceSection = ({
      value={customServiceId}
     >
      <option value="">Wybierz usługę</option>
-     {services
-      .filter((service) => service.type === "CustomService")
-      .map((service) => (
-       <option
-        key={service.id}
-        value={service.id}
-       >
-        {service.name}
-       </option>
-      ))}
+     {customServices.map((service) => (
+      <option
+       key={service.id}
+       value={service.id}
+      >
+       {service.name}
+      </option>
+     ))}
     </select>
    </div>
    <div className="flex flex-col items-center p-4 rounded-lg border-2 justify-between border-black/10 w-full md:w-[300px] h-[300px]">
