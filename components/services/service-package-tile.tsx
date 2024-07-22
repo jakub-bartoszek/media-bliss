@@ -12,6 +12,10 @@ const ServicePackageTile = ({
  className,
  onSelect
 }: ServicePackageTileProps) => {
+ if (!service) {
+  return null;
+ }
+
  return (
   <div
    className={twMerge(
