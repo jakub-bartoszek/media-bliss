@@ -19,6 +19,7 @@ const ServiceCreateForm = ({
  const [image, setImage] = useState("");
  const [category, setCategory] = useState("");
  const [type, setType] = useState("");
+ const [requireLink, setRequireLink] = useState("");
  const [isSubmitting, setIsSubmitting] = useState(false);
 
  const handleSubmit = async (e: React.FormEvent) => {
@@ -37,7 +38,8 @@ const ServiceCreateForm = ({
      list: list.split(",").map((item) => item.trim()),
      image,
      category,
-     type
+     type,
+     requireLink
     },
     {
      headers: {
@@ -68,6 +70,7 @@ const ServiceCreateForm = ({
   setImage("");
   setCategory("");
   setType("");
+  setRequireLink("");
  };
 
  if (!isOpen) return null;
@@ -173,7 +176,7 @@ const ServiceCreateForm = ({
        className="w-full rounded-lg border-2 border-white/20 bg-black p-2"
        required
       >
-       <option value="">Select Category</option>
+       <option value="">Wybierz kategorię</option>
        <option value="Instagram">Instagram</option>
        <option value="TikTok">TikTok</option>
        <option value="Others">Pozostałe</option>
@@ -193,10 +196,29 @@ const ServiceCreateForm = ({
        className="w-full rounded-lg border-2 border-white/20 bg-black p-2"
        required
       >
-       <option value="">Select Type</option>
+       <option value="">Wybierz typ</option>
        <option value="Package">Pakiet</option>
        <option value="Service">Usługa</option>
        <option value="CustomService">Niestandardowa usługa</option>
+      </select>
+     </div>
+     <div>
+      <label
+       className="block text-sm font-medium mb-1"
+       htmlFor="type"
+      >
+       Wymaga linku
+      </label>
+      <select
+       id="requireLink"
+       value={requireLink}
+       onChange={(e) => setType(e.target.value)}
+       className="w-full rounded-lg border-2 border-white/20 bg-black p-2"
+       required
+      >
+       <option value="">Wybierz opcję</option>
+       <option value="true">Tak</option>
+       <option value="false">Nie</option>
       </select>
      </div>
      <div className="flex justify-end">

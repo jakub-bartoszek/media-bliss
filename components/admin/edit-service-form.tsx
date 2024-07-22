@@ -18,7 +18,8 @@ const EditServiceForm = ({
   list: service.list,
   image: service.image,
   category: service.category,
-  type: service.type
+  type: service.type,
+  requireLink: service.requireLink
  });
 
  const router = useRouter();
@@ -188,6 +189,20 @@ const EditServiceForm = ({
         {type}
        </option>
       ))}
+     </select>
+    </div>
+    <div>
+     <h2 className="text-2xl font-bold mb-2">
+      Wymaga linku do konta
+     </h2>
+     <select
+      className="w-full bg-gray-800 p-2 rounded-lg text-lg"
+      name="requireLink"
+      value={formState.requireLink}
+      onChange={handleChange}
+     >
+      <option value="true">Tak</option>
+      <option value="false">Nie</option>
      </select>
     </div>
    </div>
