@@ -24,17 +24,16 @@ const ServiceIdPage: React.FC<ServiceIdPageProps> = ({ params }) => {
   return <Error />;
  }
 
- if (!loading && !service) {
-  return (
-   <h1 className="w-full h-screen flex items-center justify-center text-zinc-500 text-2xl">
-    Nie znaleziono usługi
-   </h1>
-  );
- }
-
- if (service) {
-  return <EditServiceForm service={service} />;
- }
+ return (
+  <>
+   {!loading && !service && (
+    <h1 className="w-full h-screen flex items-center justify-center text-zinc-500 text-2xl">
+     Nie znaleziono usługi
+    </h1>
+   )}
+   {service && <EditServiceForm service={service} />}
+  </>
+ );
 };
 
 export default ServiceIdPage;

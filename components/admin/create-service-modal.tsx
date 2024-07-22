@@ -205,14 +205,14 @@ const ServiceCreateForm = ({
      <div>
       <label
        className="block text-sm font-medium mb-1"
-       htmlFor="type"
+       htmlFor="requireLink"
       >
        Wymaga linku
       </label>
       <select
        id="requireLink"
        value={requireLink}
-       onChange={(e) => setType(e.target.value)}
+       onChange={(e) => setRequireLink(e.target.value)}
        className="w-full rounded-lg border-2 border-white/20 bg-black p-2"
        required
       >

@@ -28,7 +28,7 @@ const useServices = () => {
   fetchServices();
  }, []);
 
- return { services, error, loading };
+ return { services, error, loading, refetch: fetchServices };
 };
 
 export default useServices;
