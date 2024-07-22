@@ -4,6 +4,7 @@ import { useState } from "react";
 import ServiceCreateForm from "@/components/admin/create-service-modal";
 import useServices from "@/lib/hooks/useServices";
 import Loader from "@/components/loader";
+import Error from "@/components/error";
 
 const AdminServices = () => {
  const { services, loading, error } = useServices();
@@ -26,14 +27,24 @@ const AdminServices = () => {
   CustomService: "Niestandardowa usługi"
  };
 
+ if (loading) {
+  return <Loader />;
+ }
+
+ if (error) {
+  return <Error />;
+ }
+
+ if (!loading && !categories.length) {
+  return (
+   <h1 className="w-full h-screen flex items-center justify-center text-zinc-500 text-2xl">
+    Nie znaleziono żadnych usług
+   </h1>
+  );
+ }
+
  return (
   <div className="text-white w-full h-full flex items-center flex-col overflow-y-auto">
-   {loading && <Loader />}
-   {!loading && categories.length === 0 && (
-    <h1 className="w-full h-screen flex items-center justify-center text-zinc-500 text-2xl">
-     Nie znaleziono żadnych usług
-    </h1>
-   )}
    {categories.map((category) => (
     <div
      key={category}
