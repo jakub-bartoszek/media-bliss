@@ -1,17 +1,14 @@
+import { ServiceWithDecimalPrice } from "@/types";
 import { twMerge } from "tailwind-merge";
 
 interface ServicePackageTileProps {
- name: string;
- price: number;
- list: string[];
+ service: ServiceWithDecimalPrice;
  className?: string;
  onSelect?: () => void;
 }
 
 const ServicePackageTile = ({
- name,
- list,
- price,
+ service,
  className,
  onSelect
 }: ServicePackageTileProps) => {
@@ -22,21 +19,21 @@ const ServicePackageTile = ({
     className
    )}
   >
-   {name === "Pakiet High" && (
+   {service.name === "Pakiet High" && (
     <div className="absolute top-4 -right-8 rotate-45 bg-primary text-white py-1 px-8 text-xs w-fit">
      Bestseller
     </div>
    )}
    <div className="p-4">
     <div className="pb-4">
-     <div className="text-xl font-bold">{name}</div>
+     <div className="text-xl font-bold">{service.name}</div>
      <div className="text-4xl font-bold text-primary">
-      {price} PLN
+      {service.price} PLN
      </div>
     </div>
     <div className="border-t-2 pt-4">
      <ul className="list-disc marker:text-zinc-400 pl-4">
-      {list.map((item, index) => (
+      {service.list.map((item, index) => (
        <li key={index}>{item}</li>
       ))}
      </ul>

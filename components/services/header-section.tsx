@@ -33,26 +33,26 @@ const HeaderSection = ({
     <div className="w-1/2 h-full relative hidden lg:flex items-center">
      <ServicePackageTile
       className="w-[300px] h-[450px] absolute left-0 scale-[80%]"
-      key={services[0].id}
-      name={services[0].name}
-      list={services[0].list}
-      price={services[0].price}
+      service={
+       services.filter(
+        (service) => service.name === "Pakiet Starter"
+       )[0]
+      }
      />
      <ServicePackageTile
       className="w-[300px] h-[450px] absolute right-0 scale-[80%]"
-      key={services[0].id}
-      name={services[0].name}
-      list={services[0].list}
-      price={services[0].price}
+      service={
+       services.filter((service) => service.name === "Pakiet Pro")[0]
+      }
      />
      <div className=" absolute bg-white w-full flex justify-center bg-opacity-40">
       <ServicePackageTile
        className="w-[300px] h-[450px]"
-       key={services[3].id}
-       name={services[3].name}
-       list={services[3].list}
-       price={services[3].price}
-       onSelect={() => handleProductSelect(services[3])}
+       service={
+        services.filter(
+         (service) => service.name === "Pakiet High"
+        )[0]
+       }
       />
      </div>
     </div>

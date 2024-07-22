@@ -23,9 +23,7 @@ const ServiceSection = ({
        .map((service) => (
         <ServicePackageTile
          key={service.id}
-         name={service.name}
-         list={service.list}
-         price={service.price}
+         service={service}
          onSelect={() => handleProductSelect(service)}
         />
        ))}
