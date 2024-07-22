@@ -74,7 +74,7 @@ const ServiceCreateForm = ({
 
  return (
   <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-   <div className="bg-black border-2 rounded-lg p-6 border-white/20 w-1/2">
+   <div className="bg-black border-2 rounded-lg p-6 border-white/20 w-2/3 h-[90vh] overflow-y-scroll">
     <h2 className="text-xl font-bold mb-4">Create New Service</h2>
     <form
      className="flex flex-col gap-4 text-white"
