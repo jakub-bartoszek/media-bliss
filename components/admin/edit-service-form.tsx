@@ -6,7 +6,7 @@ import { ServiceCategory, ServiceType } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { ServiceWithDecimalPrice } from "@/types";
 
-const ServiceForm = ({
+const EditServiceForm = ({
  service
 }: {
  service: ServiceWithDecimalPrice;
@@ -34,7 +34,7 @@ const ServiceForm = ({
  const handleSave = async () => {
   try {
    const response = await axios.patch(
-    `/api/admin/services/${service.id}`,
+    `/api/services/${service.id}`,
     formState,
     {
      headers: {
@@ -45,7 +45,6 @@ const ServiceForm = ({
 
    if (response.status === 200) {
     router.refresh();
-   } else {
    }
   } catch (error) {
    console.error("Error saving service:", error);
@@ -55,7 +54,7 @@ const ServiceForm = ({
  const handleDelete = async () => {
   try {
    const response = await axios.delete(
-    `/api/admin/services/${service.id}`,
+    `/api/services/${service.id}`,
     {
      headers: {
       "Content-Type": "application/json"
@@ -66,7 +65,6 @@ const ServiceForm = ({
 
    if (response.status === 200) {
     router.push("/admin/services");
-   } else {
    }
   } catch (error) {
    console.error("Error deleting service:", error);
@@ -197,4 +195,4 @@ const ServiceForm = ({
  );
 };
 
-export default ServiceForm;
+export default EditServiceForm;
