@@ -3,5 +3,9 @@ export default function AdminRootLayout({
 }: Readonly<{
  children: React.ReactNode;
 }>) {
- return <div className="w-full h-full bg-zinc-900">{children}</div>;
+ return (
+  <div className="w-full h-full min-h-screen bg-zinc-900">
+   {children}
+  </div>
+ );
 }
