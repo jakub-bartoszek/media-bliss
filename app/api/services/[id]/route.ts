@@ -1,22 +1,34 @@
 import { prisma } from "@/lib/server/database/prisma";
-import { ServiceCategory } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: Request) {
- const categoryParam = new URL(request.url).searchParams.get(
-  "category"
- );
- const category = categoryParam as ServiceCategory | undefined;
+export async function GET(
+ request: NextRequest,
+ { params }: { params: { id: string } }
+) {
+ const serviceId = parseInt(params.id);
+
+ if (isNaN(serviceId)) {
+  return NextResponse.json(
+   { error: "Invalid service ID" },
+   { status: 400 }
+  );
+ }
 
  try {
-  const services = await prisma.service.findMany({
-   where: category ? { category } : {},
-   orderBy: {
-    price: "desc"
+  const service = await prisma.service.findUnique({
+   where: {
+    id: serviceId
    }
   });
 
-  return NextResponse.json(services);
+  if (!service) {
+   return NextResponse.json(
+    { error: "Service not found" },
+    { status: 404 }
+   );
+  }
+
+  return NextResponse.json(service);
  } catch (error) {
   console.error(error);
   return NextResponse.error();
