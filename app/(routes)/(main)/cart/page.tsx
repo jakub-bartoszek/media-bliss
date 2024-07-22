@@ -110,17 +110,16 @@ const Cart = () => {
          key={item.cartId}
          className="flex justify-between items-center p-4 border rounded-lg gap-4"
         >
-         <div className="w-1/2">
+         <div className="w-1/3">
           <h2 className="text-xl font-semibold">{item.name}</h2>
           <p className="text-sm text-gray-500">{item.category}</p>
           <span className="text-lg font-semibold mr-4 text-primary">
            {Number(item.price).toFixed(2)} PLN
           </span>
          </div>
-         <div className="flex items-center w-1/2 justify-between">
-          {item.category === "Instagram" ||
-          item.category === "TikTok" ? (
-           <div className="w-full">
+         <div className="flex items-center w-2/3 justify-between">
+          <div className="w-full">
+           {item.requireLink === "true" ? (
             <input
              className="p-2 border border-gray-300 rounded-md text-gray-700 w-full"
              placeholder="Link do konta"
@@ -134,17 +133,12 @@ const Cart = () => {
               );
              }}
             />
-            {errors[item.cartId] && (
-             <p className="text-red-500 text-sm mt-1">
-              {errors[item.cartId]}
-             </p>
-            )}
-           </div>
-          ) : (
-           <p className="text-gray-500">
-            Produkt zostanie dostarczony na email
-           </p>
-          )}
+           ) : (
+            <p className="text-sm text-center">
+             Produkt zostanie dostarczony na adres email
+            </p>
+           )}
+          </div>
           <button
            className="ml-4 p-2 text-gray-500 hover:text-gray-700 transition"
            onClick={() => removeItemFromCart(item.cartId)}
