@@ -9,6 +9,7 @@ export interface ServiceWithDecimalPrice {
  price: number;
  category: ServiceCategory;
  type: ServiceType;
+ requireLink: boolean;
 }
 
 export interface CartItem extends ServiceWithDecimalPrice {
