@@ -1,32 +1,71 @@
-import { ServiceWithDecimalPrice } from "@/types";
+import { useState } from "react";
+import { nanoid } from "nanoid";
+import { ServiceWithDecimalPrice, CartItem } from "@/types";
 
 const CustomServiceSection = ({
  services,
- handleAddCustomService,
- setCustomServiceId,
- setCustomServiceName,
- setCustomServicePrice,
- setQuantity,
- customServiceId,
- customServiceName,
- customServicePrice,
- quantity,
- handleQuantityChange
+ setSelectedProduct,
+ setIsModalOpen
 }: {
  services: ServiceWithDecimalPrice[];
- handleAddCustomService: () => void;
- setCustomServiceId: (id: string) => void;
- setCustomServiceName: (name: string) => void;
- setCustomServicePrice: (price: number) => void;
- setQuantity: (quantity: number) => void;
- customServiceId: string;
- customServiceName: string;
- customServicePrice: number;
- quantity: number;
- handleQuantityChange: (
-  e: React.ChangeEvent<HTMLInputElement>
- ) => void;
+ setSelectedProduct: (product: CartItem) => void;
+ setIsModalOpen: (isOpen: boolean) => void;
 }) => {
+ const [customServiceId, setCustomServiceId] = useState<string>("");
+ const [quantity, setQuantity] = useState<number>(0);
+ const [customServicePrice, setCustomServicePrice] =
+  useState<number>(0);
+ const [customServiceName, setCustomServiceName] =
+  useState<string>("");
+
+ const handleAddCustomService = () => {
+  const selectedService = services.find(
+   (service) => service.id.toString() === customServiceId
+  );
+  if (!selectedService) return;
+
+  const customProduct: CartItem = {
+   ...selectedService,
+   cartId: nanoid(),
+   name: `${quantity}x ${selectedService.name}`,
+   price: customServicePrice
+  };
+
+  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+  cart.push(customProduct);
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  setSelectedProduct(customProduct);
+  setIsModalOpen(true);
+ };
+
+ const handleQuantityChange = (
+  e: React.ChangeEvent<HTMLInputElement>
+ ) => {
+  const qty = parseInt(e.target.value);
+  setQuantity(qty);
+
+  const selectedService = services.find(
+   (service) => service.id.toString() === customServiceId
+  );
+  if (selectedService) {
+   setCustomServicePrice(qty * selectedService.price);
+  }
+ };
+
+ const handleQuantityBlur = () => {
+  if (quantity < 100) {
+   setQuantity(100);
+
+   const selectedService = services.find(
+    (service) => service.id.toString() === customServiceId
+   );
+   if (selectedService) {
+    setCustomServicePrice(100 * selectedService.price);
+   }
+  }
+ };
+
  return (
   <section className="flex flex-col md:flex-row justify-between gap-16 items-center text-zinc-700">
    <div className="w-full md:w-2/3">
@@ -81,6 +120,7 @@ const CustomServiceSection = ({
       placeholder="Quantity"
       value={quantity}
       onChange={handleQuantityChange}
+      onBlur={handleQuantityBlur}
      />
      <button
       className="px-4 py-2 w-full bg-primary hover:bg-primary-light transition text-white rounded-lg"

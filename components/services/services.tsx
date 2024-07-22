@@ -15,11 +15,8 @@ const Services = ({
  category: ServiceCategory;
 }) => {
  const [isModalOpen, setIsModalOpen] = useState(false);
- const [selectedProduct, setSelectedProduct] = useState<ServiceWithDecimalPrice | null>(null);
- const [customServiceId, setCustomServiceId] = useState<string>("");
- const [quantity, setQuantity] = useState<number>(0);
- const [customServicePrice, setCustomServicePrice] = useState<number>(0);
- const [customServiceName, setCustomServiceName] = useState<string>("");
+ const [selectedProduct, setSelectedProduct] =
+  useState<ServiceWithDecimalPrice | null>(null);
  const firstSectionRef = useRef<HTMLDivElement>(null);
 
  const handleProductSelect = (product: ServiceWithDecimalPrice) => {
@@ -35,42 +32,6 @@ const Services = ({
   cart.push(uniqueProduct);
   localStorage.setItem("cart", JSON.stringify(cart));
  };
-
- const handleAddCustomService = () => {
-  const selectedService = services.find(
-   (service) => service.id.toString() === customServiceId
-  );
-  if (!selectedService) return;
-
-  const customProduct: CartItem = {
-   ...selectedService,
-   cartId: nanoid(),
-   name: `${quantity}x ${selectedService.name}`,
-   price: customServicePrice
-  };
-
-  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-  cart.push(customProduct);
-  localStorage.setItem("cart", JSON.stringify(cart));
-
-  setSelectedProduct(customProduct);
-  setIsModalOpen(true);
- };
-
- const handleQuantityChange = (
-  e: React.ChangeEvent<HTMLInputElement>
- ) => {
-  const qty = parseInt(e.target.value);
-  setQuantity(qty);
-
-  const selectedService = services.find(
-   (service) => service.id.toString() === customServiceId
-  );
-  if (selectedService) {
-   setCustomServicePrice(qty * selectedService.price);
-  }
- };
-
 
  const scrollToFirstSection = () => {
   if (firstSectionRef.current) {
@@ -103,16 +64,8 @@ const Services = ({
       />
       <CustomServiceSection
        services={services}
-       handleAddCustomService={handleAddCustomService}
-       setCustomServiceId={setCustomServiceId}
-       setCustomServiceName={setCustomServiceName}
-       setCustomServicePrice={setCustomServicePrice}
-       setQuantity={setQuantity}
-       customServiceId={customServiceId}
-       customServiceName={customServiceName}
-       customServicePrice={customServicePrice}
-       quantity={quantity}
-       handleQuantityChange={handleQuantityChange}
+       setSelectedProduct={setSelectedProduct}
+       setIsModalOpen={setIsModalOpen}
       />
      </div>
     </>
