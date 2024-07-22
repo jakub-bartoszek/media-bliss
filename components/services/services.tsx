@@ -47,6 +47,10 @@ const Services = ({
   }
  };
 
+ const customServices = services.filter(
+  (service) => service.type === "CustomService"
+ );
+
  return (
   <div className="w-full h-full p-4 pt-16 mb-16">
    {services.length !== 0 && (
@@ -63,7 +67,7 @@ const Services = ({
        handleProductSelect={handleProductSelect}
       />
       <CustomServiceSection
-       services={services}
+       services={customServices}
        setSelectedProduct={setSelectedProduct}
        setIsModalOpen={setIsModalOpen}
       />
