@@ -5,12 +5,7 @@ import { usePathname } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 import { BsMarkdown, BsReception0 } from "react-icons/bs";
 import { MdHealthAndSafety, MdMenu, MdSell } from "react-icons/md";
-import {
- BiCalculator,
- BiHome,
- BiLogOut,
- BiMenu
-} from "react-icons/bi";
+import { BiCalculator, BiHome, BiLogOut } from "react-icons/bi";
 import { useState } from "react";
 
 const navData = [
@@ -81,14 +76,13 @@ const AdminNavigation = () => {
      </Link>
     ))}
    </div>
-   {/* Sidebar */}
    <div
     className={twMerge(
-     "w-screen h-screen bg-black bg-opacity-0 absolute top-0 left-0 hidden",
+     "w-screen h-screen bg-black bg-opacity-0 absolute top-0 left-0 hidden md:hidden",
      sidebarOpen && "flex bg-opacity-70"
     )}
     onClick={() => setSidebarOpen(false)}
-    >
+   >
     <div
      className={`fixed left-0 top-0 h-screen flex flex-col p-2 md:p-4 gap-2 border-r-2 border-white/10 transform transition-transform duration-300 bg-zinc-900 ${
       sidebarOpen ? "translate-x-0" : "-translate-x-full"
