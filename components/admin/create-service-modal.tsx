@@ -29,7 +29,7 @@ const ServiceCreateForm = ({
 
   try {
    await axios.post(
-    "/api/admin/services",
+    "/api/services",
     {
      name,
      price: parseFloat(price),
