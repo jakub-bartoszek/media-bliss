@@ -2,7 +2,7 @@ import { prisma } from "@/lib/server/database/prisma";
 import { ServiceCategory } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
  const categoryParam = new URL(request.url).searchParams.get(
   "category"
  );

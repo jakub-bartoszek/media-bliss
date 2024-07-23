@@ -1,6 +1,11 @@
-import { ServiceCategory, ServiceType } from "@prisma/client";
+import {
+ Customer,
+ Order,
+ ServiceCategory,
+ ServiceType
+} from "@prisma/client";
 
-export interface ServiceWithDecimalPrice {
+export type ServiceWithDecimalPrice = {
  id: number;
  name: string;
  description: string;
@@ -10,12 +15,16 @@ export interface ServiceWithDecimalPrice {
  category: ServiceCategory;
  type: ServiceType;
  requireLink: string;
-}
+};
 
-export interface CartItem extends ServiceWithDecimalPrice {
+export type CartItem = ServiceWithDecimalPrice & {
  cartId: string;
-}
+};
 
-export interface CartItemWithAccountLink extends CartItem {
+export type CartItemWithAccountLink = CartItem & {
  accountLink: string;
-}
+};
+
+export type OrderWithCustomer = Order & {
+ customer: Customer | null;
+};

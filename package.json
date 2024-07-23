@@ -7,7 +7,8 @@
   "build": "next build",
   "postinstall": "prisma generate",
   "start": "next start",
-  "lint": "next lint"
+  "lint": "next lint",
+  "test": "jest"
  },
  "dependencies": {
   "@node-rs/argon2": "^1.8.3",
