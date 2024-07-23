@@ -1,33 +1,24 @@
-import fs from "fs";
-import path from "path";
-import { remark } from "remark";
-import html from "remark-html";
+"use client";
 
-export const metadata = {
- title: "Terms of Service"
-};
+import Error from "@/components/error";
+import Loader from "@/components/loader";
+import useTermsOfService from "@/lib/hooks/useTermsOfService";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
-async function getTermsOfServiceContent() {
- const filePath = path.join(
-  process.cwd(),
-  "public",
-  "terms-of-service.md"
- );
- const fileContents = fs.readFileSync(filePath, "utf8");
- const processedContent = await remark()
-  .use(html)
-  .process(fileContents);
- return processedContent.toString();
-}
+export default function TermsOfServicePage() {
+ const { termsOfService, loading, error } = useTermsOfService();
 
-export default async function TermsOfServicePage() {
- const contentHtml = await getTermsOfServiceContent();
+ if (loading) return <Loader />;
+ if (error) return <Error />;
 
  return (
   <div className="w-full pt-24">
    <div className="prose p-4">
     <h1>Terms of Service</h1>
-    <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
+    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+     {termsOfService}
+    </ReactMarkdown>
    </div>
   </div>
  );

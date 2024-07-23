@@ -73,8 +73,8 @@ const EditServiceForm = ({
  };
 
  return (
-  <div className="w-full h-full flex flex-col gap-4">
-   <div className="flex items-center justify-between gap-4 border-b-2 border-white/20 p-4">
+  <div className="w-full h-full min-h-screen flex flex-col relative">
+   <div className="sticky top-0 z-10 w-full h-14 flex items-center justify-between gap-4 border-b-2 border-white/20 p-4 bg-zinc-900">
     <button
      className="text-white py-2 px-4 rounded-full bg-gray-700 hover:bg-gray-500 font-bold"
      onClick={() => router.back()}

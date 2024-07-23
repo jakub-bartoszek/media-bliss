@@ -45,6 +45,23 @@ const config: Config = {
    }
   }
  },
- plugins: [require("@tailwindcss/typography")]
+ plugins: [
+  require("@tailwindcss/typography"),
+  function ({ addComponents }: { addComponents: any }) {
+   addComponents({
+    ".prose": {
+     color: "currentColor",
+     "& h1, & h2, & h3, & h4, & h5, & h6": {
+      color: "currentColor"
+     },
+     "& a": {
+      color: "currentColor"
+     }
+     // Add more styling rules as needed
+    }
+   });
+  }
+ ]
 };
+
 export default config;

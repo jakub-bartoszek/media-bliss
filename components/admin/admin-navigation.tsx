@@ -36,7 +36,7 @@ const navData = [
  },
  {
   title: "Regulamin",
-  href: "/admin/terms-and-conditions",
+  href: "/admin/terms-of-service",
   icon: <BsMarkdown className="w-6 h-6" />
  },
  {
