@@ -1,0 +1,16 @@
+language: node_js
+
+node_js:
+  - '18'  # Ensure this matches the Node.js version you use locally
+
+# Cache dependencies to speed up builds
+cache:
+  directories:
+    - node_modules
+
+# Install dependencies, run linting, tests, and build
+script:
+  - npm install    # This will run the postinstall script as well
+  - npm run lint    # Run linting to ensure code quality
+  - npm test        # Run tests to ensure code correctness
+  - npm run build   # Build the project for production
