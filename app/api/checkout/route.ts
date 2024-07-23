@@ -5,10 +5,15 @@ interface CartItem {
  name: string;
  price: number;
  accountLink: string;
+ description: string;
+ image: string;
+ category: string;
+ type: string;
 }
 
 interface SessionData {
  content: string;
+ dateOfPurchase: string;
 }
 
 declare global {
@@ -35,6 +40,8 @@ export async function POST(req: NextRequest) {
      product_data: {
       name: item.name,
       metadata: {
+       category: item.category,
+       type: item.type,
        accountLink: item.accountLink
       }
      },
@@ -49,7 +56,8 @@ export async function POST(req: NextRequest) {
 
   const serializedCartItems = JSON.stringify(cartItems);
   globalThis.sessions.set(session.id, {
-   content: serializedCartItems
+   content: serializedCartItems,
+   dateOfPurchase: new Date().toISOString() // Add date of purchase
   });
 
   console.log(`Session created: ${session.id}`);

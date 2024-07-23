@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { OrderStatus } from "@prisma/client";
 import { useRouter } from "next/navigation";
@@ -11,12 +11,26 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
   email: order.email,
   contents: order.contents,
   customerName: order.customerName,
-  status: order.status
+  status: order.status,
+  dateOfPurchase: new Date(order.dateOfPurchase) // Ensure this is a Date object
  });
 
+ const [parsedContents, setParsedContents] = useState<any[]>([]);
  const router = useRouter();
 
- const handleChange = (e: any) => {
+ useEffect(() => {
+  try {
+   const parsed = JSON.parse(order.contents);
+   setParsedContents(Array.isArray(parsed) ? parsed : []);
+  } catch (error) {
+   console.error("Error parsing contents:", error);
+   setParsedContents([]);
+  }
+ }, [order.contents]);
+
+ const handleChange = (
+  e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+ ) => {
   const { name, value } = e.target;
   setFormState((prevState) => ({
    ...prevState,
@@ -61,6 +75,18 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
   }
  };
 
+ // Format date and time for Polish locale
+ const formatDate = (date: Date) => {
+  return new Intl.DateTimeFormat("pl-PL", {
+   day: "2-digit",
+   month: "2-digit",
+   year: "numeric",
+   hour: "2-digit",
+   minute: "2-digit",
+   hour12: false // 24-hour format
+  }).format(date);
+ };
+
  return (
   <div className="w-full h-full min-h-screen flex flex-col relative">
    <div className="sticky top-0 z-10 w-full h-14 flex items-center justify-between gap-4 border-b-2 border-white/20 p-4 bg-zinc-900">
@@ -87,6 +113,10 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
    </div>
    <div className="flex flex-col gap-6 text-white p-4">
     <div>
+     <h2 className="text-2xl font-bold mb-2">Data zamówienia</h2>
+     <p>{formatDate(formState.dateOfPurchase)}</p>
+    </div>
+    <div>
      <h2 className="text-2xl font-bold mb-2">Email</h2>
      <input
       className="w-full bg-gray-800 p-2 rounded-lg text-lg"
@@ -98,25 +128,39 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
      />
     </div>
     <div>
-     <h2 className="text-2xl font-bold mb-2">Contents</h2>
-     <textarea
-      className="w-full bg-gray-800 p-2 rounded-lg text-lg"
-      name="contents"
-      value={formState.contents}
-      onChange={handleChange}
-      placeholder="Contents"
-     />
+     <h2 className="text-2xl font-bold mb-2">Usługi</h2>
+     <div className="flex flex-col gap-6">
+      {parsedContents.map((item, index) => (
+       <div
+        key={index}
+        className="bg-gray-800 p-4 rounded-lg transition duration-300"
+       >
+        <h3 className="text-xl font-semibold mb-2">{item.name}</h3>
+        <p className="text-gray-400 mb-2">{item.description}</p>
+        <p className="text-lg font-bold mb-2">{item.price} PLN</p>
+        {item.accountLink && (
+         <p className="text-blue-400 hover:text-blue-300">
+          <a
+           href={item.accountLink}
+           target="_blank"
+           rel="noopener noreferrer"
+          >
+           {item.accountLink}
+          </a>
+         </p>
+        )}
+       </div>
+      ))}
+     </div>
     </div>
-    <div>
-     <h2 className="text-2xl font-bold mb-2">Customer Name</h2>
-     <input
-      className="w-full bg-gray-800 p-2 rounded-lg text-lg"
-      type="text"
-      name="customerName"
-      value={formState.customerName}
-      onChange={handleChange}
-      placeholder="Customer Name"
-     />
+    <div className="flex flex-col gap-6">
+     <h2 className="text-2xl font-bold">Klient</h2>
+     <a
+      className="bg-gray-800 p-4 rounded-lg transition duration-300"
+      href={`/customer/${order.customerId}`}
+     >
+      {formState.customerName}
+     </a>
     </div>
     <div>
      <h2 className="text-2xl font-bold mb-2">Status</h2>

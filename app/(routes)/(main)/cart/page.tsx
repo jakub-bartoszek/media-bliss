@@ -82,11 +82,25 @@ const Cart = () => {
 
   try {
    const response = await axios.post("/api/checkout", {
-    cartItems: cartItems.map(({ name, price, accountLink }) => ({
-     name,
-     price,
-     accountLink
-    }))
+    cartItems: cartItems.map(
+     ({
+      name,
+      price,
+      accountLink,
+      description,
+      image,
+      category,
+      type
+     }) => ({
+      name,
+      price,
+      accountLink,
+      description,
+      image,
+      category,
+      type
+     })
+    )
    });
    const sessionId = response.data.id;
 
@@ -112,10 +126,17 @@ const Cart = () => {
         >
          <div className="w-1/3">
           <h2 className="text-xl font-semibold">{item.name}</h2>
-          <p className="text-sm text-gray-500">{item.category}</p>
+          <p className="text-sm text-gray-500">{item.description}</p>
           <span className="text-lg font-semibold mr-4 text-primary">
            {Number(item.price).toFixed(2)} PLN
           </span>
+          {item.image && (
+           <img
+            src={item.image}
+            alt={item.name}
+            className="w-16 h-16 object-cover"
+           />
+          )}
          </div>
          <div className="flex items-center w-2/3 justify-between">
           <div className="w-full">

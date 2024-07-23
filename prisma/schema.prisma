@@ -38,13 +38,14 @@ model Customer {
 }
 
 model Order {
-  id           Int         @id @default(sequence())
-  email        String
-  contents     String
-  customerName String
-  status       OrderStatus
-  customerId   Int?
-  customer     Customer?   @relation(fields: [customerId], references: [id])
+  id             Int         @id @default(sequence())
+  email          String
+  contents       String
+  customerName   String
+  status         OrderStatus
+  customerId     Int?
+  customer       Customer?   @relation(fields: [customerId], references: [id])
+  dateOfPurchase DateTime    @default(now())
 }
 
 enum OrderStatus {
