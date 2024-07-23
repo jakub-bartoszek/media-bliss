@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 import { BsMarkdown, BsReception0 } from "react-icons/bs";
 import { MdHealthAndSafety, MdMenu, MdSell } from "react-icons/md";
-import { BiCalculator, BiHome, BiLogOut } from "react-icons/bi";
+import { BiHome, BiLogOut } from "react-icons/bi";
 import { useState } from "react";
 
 const navData = [
@@ -18,11 +18,6 @@ const navData = [
   title: "Usługi",
   href: "/admin/services",
   icon: <MdSell className="w-6 h-6" />
- },
- {
-  title: "Kalkulator",
-  href: "/admin/calculator",
-  icon: <BiCalculator className="w-6 h-6" />
  },
  {
   title: "Zamówienia",
