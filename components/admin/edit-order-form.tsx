@@ -157,7 +157,7 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
      <h2 className="text-2xl font-bold">Klient</h2>
      <a
       className="bg-gray-800 p-4 rounded-lg transition duration-300"
-      href={`/customer/${order.customerId}`}
+      href={`/admin/customers/${order.customerId}`}
      >
       {formState.customerName}
      </a>
