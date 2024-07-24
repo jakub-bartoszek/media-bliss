@@ -11,6 +11,8 @@
   "test": "jest"
  },
  "dependencies": {
+  "@nextui-org/checkbox": "^2.1.4",
+  "@nextui-org/react": "^2.4.6",
   "@node-rs/argon2": "^1.8.3",
   "@node-rs/bcrypt": "^1.10.4",
   "@prisma/client": "^5.16.2",
