@@ -111,8 +111,8 @@ const Cart = () => {
  };
 
  return (
-  <div className="w-full h-full p-4 pt-16 bg-gray-100 text-black flex flex-col justify-center">
-   <h1 className="text-3xl font-bold mb-8 text-gray-800 mt-8">
+  <div className="w-full h-full p-4 pt-16 bg-zinc-100 text-black flex flex-col justify-center">
+   <h1 className="text-3xl font-bold mb-8 text-zinc-800 mt-8">
     Twój koszyk
    </h1>
    <div className="w-full flex flex-col md:flex-row gap-4">
@@ -126,7 +126,7 @@ const Cart = () => {
         >
          <div className="w-1/3">
           <h2 className="text-xl font-semibold">{item.name}</h2>
-          <p className="text-sm text-gray-500">{item.description}</p>
+          <p className="text-sm text-zinc-500">{item.description}</p>
           <span className="text-lg font-semibold mr-4 text-primary">
            {Number(item.price).toFixed(2)} PLN
           </span>
@@ -142,7 +142,7 @@ const Cart = () => {
           <div className="w-full">
            {item.requireLink === "true" ? (
             <input
-             className="p-2 border border-gray-300 rounded-md text-gray-700 w-full"
+             className="p-2 border border-zinc-300 rounded-md text-zinc-700 w-full"
              placeholder="Link do konta"
              value={item.accountLink}
              onChange={(e) => {
@@ -161,7 +161,7 @@ const Cart = () => {
            )}
           </div>
           <button
-           className="ml-4 p-2 text-gray-500 hover:text-gray-700 transition"
+           className="ml-4 p-2 text-zinc-500 hover:text-zinc-700 transition"
            onClick={() => removeItemFromCart(item.cartId)}
           >
            <svg
@@ -184,7 +184,7 @@ const Cart = () => {
        ))}
       </div>
      ) : (
-      <p className="text-lg text-gray-500">Twój koszyk jest pusty.</p>
+      <p className="text-lg text-zinc-500">Twój koszyk jest pusty.</p>
      )}
     </div>
     <div className="w-full md:w-1/3">
@@ -196,7 +196,7 @@ const Cart = () => {
         <span>{calculateTotal().toFixed(2)} PLN</span>
        </div>
       </div>
-      <div className="flex justify-between items-center mt-4 pt-4 border-t border-gray-300">
+      <div className="flex justify-between items-center mt-4 pt-4 border-t border-zinc-300">
        <span className="text-xl font-bold">Razem</span>
        <span className="text-xl font-bold">
         {calculateTotal().toFixed(2)} PLN

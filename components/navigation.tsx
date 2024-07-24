@@ -66,25 +66,25 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
    >
     <a
      href="/services/all"
-     className="px-4 py-2 hover:bg-gray-200 rounded-lg"
+     className="px-4 py-2 hover:bg-zinc-200 rounded-lg"
     >
      Wszystkie
     </a>
     <a
      href="/services/instagram"
-     className="px-4 py-2 hover:bg-gray-200 rounded-lg"
+     className="px-4 py-2 hover:bg-zinc-200 rounded-lg"
     >
      Instagram
     </a>
     <a
      href="/services/tiktok"
-     className="px-4 py-2 hover:bg-gray-200 rounded-lg"
+     className="px-4 py-2 hover:bg-zinc-200 rounded-lg"
     >
      TikTok
     </a>
     <a
      href="/services/other"
-     className="px-4 py-2 hover:bg-gray-200 rounded-lg"
+     className="px-4 py-2 hover:bg-zinc-200 rounded-lg"
     >
      Pozostałe
     </a>

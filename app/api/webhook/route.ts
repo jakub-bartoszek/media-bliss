@@ -95,7 +95,7 @@ export async function POST(req: NextRequest) {
      customerName: customerName,
      status: "Niezrealizowane",
      customer: { connect: { id: customer.id } },
-     dateOfPurchase: sessionData.dateOfPurchase // Add date of purchase
+     dateOfPurchase: sessionData.dateOfPurchase
     }
    });
 

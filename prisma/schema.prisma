@@ -34,7 +34,7 @@ enum ServiceType {
 model Customer {
   id     Int     @id @default(sequence())
   email  String  @unique
-  orders Order[]
+  orders Order[] @relation("CustomerOrders")
 }
 
 model Order {
@@ -44,7 +44,7 @@ model Order {
   customerName   String
   status         OrderStatus
   customerId     Int?
-  customer       Customer?   @relation(fields: [customerId], references: [id])
+  customer       Customer?   @relation(fields: [customerId], references: [id], name: "CustomerOrders")
   dateOfPurchase DateTime    @default(now())
 }
 

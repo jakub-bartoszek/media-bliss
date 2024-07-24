@@ -28,3 +28,7 @@ export type CartItemWithAccountLink = CartItem & {
 export type OrderWithCustomer = Order & {
  customer: Customer | null;
 };
+
+export type CustomerWithOrders = Customer & {
+ orders: Order[] | null;
+};

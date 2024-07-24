@@ -2,7 +2,7 @@
 
 const OtherServicesPage = () => {
  return (
-  <div className="p-6 py-32 bg-gray-50">
+  <div className="p-6 py-32 bg-zinc-50">
    <div className="max-w-4xl mx-auto text-center">
     <h1 className="text-primary text-4xl md:text-6xl font-extrabold mb-8">
      Pozostałe usługi

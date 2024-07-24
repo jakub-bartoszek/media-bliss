@@ -225,7 +225,7 @@ const ServiceCreateForm = ({
       <button
        type="button"
        onClick={handleClose}
-       className="mr-2 px-4 py-2 bg-gray-500 text-white rounded-lg"
+       className="mr-2 px-4 py-2 bg-zinc-500 text-white rounded-lg"
       >
        Anuluj
       </button>

@@ -91,7 +91,7 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
   <div className="w-full h-full min-h-screen flex flex-col relative">
    <div className="sticky top-0 z-10 w-full h-14 flex items-center justify-between gap-4 border-b-2 border-white/20 p-4 bg-zinc-900">
     <button
-     className="text-white py-2 px-4 rounded-full bg-gray-700 hover:bg-gray-500 font-bold"
+     className="text-white py-2 px-4 rounded-full bg-zinc-700 hover:bg-zinc-500 font-bold"
      onClick={() => router.back()}
     >
      Powrót
@@ -119,7 +119,7 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
     <div>
      <h2 className="text-2xl font-bold mb-2">Email</h2>
      <input
-      className="w-full bg-gray-800 p-2 rounded-lg text-lg"
+      className="w-full bg-zinc-800 p-2 rounded-lg text-lg"
       type="email"
       name="email"
       value={formState.email}
@@ -133,10 +133,10 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
       {parsedContents.map((item, index) => (
        <div
         key={index}
-        className="bg-gray-800 p-4 rounded-lg transition duration-300"
+        className="bg-zinc-800 p-4 rounded-lg transition duration-300"
        >
         <h3 className="text-xl font-semibold mb-2">{item.name}</h3>
-        <p className="text-gray-400 mb-2">{item.description}</p>
+        <p className="text-zinc-400 mb-2">{item.description}</p>
         <p className="text-lg font-bold mb-2">{item.price} PLN</p>
         {item.accountLink && (
          <p className="text-blue-400 hover:text-blue-300">
@@ -156,7 +156,7 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
     <div className="flex flex-col gap-6">
      <h2 className="text-2xl font-bold">Klient</h2>
      <a
-      className="bg-gray-800 p-4 rounded-lg transition duration-300"
+      className="bg-zinc-800 p-4 rounded-lg transition duration-300"
       href={`/admin/customers/${order.customerId}`}
      >
       {formState.customerName}
@@ -165,7 +165,7 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
     <div>
      <h2 className="text-2xl font-bold mb-2">Status</h2>
      <select
-      className="w-full bg-gray-800 p-2 rounded-lg text-lg"
+      className="w-full bg-zinc-800 p-2 rounded-lg text-lg"
       name="status"
       value={formState.status}
       onChange={handleChange}

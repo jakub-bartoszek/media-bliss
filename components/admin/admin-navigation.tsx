@@ -3,10 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { twMerge } from "tailwind-merge";
-import { BsMarkdown, BsReception0 } from "react-icons/bs";
-import { MdHealthAndSafety, MdMenu, MdSell } from "react-icons/md";
+import { MdArticle, MdMenu } from "react-icons/md";
+import { FaGear } from "react-icons/fa6";
 import { BiHome, BiLogOut } from "react-icons/bi";
 import { useState } from "react";
+import { TbShoppingCartCopy } from "react-icons/tb";
+import { BsPeopleFill } from "react-icons/bs";
 
 const navData = [
  {
@@ -17,22 +19,22 @@ const navData = [
  {
   title: "Usługi",
   href: "/admin/services",
-  icon: <MdSell className="w-6 h-6" />
+  icon: <FaGear className="w-6 h-6" />
  },
  {
   title: "Zamówienia",
   href: "/admin/orders",
-  icon: <BsReception0 className="w-6 h-6" />
+  icon: <TbShoppingCartCopy className="w-6 h-6" />
  },
  {
-  title: "Admin",
-  href: "/admin/security",
-  icon: <MdHealthAndSafety className="w-6 h-6" />
+  title: "Klienci",
+  href: "/admin/customers",
+  icon: <BsPeopleFill  className="w-6 h-6" />
  },
  {
   title: "Regulamin",
   href: "/admin/terms-of-service",
-  icon: <BsMarkdown className="w-6 h-6" />
+  icon: <MdArticle className="w-6 h-6" />
  },
  {
   title: "Wyloguj",

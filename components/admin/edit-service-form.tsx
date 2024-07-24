@@ -76,7 +76,7 @@ const EditServiceForm = ({
   <div className="w-full h-full min-h-screen flex flex-col relative">
    <div className="sticky top-0 z-10 w-full h-14 flex items-center justify-between gap-4 border-b-2 border-white/20 p-4 bg-zinc-900">
     <button
-     className="text-white py-2 px-4 rounded-full bg-gray-700 hover:bg-gray-500 font-bold"
+     className="text-white py-2 px-4 rounded-full bg-zinc-700 hover:bg-zinc-500 font-bold"
      onClick={() => router.back()}
     >
      Powrót
@@ -100,7 +100,7 @@ const EditServiceForm = ({
     <div>
      <h2 className="text-2xl font-bold mb-2">Nazwa</h2>
      <input
-      className="w-full bg-gray-800 p-2 rounded-lg text-lg"
+      className="w-full bg-zinc-800 p-2 rounded-lg text-lg"
       type="text"
       name="name"
       value={formState.name}
@@ -111,7 +111,7 @@ const EditServiceForm = ({
     <div>
      <h2 className="text-2xl font-bold mb-2">Cena</h2>
      <input
-      className="w-full bg-gray-800 p-2 rounded-lg text-lg"
+      className="w-full bg-zinc-800 p-2 rounded-lg text-lg"
       type="number"
       name="price"
       value={formState.price}
@@ -122,7 +122,7 @@ const EditServiceForm = ({
     <div>
      <h2 className="text-2xl font-bold mb-2">Opis</h2>
      <textarea
-      className="w-full bg-gray-800 p-2 rounded-lg text-lg"
+      className="w-full bg-zinc-800 p-2 rounded-lg text-lg"
       name="description"
       value={formState.description}
       onChange={handleChange}
@@ -132,7 +132,7 @@ const EditServiceForm = ({
     <div>
      <h2 className="text-2xl font-bold mb-2">Lista</h2>
      <textarea
-      className="w-full bg-gray-800 p-2 rounded-lg text-lg"
+      className="w-full bg-zinc-800 p-2 rounded-lg text-lg"
       name="list"
       value={formState.list.join(", ")}
       onChange={(e) =>
@@ -147,7 +147,7 @@ const EditServiceForm = ({
     <div>
      <h2 className="text-2xl font-bold mb-2">Obraz</h2>
      <input
-      className="w-full bg-gray-800 p-2 rounded-lg text-lg"
+      className="w-full bg-zinc-800 p-2 rounded-lg text-lg"
       type="text"
       name="image"
       value={formState.image}
@@ -158,7 +158,7 @@ const EditServiceForm = ({
     <div>
      <h2 className="text-2xl font-bold mb-2">Kategoria</h2>
      <select
-      className="w-full bg-gray-800 p-2 rounded-lg text-lg"
+      className="w-full bg-zinc-800 p-2 rounded-lg text-lg"
       name="category"
       value={formState.category}
       onChange={handleChange}
@@ -176,7 +176,7 @@ const EditServiceForm = ({
     <div>
      <h2 className="text-2xl font-bold mb-2">Typ</h2>
      <select
-      className="w-full bg-gray-800 p-2 rounded-lg text-lg"
+      className="w-full bg-zinc-800 p-2 rounded-lg text-lg"
       name="type"
       value={formState.type}
       onChange={handleChange}
@@ -196,7 +196,7 @@ const EditServiceForm = ({
       Wymaga linku do konta
      </h2>
      <select
-      className="w-full bg-gray-800 p-2 rounded-lg text-lg"
+      className="w-full bg-zinc-800 p-2 rounded-lg text-lg"
       name="requireLink"
       value={formState.requireLink}
       onChange={handleChange}
