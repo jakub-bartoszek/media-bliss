@@ -5,8 +5,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 import { CartItemWithAccountLink } from "@/types";
 import { twMerge } from "tailwind-merge";
-import { FaCheck, FaCross, FaShoppingCart } from "react-icons/fa";
-import { RxCross1 } from "react-icons/rx";
+import { FaCheck, FaShoppingCart } from "react-icons/fa";
 import { BiTrash } from "react-icons/bi";
 
 const stripePromise = loadStripe(
@@ -77,7 +76,10 @@ const Cart = () => {
   }, 0);
  };
 
- const handleBuy = async () => {
+ const handleSubmit = async (
+  event: React.FormEvent<HTMLFormElement>
+ ) => {
+  event.preventDefault();
   const stripe = await stripePromise;
 
   if (!stripe) {
@@ -125,7 +127,10 @@ const Cart = () => {
      <div>Brak produktów w koszyku</div>
     </div>
    ) : (
-    <div className="p-4 pt-16">
+    <form
+     onSubmit={handleSubmit}
+     className="p-4 pt-16"
+    >
      <h1 className="text-3xl font-bold mb-8 text-zinc-800 mt-8">
       Twój koszyk
      </h1>
@@ -150,6 +155,7 @@ const Cart = () => {
             {item.requireLink === "true" ? (
              <div className="relative">
               <input
+               required
                className="p-2 border border-zinc-300 rounded-md text-zinc-700 w-full"
                placeholder="Link do konta"
                value={item.accountLink}
@@ -164,7 +170,7 @@ const Cart = () => {
                }}
               />
               {errors[item.cartId] && (
-               <div className="absolute text-red-500 text-sm mt-1">
+               <div className="text-red-500 text-sm mt-1">
                 {errors[item.cartId]}
                </div>
               )}
@@ -176,6 +182,7 @@ const Cart = () => {
             )}
            </div>
            <button
+            type="button"
             className="ml-4 p-2 text-zinc-500 hover:text-zinc-700 transition"
             onClick={() => removeItemFromCart(item.cartId)}
            >
@@ -233,8 +240,8 @@ const Cart = () => {
           </span>
          </div>
          <button
+          type="submit"
           className="w-full px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-light transition disabled:bg-zinc-500"
-          onClick={handleBuy}
           disabled={!termsAccepted}
          >
           Zapłać
@@ -243,7 +250,7 @@ const Cart = () => {
        </div>
       </div>
      </div>
-    </div>
+    </form>
    )}
   </div>
  );
