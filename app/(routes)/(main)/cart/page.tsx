@@ -18,6 +18,7 @@ const Cart = () => {
  >([]);
  const [errors, setErrors] = useState<{ [key: string]: string }>({});
  const [termsAccepted, setTermsAccepted] = useState(false);
+ const [submitting, setSubmitting] = useState(false);
 
  useEffect(() => {
   const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -68,6 +69,29 @@ const Cart = () => {
   }
  };
 
+ const validateAllLinks = () => {
+  let valid = true;
+  cartItems.forEach((item) => {
+   if (item.requireLink === "true") {
+    const regex =
+     item.category === "Instagram"
+      ? /^(https?:\/\/)?(www\.)?instagram\.com\/[a-zA-Z0-9(_)\.]+\/?$/
+      : /^(https?:\/\/)?(www\.)?tiktok\.com\/@[a-zA-Z0-9(_)\.]+\/?$/;
+    if (!regex.test(item.accountLink)) {
+     valid = false;
+     setErrors((prev) => ({
+      ...prev,
+      [item.cartId]:
+       item.category === "Instagram"
+        ? "Please enter a valid Instagram account link."
+        : "Please enter a valid TikTok account link."
+     }));
+    }
+   }
+  });
+  return valid;
+ };
+
  const calculateTotal = () => {
   return cartItems.reduce((total, item) => {
    const price =
@@ -80,12 +104,20 @@ const Cart = () => {
   event: React.FormEvent<HTMLFormElement>
  ) => {
   event.preventDefault();
+
+  if (!validateAllLinks()) {
+   console.error("Some account links are invalid.");
+   return;
+  }
+
   const stripe = await stripePromise;
 
   if (!stripe) {
    console.error("Stripe has not loaded.");
    return;
   }
+
+  setSubmitting(true);
 
   try {
    const response = await axios.post("/api/checkout", {
@@ -114,6 +146,7 @@ const Cart = () => {
    await stripe.redirectToCheckout({ sessionId });
   } catch (error) {
    console.error("Error redirecting to checkout", error);
+   setSubmitting(false);
   }
  };
 
@@ -242,9 +275,9 @@ const Cart = () => {
          <button
           type="submit"
           className="w-full px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-light transition disabled:bg-zinc-500"
-          disabled={!termsAccepted}
+          disabled={!termsAccepted || submitting}
          >
-          Zapłać
+          {submitting ? "Przetwarzanie..." : "Zapłać"}
          </button>
         </div>
        </div>
