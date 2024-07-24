@@ -53,6 +53,13 @@ const HeaderSection = ({
          (service) => service.name === "Pakiet High"
         )[0]
        }
+       onSelect={() =>
+        handleProductSelect(
+         services.filter(
+          (service) => service.name === "Pakiet High"
+         )[0]
+        )
+       }
       />
      </div>
     </div>
