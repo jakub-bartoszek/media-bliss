@@ -17,7 +17,7 @@ const CartModal: React.FC<CartModalProps> = ({
  );
 
  return (
-  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
    <div className="bg-white p-4 rounded-lg relative">
     <button
      onClick={onClose}
@@ -53,7 +53,7 @@ const CartModal: React.FC<CartModalProps> = ({
        </div>
       )}
      </div>
-     <div className="w-full flex gap-32">
+     <div className="w-full flex gap-16">
       <button
        onClick={onClose}
        className="px-4 py-2 bg-primary hover:bg-primary-light text-white rounded-lg text-nowrap"
@@ -62,7 +62,7 @@ const CartModal: React.FC<CartModalProps> = ({
       </button>
       <a
        href="/cart"
-       className="w-full flex justify-center items-center px-4 py-2 bg-primary hover:bg-primary-light transition text-white rounded-lg"
+       className="w-full flex justify-center items-center px-4 py-2 bg-primary hover:bg-primary-light transition text-white rounded-lg text-nowrap"
       >
        Zobacz koszyk
       </a>
