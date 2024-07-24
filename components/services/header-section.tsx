@@ -13,8 +13,8 @@ const HeaderSection = ({
  handleProductSelect: (product: ServiceWithDecimalPrice) => void;
 }) => {
  return (
-  <div className="w-full h-[calc(100vh-64px)] flex items-center gap-16 p-8">
-   <div className="w-full h-[calc(100vh-64px)] flex items-center gap-16 p-8">
+  <div className="w-full h-[calc(100vh-64px)] flex items-center gap-16 p-4">
+   <div className="w-full h-[calc(100vh-64px)] flex items-center gap-16">
     <div className="w-full lg:w-1/2 flex flex-col items-center md:items-start">
      <h1 className="text-primary text-center md:text-left text-5xl md:text-6xl font-bold mb-4">
       Usługi {category}
