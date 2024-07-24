@@ -25,8 +25,16 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
  try {
-  const { name, price, description, list, image, category, type } =
-   await request.json();
+  const {
+   name,
+   price,
+   description,
+   list,
+   image,
+   category,
+   type,
+   requireLink
+  } = await request.json();
 
   const newService = await prisma.service.create({
    data: {
@@ -36,7 +44,8 @@ export async function POST(request: NextRequest) {
     list,
     image,
     category,
-    type
+    type,
+    requireLink
    }
   });
 
