@@ -30,14 +30,14 @@ const CartModal: React.FC<CartModalProps> = ({
       Dodano do koszyka!
      </h1>
      <div className="max-w-[300px] border-2 rounded-lg border-primary p-4">
-      <div className="border-b-2 pb-4">
+      <div>
        <p className="font-bold text-xl">{selectedProduct.name}</p>
        <p className="text-4xl font-bold text-primary">
         {selectedProduct.price} PLN
        </p>
       </div>
       {filteredList.length > 0 && (
-       <ul className="list-disc marker:text-zinc-400 pl-4 mt-4">
+       <ul className="list-disc marker:text-zinc-400 pl-4 pt-4">
         {filteredList.map((item, index) => (
          <li key={index}>{item}</li>
         ))}
