@@ -29,7 +29,7 @@ const navData = [
  {
   title: "Klienci",
   href: "/admin/customers",
-  icon: <BsPeopleFill  className="w-6 h-6" />
+  icon: <BsPeopleFill className="w-6 h-6" />
  },
  {
   title: "Regulamin",
@@ -73,42 +73,44 @@ const AdminNavigation = () => {
      </Link>
     ))}
    </div>
-   <div
-    className={twMerge(
-     "w-screen h-screen bg-black bg-opacity-0 absolute top-0 left-0 hidden md:hidden",
-     sidebarOpen && "flex bg-opacity-70"
-    )}
-    onClick={() => setSidebarOpen(false)}
-   >
+   {/* Sidebar */}
+   {sidebarOpen && (
     <div
-     className={`fixed left-0 top-0 h-screen flex flex-col p-2 md:p-4 gap-2 border-r-2 border-white/10 transform transition-transform duration-300 bg-zinc-900 ${
-      sidebarOpen ? "translate-x-0" : "-translate-x-full"
-     }`}
+     onClick={() => setSidebarOpen(false)}
+     className="h-screen w-screen bg-black bg-opacity-75 absolute top-0 left-0 z-10"
     >
-     <button
-      key={"menu"}
-      onClick={() => setSidebarOpen(false)}
-      className="flex md:hidden items-center gap-2 md:gap-4 md:text-xl py-2 px-2 md:py-4 md:px-6 rounded-lg text-white hover:bg-zinc-700 cursor-pointer transition w-min"
+     <div
+      className={twMerge(
+       "h-screen bg-zinc-900 w-64 fixed top-0 left-0 flex flex-col p-2 md:p-4 gap-2 border-r-2 border-white/10 transition-transform transform",
+       sidebarOpen ? "translate-x-0" : "-translate-x-full"
+      )}
+      style={{ transition: "transform 0.3s ease-in-out" }}
      >
-      <MdMenu className="w-6 h-6" />
-      <div className="md:flex hidden">Menu</div>
-     </button>
-     {navData.map((nav, index) => (
-      <Link
-       key={index}
-       href={nav.href}
-       className={twMerge(
-        "flex items-center gap-2 md:gap-4 md:text-xl py-2 px-2 md:py-4 md:px-6 rounded-lg text-white hover:bg-zinc-700 cursor-pointer transition",
-        index === navData.length - 1 && "mt-auto",
-        pathname === nav.href && "bg-primary hover:bg-primary-light"
-       )}
+      <button
+       key={"menu"}
+       onClick={() => setSidebarOpen(false)}
+       className="flex md:hidden items-center w-min gap-4 md:text-xl py-2 px-2 md:py-4 md:px-6 rounded-lg text-white hover:bg-zinc-700 cursor-pointer transition"
       >
-       {nav.icon}
-       <div className="flex">{nav.title}</div>
-      </Link>
-     ))}
+       <MdMenu className="w-6 h-6" />
+       <div className="md:flex hidden">Menu</div>
+      </button>
+      {navData.map((nav, index) => (
+       <Link
+        key={index}
+        href={nav.href}
+        className={twMerge(
+         "flex items-center gap-4 md:text-xl py-2 px-2 md:py-4 md:px-6 rounded-lg text-white hover:bg-zinc-700 cursor-pointer transition",
+         index === navData.length - 1 && "mt-auto",
+         pathname === nav.href && "bg-primary hover:bg-primary-light"
+        )}
+       >
+        <div>{nav.icon}</div>
+        <div>{nav.title}</div>
+       </Link>
+      ))}
+     </div>
     </div>
-   </div>
+   )}
   </div>
  );
 };
