@@ -1,5 +1,53 @@
 "use client";
 
+import {
+ FaBullhorn,
+ FaFacebook,
+ FaGoogle,
+ FaTrafficLight,
+ FaVideo,
+ FaCamera,
+ FaBusinessTime,
+ FaImage,
+ FaLaptopCode,
+ FaReact,
+ FaJs,
+ FaWordpress
+} from "react-icons/fa";
+import { SiNextdotjs, SiTypescript } from "react-icons/si";
+
+const services = [
+ { name: "Reklama na Times Square", icon: FaBullhorn },
+ { name: "Kampanie reklamowe Meta Ads", icon: FaFacebook },
+ { name: "Opinie Google", icon: FaGoogle },
+ {
+  name: "Ruch na stronie internetowej Traffic WWW",
+  icon: FaTrafficLight
+ },
+ { name: "Realizacja reklam", icon: FaVideo },
+ { name: "Ogrywanie produktów", icon: FaVideo },
+ { name: "Sesje zdjęciowe", icon: FaCamera },
+ { name: "Wizytówki", icon: FaBusinessTime },
+ { name: "Loga", icon: FaImage },
+ { name: "Grafiki reklamowe", icon: FaImage },
+ { name: "Projektowanie stron", icon: FaLaptopCode }
+];
+
+const webDevelopmentServices = [
+ { name: "React", icon: FaReact },
+ { name: "Next.js", icon: SiNextdotjs },
+ { name: "JavaScript", icon: FaJs },
+ { name: "TypeScript", icon: SiTypescript },
+ { name: "Wordpress", icon: FaWordpress }
+];
+
+const ServiceCard = ({ name, Icon }: { name: string; Icon: any }) => (
+ <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow flex items-center space-x-4">
+  <Icon className="text-primary text-3xl" />
+  <span className="text-lg md:text-xl font-medium">{name}</span>
+ </div>
+);
+
 const OtherServicesPage = () => {
  return (
   <div className="p-6 py-32 bg-zinc-50">
@@ -15,62 +63,28 @@ const OtherServicesPage = () => {
      - <b>kontakt@mediabliss.pl</b>
     </p>
    </div>
+   <div className="max-w-4xl mx-auto mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+    {services.map((service, index) => (
+     <ServiceCard
+      key={index}
+      name={service.name}
+      Icon={service.icon}
+     />
+    ))}
+   </div>
    <div className="max-w-4xl mx-auto mt-12">
-    <ul className="text-lg md:text-xl list-disc pl-4 marker:text-zinc-400 font-medium space-y-1 md:space-y-2">
-     <li className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-      Reklama na Times Square
-     </li>
-     <li className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-      Kampanie reklamowe Meta Ads
-     </li>
-     <li className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-      Opinie Google
-     </li>
-     <li className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-      Ruch na stronie internetowej Traffic WWW
-     </li>
-     <li className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-      Realizacja reklam
-     </li>
-     <li className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-      Ogrywanie produktów
-     </li>
-     <li className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-      Sesje zdjęciowe
-     </li>
-     <li className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-      Wizytówki
-     </li>
-     <li className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-      Loga
-     </li>
-     <li className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-      Grafiki reklamowe
-     </li>
-     <li className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-      Projektowanie stron
-     </li>
-     <li className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-      Tworzenie stron internetowych
-     </li>
-     <ul className="list-disc pl-8 marker:text-primary space-y-1 md:space-y-2">
-      <li className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-       React
-      </li>
-      <li className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-       Next.js
-      </li>
-      <li className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-       JavaScript
-      </li>
-      <li className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-       TypeScript
-      </li>
-      <li className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-       Wordpress
-      </li>
-     </ul>
-    </ul>
+    <h2 className="text-2xl md:text-3xl font-bold mb-6">
+     Tworzenie stron internetowych
+    </h2>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+     {webDevelopmentServices.map((service, index) => (
+      <ServiceCard
+       key={index}
+       name={service.name}
+       Icon={service.icon}
+      />
+     ))}
+    </div>
    </div>
   </div>
  );
