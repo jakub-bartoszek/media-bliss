@@ -91,7 +91,7 @@ const AdminServices = () => {
     </>
    )}
    <button
-    className="py-3 px-6 font-bold absolute bottom-8 bg-primary text-white rounded-lg transition hover:bg-primary-light shadow-lg"
+    className="py-3 px-6 font-bold sticky bottom-8 bg-primary text-white rounded-lg transition hover:bg-primary-light shadow-lg"
     onClick={() => setIsCreateModalOpen(true)}
    >
     Dodaj usługę
