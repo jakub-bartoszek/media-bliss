@@ -15,7 +15,8 @@ const ServiceCreateForm = ({
  const [name, setName] = useState("");
  const [price, setPrice] = useState("");
  const [description, setDescription] = useState("");
- const [list, setList] = useState<string>("");
+ const [list, setList] = useState<string[]>([]);
+ const [newListItem, setNewListItem] = useState("");
  const [image, setImage] = useState("");
  const [category, setCategory] = useState("");
  const [type, setType] = useState("");
@@ -35,7 +36,7 @@ const ServiceCreateForm = ({
      name,
      price: parseFloat(price),
      description,
-     list: list.split(",").map((item) => item.trim()),
+     list,
      image,
      category,
      type,
@@ -66,11 +67,23 @@ const ServiceCreateForm = ({
   setName("");
   setPrice("");
   setDescription("");
-  setList("");
+  setList([]);
+  setNewListItem("");
   setImage("");
   setCategory("");
   setType("");
   setRequireLink("");
+ };
+
+ const handleAddListItem = () => {
+  if (newListItem.trim() !== "") {
+   setList((prevList) => [...prevList, newListItem.trim()]);
+   setNewListItem("");
+  }
+ };
+
+ const handleRemoveListItem = (index: number) => {
+  setList((prevList) => prevList.filter((_, i) => i !== index));
  };
 
  if (!isOpen) return null;
@@ -137,14 +150,40 @@ const ServiceCreateForm = ({
       >
        Lista
       </label>
-      <textarea
-       id="list"
-       placeholder="Wymieniaj po przecinku (1000 Polubień, 2000 Wyświetleń)"
-       value={list}
-       onChange={(e) => setList(e.target.value)}
-       className="w-full rounded-lg border-2 border-white/20 bg-black p-2"
-       rows={2}
-      />
+      <div className="flex gap-2 mb-4">
+       <input
+        type="text"
+        id="newListItem"
+        value={newListItem}
+        onChange={(e) => setNewListItem(e.target.value)}
+        className="w-full rounded-lg border-2 border-white/20 bg-black p-2"
+        placeholder="Add item"
+       />
+       <button
+        type="button"
+        onClick={handleAddListItem}
+        className="px-4 py-2 bg-indigo-700 text-white rounded-lg hover:bg-indigo-600"
+       >
+        Add
+       </button>
+      </div>
+      <ul>
+       {list.map((item, index) => (
+        <li
+         key={index}
+         className="flex justify-between items-center mb-2"
+        >
+         {item}
+         <button
+          type="button"
+          onClick={() => handleRemoveListItem(index)}
+          className="text-red-600 hover:text-red-400"
+         >
+          Remove
+         </button>
+        </li>
+       ))}
+      </ul>
      </div>
      <div>
       <label
