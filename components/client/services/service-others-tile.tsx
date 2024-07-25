@@ -1,5 +1,6 @@
 "use client";
 
+import Button from "@/components/button";
 import { ServiceWithDecimalPrice } from "@/types";
 import { useState } from "react";
 
@@ -35,12 +36,12 @@ const ServiceOthersTile = ({ service, onSelect }: ServiceOthersTileProps) => {
      />
     </div>
     <div className="flex items-center justify-center p-4">
-     <button
-      className="bg-primary py-2 w-full text-white rounded-md hover:bg-primary-light transition"
+     <Button
+      className="w-full"
       onClick={onSelect}
      >
       Dodaj do koszyka
-     </button>
+     </Button>
     </div>
    </div>
    {modalOpen && (

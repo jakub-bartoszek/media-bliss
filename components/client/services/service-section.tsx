@@ -1,5 +1,5 @@
-import ServicePackageTile from "@/components/services/service-package-tile";
-import ServiceOthersTile from "@/components/services/service-others-tile";
+import ServicePackageTile from "@/components/client/services/service-package-tile";
+import ServiceOthersTile from "@/components/client/services/service-others-tile";
 import { ServiceWithDecimalPrice } from "@/types";
 
 const ServiceSection = ({

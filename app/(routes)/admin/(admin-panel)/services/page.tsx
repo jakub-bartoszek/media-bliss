@@ -3,8 +3,8 @@
 import { useState } from "react";
 import ServiceCreateForm from "@/components/admin/create-service-modal";
 import useServices from "@/lib/hooks/useServices";
-import Loader from "@/components/loader";
-import Error from "@/components/error";
+import Loader from "@/components/client/loader";
+import Error from "@/components/client/error";
 
 const AdminServices = () => {
  const { services, loading, error, refetch } = useServices();

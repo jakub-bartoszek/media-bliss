@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { nanoid } from "nanoid";
 import { ServiceWithDecimalPrice, CartItem } from "@/types";
+import Button from "@/components/button";
 
 const AccountServiceSection = ({
  service,
@@ -88,12 +89,12 @@ const AccountServiceSection = ({
       min={100}
       max={maxQuantity}
      />
-     <button
-      className="px-4 py-2 w-full bg-primary hover:bg-primary-light transition text-white rounded-lg"
+     <Button
+      className="w-full"
       onClick={handleAddCustomService}
      >
       Dodaj do koszyka
-     </button>
+     </Button>
     </div>
    </div>
   </section>

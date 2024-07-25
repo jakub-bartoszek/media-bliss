@@ -1,5 +1,6 @@
 import { ServiceWithDecimalPrice } from "@/types";
 import ServicePackageTile from "./service-package-tile";
+import Button from "@/components/button";
 
 const HeaderSection = ({
  category,
@@ -22,12 +23,7 @@ const HeaderSection = ({
      Poszerz swoje zasięgi i zyskaj nową popularność, która pozwoli ci dotrzeć
      do niespotykanej dotąd ilości osób.
     </p>
-    <button
-     className="text-white bg-primary hover:bg-primary-light px-4 py-2 rounded-lg"
-     onClick={scrollToFirstSection}
-    >
-     Poznaj naszą ofertę
-    </button>
+    <Button onClick={scrollToFirstSection}>Poznaj naszą ofertę</Button>
    </div>
    <div className="w-1/2 h-full relative hidden lg:flex items-center">
     <ServicePackageTile

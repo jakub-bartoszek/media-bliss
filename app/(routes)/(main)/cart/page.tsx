@@ -7,15 +7,15 @@ import { CartItemWithAccountLink } from "@/types";
 import { twMerge } from "tailwind-merge";
 import { FaCheck, FaShoppingCart } from "react-icons/fa";
 import { BiTrash } from "react-icons/bi";
+import Button from "@/components/button";
+import CheckBox from "@/components/check-box";
 
 const stripePromise = loadStripe(
  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ""
 );
 
 const Cart = () => {
- const [cartItems, setCartItems] = useState<
-  CartItemWithAccountLink[]
- >([]);
+ const [cartItems, setCartItems] = useState<CartItemWithAccountLink[]>([]);
  const [errors, setErrors] = useState<{ [key: string]: string }>({});
  const [termsAccepted, setTermsAccepted] = useState(false);
  const [submitting, setSubmitting] = useState(false);
@@ -26,9 +26,7 @@ const Cart = () => {
  }, []);
 
  const removeItemFromCart = (cartId: string) => {
-  const updatedCart = cartItems.filter(
-   (item) => item.cartId !== cartId
-  );
+  const updatedCart = cartItems.filter((item) => item.cartId !== cartId);
   setCartItems(updatedCart);
   localStorage.setItem("cart", JSON.stringify(updatedCart));
  };
@@ -46,20 +44,17 @@ const Cart = () => {
   accountLink: string,
   category: string
  ) => {
-  let regex: RegExp | undefined;
-  let errorMessage = "";
+  const regex =
+   category === "Instagram"
+    ? /^(https?:\/\/)?(www\.)?instagram\.com\/[a-zA-Z0-9(_)\.]+\/?$/
+    : /^(https?:\/\/)?(www\.)?tiktok\.com\/@[a-zA-Z0-9(_)\.]+\/?$/;
 
-  if (category === "Instagram") {
-   regex =
-    /^(https?:\/\/)?(www\.)?instagram\.com\/[a-zA-Z0-9(_)\.]+\/?$/;
-   errorMessage = "Please enter a valid Instagram account link.";
-  } else if (category === "TikTok") {
-   regex =
-    /^(https?:\/\/)?(www\.)?tiktok\.com\/@[a-zA-Z0-9(_)\.]+\/?$/;
-   errorMessage = "Please enter a valid TikTok account link.";
-  }
+  const errorMessage =
+   category === "Instagram"
+    ? "Please enter a valid Instagram account link."
+    : "Please enter a valid TikTok account link.";
 
-  if (regex && !regex.test(accountLink)) {
+  if (!regex.test(accountLink)) {
    setErrors((prev) => ({ ...prev, [cartId]: errorMessage }));
   } else {
    setErrors((prev) => {
@@ -100,9 +95,7 @@ const Cart = () => {
   }, 0);
  };
 
- const handleSubmit = async (
-  event: React.FormEvent<HTMLFormElement>
- ) => {
+ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
   event.preventDefault();
 
   if (!validateAllLinks()) {
@@ -122,15 +115,7 @@ const Cart = () => {
   try {
    const response = await axios.post("/api/checkout", {
     cartItems: cartItems.map(
-     ({
-      name,
-      price,
-      accountLink,
-      description,
-      image,
-      category,
-      type
-     }) => ({
+     ({ name, price, accountLink, description, image, category, type }) => ({
       name,
       price,
       accountLink,
@@ -154,9 +139,7 @@ const Cart = () => {
   <div className="w-full h-full bg-zinc-100 text-black flex flex-col justify-center">
    {cartItems.length === 0 ? (
     <div className="w-full h-screen flex items-center justify-center flex-col text-zinc-400">
-     <div>
-      <FaShoppingCart className="w-24 h-24 text-zinc-500" />
-     </div>
+     <FaShoppingCart className="w-24 h-24 text-zinc-500" />
      <div>Brak produktów w koszyku</div>
     </div>
    ) : (
@@ -164,18 +147,16 @@ const Cart = () => {
      onSubmit={handleSubmit}
      className="p-4 pt-16"
     >
-     <h1 className="text-3xl font-bold mb-8 text-zinc-800 mt-8">
-      Twój koszyk
-     </h1>
+     <h1 className="text-3xl font-bold mb-8 text-zinc-800 mt-8">Twój koszyk</h1>
      <div className="w-full flex flex-col md:flex-row gap-4">
       <div className="w-full md:w-2/3">
        <div className="flex flex-col gap-4">
         {cartItems.map((item) => (
          <div
           key={item.cartId}
-          className="flex justify-between items-center p-4 border rounded-lg gap-4"
+          className="flex justify-between items-center p-4 py-6 md:py-4 border rounded-lg gap-4"
          >
-          <div className="w-1/3">
+          <div className="w-1/2">
            <h2 className="text-xl font-semibold">{item.name}</h2>
            <p className="text-sm text-zinc-500">{item.category}</p>
            <p className="text-sm text-zinc-500">{item.description}</p>
@@ -189,21 +170,17 @@ const Cart = () => {
              <div className="relative">
               <input
                required
-               className="p-2 border border-zinc-300 rounded-md text-zinc-700 w-full"
+               className="py-1 px-2 border border-zinc-300 rounded-md text-zinc-700 w-full"
                placeholder="Link do konta"
                value={item.accountLink}
                onChange={(e) => {
                 const newLink = e.target.value;
                 updateAccountLink(item.cartId, newLink);
-                validateAccountLink(
-                 item.cartId,
-                 newLink,
-                 item.category
-                );
+                validateAccountLink(item.cartId, newLink, item.category);
                }}
               />
               {errors[item.cartId] && (
-               <div className="text-red-500 text-sm mt-1">
+               <div className="absolute text-red-500 text-xs mt-1">
                 {errors[item.cartId]}
                </div>
               )}
@@ -214,20 +191,20 @@ const Cart = () => {
              </p>
             )}
            </div>
-           <button
-            type="button"
-            className="ml-4 p-2 text-zinc-500 hover:text-zinc-700 transition"
-            onClick={() => removeItemFromCart(item.cartId)}
-           >
-            <BiTrash className="w-6 h-6" />
-           </button>
           </div>
+          <Button
+           type="button"
+           className="p-2 bg-rose-500"
+           onClick={() => removeItemFromCart(item.cartId)}
+          >
+           <BiTrash className="w-5 h-5" />
+          </Button>
          </div>
         ))}
        </div>
       </div>
       <div className="w-full md:w-1/3">
-       <div className="p-6 border rounded-lg bg-white">
+       <div className="p-4 border rounded-lg bg-white">
         <h2 className="text-2xl font-semibold">Podsumowanie</h2>
         <div className="mt-4">
          <div className="flex justify-between">
@@ -242,25 +219,11 @@ const Cart = () => {
          </span>
         </div>
         <div className="mt-6">
-         <div className="flex items-center space-x-3 mb-4">
-          <div
+         <div className="flex gap-x-2 mb-4">
+          <CheckBox
            onClick={() => setTermsAccepted(!termsAccepted)}
-           className={twMerge(
-            "min-w-6 min-h-6 border-2 border-primary rounded-lg flex items-center justify-center transition cursor-pointer",
-            termsAccepted
-             ? "bg-primary"
-             : "hover:border-primary-light"
-           )}
-          >
-           <FaCheck
-            className={twMerge(
-             "text-white h-4 w-4 transition-transform",
-             termsAccepted
-              ? "transform scale-100"
-              : "transform scale-0"
-            )}
-           />
-          </div>
+           checked={termsAccepted}
+          />
           <span>
            Zapoznałem/am się i akceptuję{" "}
            <a
@@ -272,13 +235,13 @@ const Cart = () => {
            MediaBliss
           </span>
          </div>
-         <button
+         <Button
+          className="w-full"
           type="submit"
-          className="w-full px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-light transition disabled:bg-zinc-500"
           disabled={!termsAccepted || submitting}
          >
           {submitting ? "Przetwarzanie..." : "Zapłać"}
-         </button>
+         </Button>
         </div>
        </div>
       </div>

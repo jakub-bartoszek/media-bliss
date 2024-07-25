@@ -1,4 +1,5 @@
-import HomeSection from "@/components/home/home-section";
+import Button from "@/components/button";
+import HomeSection from "@/components/client/home/home-section";
 
 const sections = [
  {
@@ -49,9 +50,9 @@ export default function Home() {
       src="/logos/mb-logo-light-1.svg"
      />
      <a href="/services/all">
-      <button className="bg-primary rounded-lg py-2 px-4 md:py-4 md:px-6 w-max text-white text-lg md:text-xl font-bold animate-[button-appear_2000ms] hover:bg-primary-light transition">
+      <Button className="text-lg md:text-xl animate-[button-appear_2000ms]">
        Sprawdź naszą ofertę
-      </button>
+      </Button>
      </a>
     </div>
    </div>

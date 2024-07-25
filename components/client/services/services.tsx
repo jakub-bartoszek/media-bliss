@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import HeaderSection from "./header-section";
 import ServiceSection from "./service-section";
 import CustomServiceSection from "./custom-service-section";
-import CartModal from "@/components/cart-modal";
+import CartModal from "@/components/client/modals/cart-modal";
 import { ServiceCategory } from "@prisma/client";
 import { nanoid } from "nanoid";
 import { CartItem, ServiceWithDecimalPrice } from "@/types";

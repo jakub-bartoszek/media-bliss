@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { nanoid } from "nanoid";
 import { ServiceWithDecimalPrice, CartItem } from "@/types";
+import Button from "@/components/button";
 
 const CustomServiceSection = ({
  services,
@@ -124,12 +125,12 @@ const CustomServiceSection = ({
       onChange={handleQuantityChange}
       onBlur={handleQuantityBlur}
      />
-     <button
-      className="px-4 py-2 w-full bg-primary hover:bg-primary-light transition text-white rounded-lg"
+     <Button
+      className="w-full"
       onClick={handleAddCustomService}
      >
       Dodaj do koszyka
-     </button>
+     </Button>
     </div>
    </div>
   </section>
