@@ -17,6 +17,8 @@ const CustomServiceSection = ({
  const [customServicePrice, setCustomServicePrice] = useState<number>(0);
  const [customServiceName, setCustomServiceName] = useState<string>("");
 
+ const maxQuantity = 1000000;
+
  const handleAddCustomService = () => {
   const selectedService = services.find(
    (service) => service.id.toString() === customServiceId
@@ -39,7 +41,8 @@ const CustomServiceSection = ({
  };
 
  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  const qty = parseInt(e.target.value);
+  const qty = Math.min(parseInt(e.target.value), maxQuantity);
+
   setQuantity(qty);
 
   const selectedService = services.find(
@@ -124,6 +127,8 @@ const CustomServiceSection = ({
       value={quantity}
       onChange={handleQuantityChange}
       onBlur={handleQuantityBlur}
+      min={100}
+      max={maxQuantity}
      />
      <Button
       className="w-full"
