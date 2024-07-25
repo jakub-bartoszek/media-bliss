@@ -26,7 +26,7 @@ const CartModal: React.FC<CartModalProps> = ({
     <div>
      <p className="text-xl font-bold mb-4">{selectedProduct.name}</p>
      <p className="text-4xl font-bold text-primary">
-      {selectedProduct.price.toFixed(2)} PLN
+      {selectedProduct.price} PLN
      </p>
     </div>
     {filteredList.length > 0 && (
