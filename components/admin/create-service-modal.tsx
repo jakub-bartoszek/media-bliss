@@ -200,6 +200,7 @@ const ServiceCreateForm = ({
        <option value="Package">Pakiet</option>
        <option value="Service">Usługa</option>
        <option value="CustomService">Niestandardowa usługa</option>
+       <option value="Account">Konto</option>
       </select>
      </div>
      <div>

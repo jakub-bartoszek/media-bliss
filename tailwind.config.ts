@@ -42,6 +42,9 @@ const config: Config = {
       transform: "translateY(0);"
      }
     }
+   },
+   height: {
+    screen: "100dvh"
    }
   }
  },

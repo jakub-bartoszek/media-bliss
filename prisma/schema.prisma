@@ -29,6 +29,7 @@ enum ServiceType {
   Package
   Service
   CustomService
+  Account
 }
 
 model Customer {

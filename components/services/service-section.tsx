@@ -14,7 +14,7 @@ const ServiceSection = ({
    {services.filter((service) => service.type === "Package")
     .length !== 0 && (
     <section>
-     <h2 className="w-full text-center text-4xl font-bold mb-4 text-primary">
+     <h2 className="w-full text-center text-5xl font-bold mb-4 text-primary">
       Pakiety
      </h2>
      <div className="flex flex-wrap justify-center gap-4 mb-16">
@@ -33,7 +33,7 @@ const ServiceSection = ({
    {services.filter((service) => service.type === "Service")
     .length !== 0 && (
     <section>
-     <h2 className="w-full text-center text-4xl font-bold mb-4 text-primary">
+     <h2 className="w-full text-center text-5xl font-bold mb-4 text-primary">
       Usługi
      </h2>
      <div className="flex flex-wrap justify-center gap-4 mb-16">

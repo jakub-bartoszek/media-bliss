@@ -6,6 +6,7 @@ import CartModal from "@/components/cart-modal";
 import { ServiceCategory } from "@prisma/client";
 import { nanoid } from "nanoid";
 import { CartItem, ServiceWithDecimalPrice } from "@/types";
+import AccountServiceSection from "./account-service-section";
 
 const Services = ({
  services,
@@ -36,8 +37,7 @@ const Services = ({
  const scrollToFirstSection = () => {
   if (firstSectionRef.current) {
    const offset = 64;
-   const elementPosition =
-    firstSectionRef.current.getBoundingClientRect().top;
+   const elementPosition = firstSectionRef.current.getBoundingClientRect().top;
    const offsetPosition = elementPosition + window.scrollY - offset;
 
    window.scrollTo({
@@ -51,8 +51,12 @@ const Services = ({
   (service) => service.type === "CustomService"
  );
 
+ const accountService = services.filter(
+  (service) => service.type === "Account"
+ )[0];
+
  return (
-  <div className="w-full h-full p-4 pt-16 mb-16">
+  <div className="w-full h-full p-4">
    {services.length !== 0 && (
     <>
      <HeaderSection
@@ -61,10 +65,18 @@ const Services = ({
       scrollToFirstSection={scrollToFirstSection}
       handleProductSelect={handleProductSelect}
      />
-     <div ref={firstSectionRef}>
+     <div
+      className="flex flex-col gap-16"
+      ref={firstSectionRef}
+     >
       <ServiceSection
        services={services}
        handleProductSelect={handleProductSelect}
+      />
+      <AccountServiceSection
+       service={accountService}
+       setSelectedProduct={setSelectedProduct}
+       setIsModalOpen={setIsModalOpen}
       />
       <CustomServiceSection
        services={customServices}

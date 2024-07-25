@@ -13,10 +13,8 @@ const CustomServiceSection = ({
 }) => {
  const [customServiceId, setCustomServiceId] = useState<string>("");
  const [quantity, setQuantity] = useState<number>(0);
- const [customServicePrice, setCustomServicePrice] =
-  useState<number>(0);
- const [customServiceName, setCustomServiceName] =
-  useState<string>("");
+ const [customServicePrice, setCustomServicePrice] = useState<number>(0);
+ const [customServiceName, setCustomServiceName] = useState<string>("");
 
  const handleAddCustomService = () => {
   const selectedService = services.find(
@@ -39,9 +37,7 @@ const CustomServiceSection = ({
   setIsModalOpen(true);
  };
 
- const handleQuantityChange = (
-  e: React.ChangeEvent<HTMLInputElement>
- ) => {
+ const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   const qty = parseInt(e.target.value);
   setQuantity(qty);
 
@@ -65,6 +61,7 @@ const CustomServiceSection = ({
    }
   }
  };
+
  const customServices = services.filter(
   (service) => service.type === "CustomService"
  );
@@ -74,14 +71,14 @@ const CustomServiceSection = ({
  }
 
  return (
-  <section className="flex flex-col md:flex-row justify-between gap-16 items-center text-zinc-700">
+  <section className="flex flex-col md:flex-row-reverse justify-between gap-16 text-zinc-700 p-4 border-2 rounded-lg py-16">
    <div className="w-full md:w-2/3">
     <h2 className="w-full text-5xl text-center md:text-left font-bold mb-4 text-primary">
      Własna usługa
     </h2>
-    <p className="text-lg mb-8">
-     Pakiety nie spełniają twoich oczekiwań? Przygotowaliśmy dla
-     ciebie możliwość dostosowania naszych usług do twoich potrzeb.
+    <p className="text-xl mb-8">
+     Pakiety nie spełniają twoich oczekiwań? Przygotowaliśmy dla ciebie
+     możliwość dostosowania naszych usług do twoich potrzeb.
     </p>
     <select
      className="border-2 p-2 rounded-lg w-full"
