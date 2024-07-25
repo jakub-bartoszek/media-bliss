@@ -136,7 +136,7 @@ const Cart = () => {
  };
 
  return (
-  <div className="w-full h-full bg-zinc-100 text-black flex flex-col justify-center">
+  <div className="w-full h-full text-black flex flex-col justify-center">
    {cartItems.length === 0 ? (
     <div className="w-full h-screen flex items-center justify-center flex-col text-zinc-400">
      <FaShoppingCart className="w-24 h-24 text-zinc-500" />
