@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import axios from "axios";
+import Button from "@/components/button";
 
 const LoginPage = () => {
  const [error, setError] = useState(false);
@@ -35,24 +36,24 @@ const LoginPage = () => {
  return (
   <form
    onSubmit={handleSubmit}
-   className="w-1/2 ml-auto mr-auto h-screen flex flex-col items-center justify-center gap-4"
+   className="w-1/2 ml-auto mr-auto h-screen flex flex-col items-center justify-center gap-y-6"
   >
-   <h1 className="text-indigo-600 text-5xl mb-6">Admin</h1>
-   <input
-    name="password"
-    type="password"
-    placeholder="Hasło"
-    className="w-full px-4 py-2.5 outline-none bg-surface-100 border-2 border-indigo-600 rounded-xl"
-   />
-   <button
-    className="w-full py-2.5 text-white bg-indigo-600 rounded-xl disabled:opacity-50 transition-opacity"
-    disabled={awaiting}
-   >
-    Login
-   </button>
-   {error && (
-    <small className="text-rose-500">Hasło jest nieprawidłowe</small>
-   )}
+   <h1 className="text-primary text-5xl">Admin</h1>
+   <div className="w-full flex gap-y-2 flex-col">
+    <input
+     name="password"
+     type="password"
+     placeholder="Hasło"
+     className="w-full px-4 py-2.5 outline-none bg-surface-100 border-2 border-primary rounded-xl"
+    />
+    <Button
+     className="w-full"
+     disabled={awaiting}
+    >
+     Login
+    </Button>
+    {error && <small className="text-rose-500">Hasło jest nieprawidłowe</small>}
+   </div>
   </form>
  );
 };
