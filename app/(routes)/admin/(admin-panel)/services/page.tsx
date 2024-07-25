@@ -5,6 +5,7 @@ import ServiceCreateForm from "@/components/admin/create-service-modal";
 import useServices from "@/lib/hooks/useServices";
 import Loader from "@/components/loader";
 import Error from "@/components/error";
+import Button from "@/components/button";
 
 const AdminServices = () => {
  const { services, loading, error, refetch } = useServices();
@@ -18,14 +19,13 @@ const AdminServices = () => {
  const categories = Array.from(
   new Set(services.map((service) => service.category))
  );
- const types = Array.from(
-  new Set(services.map((service) => service.type))
- );
+ const types = Array.from(new Set(services.map((service) => service.type)));
 
  const typeLabels: { [key: string]: string } = {
   Package: "Pakiety",
   Service: "Usługi",
-  CustomService: "Niestandardowa usługi"
+  CustomService: "Niestandardowa usługi",
+  Account: "Konto"
  };
 
  if (loading) {
@@ -37,65 +37,65 @@ const AdminServices = () => {
  }
 
  return (
-  <div className="text-white w-full h-full flex items-center flex-col overflow-y-auto relative">
+  <div className="text-white w-full h-full min-h-screen flex items-center flex-col overflow-y-auto relative">
    {!loading && !categories.length ? (
     <h1 className="w-full h-screen flex items-center justify-center text-zinc-500 text-2xl">
      Nie znaleziono żadnych usług
     </h1>
    ) : (
-    <>
+    <div className="w-full p-6 mb-16">
+     <h1 className="text-3xl font-bold mb-6 text-center">Usługi</h1>
      {categories.map((category) => (
       <div
+       className="mb-4"
        key={category}
-       className="mb-8 p-4 w-full"
       >
-       <h1 className="font-bold text-4xl mb-6 px-4">{category}</h1>
+       <h1 className="text-3xl text-primary font-bold">{category}</h1>
        {types.map((type) => {
         const servicesOfType = services.filter(
-         (service) =>
-          service.category === category && service.type === type
+         (service) => service.category === category && service.type === type
         );
 
         return servicesOfType.length > 0 ? (
          <div
+          className="mb-4"
           key={type}
-          className="mb-6"
          >
-          <h2 className="text-3xl text-primary mb-4 font-bold px-4">
-           {typeLabels[type]}
-          </h2>
-          {servicesOfType.map((service) => (
-           <a
-            href={`/admin/services/${service.id}`}
-            key={service.id}
-            className="flex mb-2 w-full text-lg gap-4 hover:bg-zinc-800 px-4 py-2 rounded-lg transition"
-           >
-            <span className="text-zinc-600 w-6 text-center hidden md:flex">
-             {service.id}
-            </span>
-            <span className="font-bold overflow-ellipsis whitespace-nowrap overflow-hidden flex-grow w-0">
-             {service.name}
-            </span>
-            <span className="ml-auto mr-0 text-nowrap text-zinc-400">
-             {!service.price
-              ? "Cena zależna od potrzeb klienta"
-              : `${service.price.toString()} PLN`}
-            </span>
-           </a>
-          ))}
+          <h2 className="text-xl mb-2">{typeLabels[type]}</h2>
+          <div className="w-full flex flex-col gap-y-2">
+           {servicesOfType.map((service) => (
+            <a
+             className="flex px-4 py-2 bg-zinc-800 rounded-lg justify-between items-center gap-2"
+             href={`/admin/services/${service.id}`}
+             key={service.id}
+            >
+             <div className="flex justify-between gap-4 overflow-hidden">
+              <span className="text-zinc-500">{service.id}</span>
+              <span className="text-nowrap text-ellipsis overflow-hidden whitespace-nowrap">
+               {service.name}
+              </span>
+             </div>
+             <span className="text-nowrap">
+              {!service.price
+               ? "Cena zależna od potrzeb klienta"
+               : `${service.price.toString()} PLN`}
+             </span>
+            </a>
+           ))}
+          </div>
          </div>
         ) : null;
        })}
       </div>
      ))}
-    </>
+    </div>
    )}
-   <button
-    className="py-3 px-6 font-bold sticky bottom-8 bg-primary text-white rounded-lg transition hover:bg-primary-light shadow-lg"
+   <Button
+    className="fixed bottom-8"
     onClick={() => setIsCreateModalOpen(true)}
    >
     Dodaj usługę
-   </button>
+   </Button>
    {isCreateModalOpen && (
     <ServiceCreateForm
      isOpen={isCreateModalOpen}
