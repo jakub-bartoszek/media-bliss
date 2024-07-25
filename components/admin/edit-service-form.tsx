@@ -6,11 +6,7 @@ import { ServiceCategory, ServiceType } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { ServiceWithDecimalPrice } from "@/types";
 
-const EditServiceForm = ({
- service
-}: {
- service: ServiceWithDecimalPrice;
-}) => {
+const EditServiceForm = ({ service }: { service: ServiceWithDecimalPrice }) => {
  const [formState, setFormState] = useState({
   name: service.name,
   price: service.price,
@@ -22,6 +18,7 @@ const EditServiceForm = ({
   requireLink: service.requireLink
  });
 
+ const [newListItem, setNewListItem] = useState("");
  const router = useRouter();
 
  const handleChange = (e: any) => {
@@ -54,15 +51,12 @@ const EditServiceForm = ({
 
  const handleDelete = async () => {
   try {
-   const response = await axios.delete(
-    `/api/services/${service.id}`,
-    {
-     headers: {
-      "Content-Type": "application/json"
-     },
-     data: { serviceId: service.id }
-    }
-   );
+   const response = await axios.delete(`/api/services/${service.id}`, {
+    headers: {
+     "Content-Type": "application/json"
+    },
+    data: { serviceId: service.id }
+   });
 
    if (response.status === 200) {
     router.push("/admin/services");
@@ -70,6 +64,23 @@ const EditServiceForm = ({
   } catch (error) {
    console.error("Error deleting service:", error);
   }
+ };
+
+ const handleAddListItem = () => {
+  if (newListItem.trim() !== "") {
+   setFormState((prevState) => ({
+    ...prevState,
+    list: [...prevState.list, newListItem.trim()]
+   }));
+   setNewListItem("");
+  }
+ };
+
+ const handleRemoveListItem = (index: number) => {
+  setFormState((prevState) => ({
+   ...prevState,
+   list: prevState.list.filter((_, i) => i !== index)
+  }));
  };
 
  return (
@@ -131,18 +142,37 @@ const EditServiceForm = ({
     </div>
     <div>
      <h2 className="text-2xl font-bold mb-2">Lista</h2>
-     <textarea
-      className="w-full bg-zinc-800 p-2 rounded-lg text-lg"
-      name="list"
-      value={formState.list.join(", ")}
-      onChange={(e) =>
-       setFormState({
-        ...formState,
-        list: e.target.value.split(", ")
-       })
-      }
-      placeholder="List (comma separated)"
-     />
+     <div className="flex gap-2 mb-4">
+      <input
+       className="w-full bg-zinc-800 p-2 rounded-lg text-lg"
+       type="text"
+       value={newListItem}
+       onChange={(e) => setNewListItem(e.target.value)}
+       placeholder="Add item"
+      />
+      <button
+       className="text-white py-2 px-4 rounded-full bg-indigo-700 hover:bg-indigo-600 font-bold"
+       onClick={handleAddListItem}
+      >
+       Add
+      </button>
+     </div>
+     <ul>
+      {formState.list.map((item, index) => (
+       <li
+        key={index}
+        className="flex justify-between items-center mb-2"
+       >
+        {item}
+        <button
+         className="text-red-600 hover:text-red-400 font-bold"
+         onClick={() => handleRemoveListItem(index)}
+        >
+         Remove
+        </button>
+       </li>
+      ))}
+     </ul>
     </div>
     <div>
      <h2 className="text-2xl font-bold mb-2">Obraz</h2>
@@ -192,9 +222,7 @@ const EditServiceForm = ({
      </select>
     </div>
     <div>
-     <h2 className="text-2xl font-bold mb-2">
-      Wymaga linku do konta
-     </h2>
+     <h2 className="text-2xl font-bold mb-2">Wymaga linku do konta</h2>
      <select
       className="w-full bg-zinc-800 p-2 rounded-lg text-lg"
       name="requireLink"
