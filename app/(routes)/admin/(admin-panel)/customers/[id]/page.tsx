@@ -2,8 +2,8 @@
 
 import React from "react";
 import useCustomer from "@/lib/hooks/useCustomer";
-import Loader from "@/components/client/loader";
-import Error from "@/components/client/error";
+import Loader from "@/components/loader";
+import Error from "@/components/error";
 import EditCustomerForm from "@/components/admin/edit-customer-form";
 
 interface CustomerIdPageProps {

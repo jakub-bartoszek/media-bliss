@@ -2,9 +2,9 @@
 
 import React from "react";
 import useService from "@/lib/hooks/useService";
-import Loader from "@/components/client/loader";
+import Loader from "@/components/loader";
 import EditServiceForm from "@/components/admin/edit-service-form";
-import Error from "@/components/client/error";
+import Error from "@/components/error";
 
 interface ServiceIdPageProps {
  params: {

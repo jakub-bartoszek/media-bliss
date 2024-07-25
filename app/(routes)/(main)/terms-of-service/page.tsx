@@ -1,7 +1,7 @@
 "use client";
 
-import Error from "@/components/client/error";
-import Loader from "@/components/client/loader";
+import Error from "@/components/error";
+import Loader from "@/components/loader";
 import useTermsOfService from "@/lib/hooks/useTermsOfService";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
