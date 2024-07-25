@@ -29,7 +29,7 @@ const AdminNavigationButton = ({
    onClick={setSidebarOpen && (() => setSidebarOpen(false))}
    href={href}
    className={twMerge(
-    "flex w-full gap-x-4 rounded-lg p-4 text-white transition hover:brightness-125 hover:bg-zinc-800 hover:bg-gradient-to-bl from-white/20",
+    "flex w-full gap-x-4 rounded-lg p-2 md:p-4 text-white transition hover:brightness-125 hover:bg-zinc-800 hover:bg-gradient-to-bl from-white/20",
     pathname === href && "bg-primary hover:bg-primary-light bg-gradient-to-bl",
     className
    )}

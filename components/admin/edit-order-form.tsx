@@ -5,6 +5,7 @@ import axios from "axios";
 import { OrderStatus } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { OrderWithCustomer } from "@/types";
+import Button from "../button";
 
 const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
  const [formState, setFormState] = useState({
@@ -12,7 +13,7 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
   contents: order.contents,
   customerName: order.customerName,
   status: order.status,
-  dateOfPurchase: new Date(order.dateOfPurchase) // Ensure this is a Date object
+  dateOfPurchase: new Date(order.dateOfPurchase)
  });
 
  const [parsedContents, setParsedContents] = useState<any[]>([]);
@@ -40,15 +41,11 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
 
  const handleSave = async () => {
   try {
-   const response = await axios.patch(
-    `/api/orders/${order.id}`,
-    formState,
-    {
-     headers: {
-      "Content-Type": "application/json"
-     }
+   const response = await axios.patch(`/api/orders/${order.id}`, formState, {
+    headers: {
+     "Content-Type": "application/json"
     }
-   );
+   });
 
    if (response.status === 200) {
     router.refresh();
@@ -75,7 +72,6 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
   }
  };
 
- // Format date and time for Polish locale
  const formatDate = (date: Date) => {
   return new Intl.DateTimeFormat("pl-PL", {
    day: "2-digit",
@@ -83,43 +79,38 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
    year: "numeric",
    hour: "2-digit",
    minute: "2-digit",
-   hour12: false // 24-hour format
+   hour12: false
   }).format(date);
  };
 
  return (
   <div className="w-full h-full min-h-screen flex flex-col relative">
    <div className="sticky top-0 z-10 w-full h-14 flex items-center justify-between gap-4 border-b-2 border-white/20 p-4 bg-zinc-900">
-    <button
-     className="text-white py-2 px-4 rounded-full bg-zinc-700 hover:bg-zinc-500 font-bold"
+    <Button
+     className="bg-zinc-700"
      onClick={() => router.back()}
     >
      Powrót
-    </button>
+    </Button>
     <div className="flex gap-4 items-center">
-     <button
-      className="text-white py-2 px-4 rounded-full bg-rose-700 hover:bg-rose-600 font-bold"
+     <Button
+      className="bg-rose-700"
       onClick={handleDelete}
      >
       Usuń
-     </button>
-     <button
-      className="text-white py-2 px-4 rounded-full bg-indigo-700 hover:bg-indigo-600 font-bold"
-      onClick={handleSave}
-     >
-      Zapisz
-     </button>
+     </Button>
+     <Button onClick={handleSave}>Zapisz</Button>
     </div>
    </div>
-   <div className="flex flex-col gap-6 text-white p-4">
+   <div className="flex flex-col gap-6 p-4">
     <div>
      <h2 className="text-2xl font-bold mb-2">Data zamówienia</h2>
-     <p>{formatDate(formState.dateOfPurchase)}</p>
+     <p className="text-zinc-500">{formatDate(formState.dateOfPurchase)}</p>
     </div>
     <div>
      <h2 className="text-2xl font-bold mb-2">Email</h2>
      <input
-      className="w-full bg-zinc-800 p-2 rounded-lg text-lg"
+      className="rounded-lg bg-zinc-800 px-4 py-2"
       type="email"
       name="email"
       value={formState.email}
@@ -129,17 +120,16 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
     </div>
     <div>
      <h2 className="text-2xl font-bold mb-2">Usługi</h2>
-     <div className="flex flex-col gap-6">
+     <div className="flex flex-col gap-2 w-full">
       {parsedContents.map((item, index) => (
        <div
         key={index}
-        className="bg-zinc-800 p-4 rounded-lg transition duration-300"
+        className="bg-zinc-800 p-4 rounded-lg"
        >
-        <h3 className="text-xl font-semibold mb-2">{item.name}</h3>
-        <p className="text-zinc-400 mb-2">{item.description}</p>
-        <p className="text-lg font-bold mb-2">{item.price} PLN</p>
+        <h3 className="text-lg font-bold">{item.name}</h3>
+        <p className="text-zinc-300">{item.price} PLN</p>
         {item.accountLink && (
-         <p className="text-blue-400 hover:text-blue-300">
+         <p className="text-sm text-zinc-500">
           <a
            href={item.accountLink}
            target="_blank"
@@ -153,10 +143,10 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
       ))}
      </div>
     </div>
-    <div className="flex flex-col gap-6">
-     <h2 className="text-2xl font-bold">Klient</h2>
+    <div className="w-full">
+     <h2 className="text-2xl font-bold mb-2">Klient</h2>
      <a
-      className="bg-zinc-800 p-4 rounded-lg transition duration-300"
+      className="flex w-full p-4 bg-zinc-800 hover:bg-zinc-600 transition rounded-lg"
       href={`/admin/customers/${order.customerId}`}
      >
       {formState.customerName}
@@ -165,7 +155,7 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
     <div>
      <h2 className="text-2xl font-bold mb-2">Status</h2>
      <select
-      className="w-full bg-zinc-800 p-2 rounded-lg text-lg"
+      className="bg-zinc-800 rounded-lg py-2 px-4"
       name="status"
       value={formState.status}
       onChange={handleChange}
