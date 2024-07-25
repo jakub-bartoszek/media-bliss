@@ -14,6 +14,13 @@ const AccountServiceSection = ({
  const [quantity, setQuantity] = useState<number>(0);
  const [accountPrice, setAccountPrice] = useState(0);
 
+ const maxQuantity =
+  service.category === "Instagram"
+   ? 600000
+   : service.category === "TikTok"
+   ? 200000
+   : 100000;
+
  const handleAddCustomService = useCallback(() => {
   if (!service) return;
 
@@ -33,15 +40,21 @@ const AccountServiceSection = ({
  }, [service, quantity, accountPrice, setSelectedProduct, setIsModalOpen]);
 
  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  const qty = parseInt(e.target.value) || 0;
+  const qty = Math.min(parseInt(e.target.value), maxQuantity);
   setQuantity(qty);
+
+  if (service) {
+   setAccountPrice(qty * service.price);
+  }
  };
 
  const handleQuantityBlur = () => {
   if (quantity < 100) {
    setQuantity(100);
 
-   setAccountPrice(100 * service.price);
+   if (service) {
+    setAccountPrice(100 * service.price);
+   }
   }
  };
 
@@ -55,7 +68,7 @@ const AccountServiceSection = ({
      Potrzebujesz konta o wybranej liczbie obserwacji? Zajmiemy się tym!
     </p>
     <p className="text-zinc-500 italic">
-     Dostarczone konto nie będzie miało dokladnej ilości obserwujących jaką
+     Dostarczone konto nie będzie miało dokładnej ilości obserwujących jaką
      podałeś/aś.
     </p>
    </div>
@@ -72,6 +85,8 @@ const AccountServiceSection = ({
       value={quantity}
       onChange={handleQuantityChange}
       onBlur={handleQuantityBlur}
+      min={100}
+      max={maxQuantity}
      />
      <button
       className="px-4 py-2 w-full bg-primary hover:bg-primary-light transition text-white rounded-lg"
