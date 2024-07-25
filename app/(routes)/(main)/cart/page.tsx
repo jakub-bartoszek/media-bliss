@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 import { CartItemWithAccountLink } from "@/types";
-import { twMerge } from "tailwind-merge";
-import { FaCheck, FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
 import { BiTrash } from "react-icons/bi";
 import Button from "@/components/button";
 import CheckBox from "@/components/check-box";
@@ -29,6 +28,7 @@ const Cart = () => {
   const updatedCart = cartItems.filter((item) => item.cartId !== cartId);
   setCartItems(updatedCart);
   localStorage.setItem("cart", JSON.stringify(updatedCart));
+  window.dispatchEvent(new Event("storage"));
  };
 
  const updateAccountLink = (cartId: string, accountLink: string) => {
@@ -37,6 +37,7 @@ const Cart = () => {
   );
   setCartItems(updatedCart);
   localStorage.setItem("cart", JSON.stringify(updatedCart));
+  window.dispatchEvent(new Event("storage"));
  };
 
  const validateAccountLink = (

@@ -21,10 +21,7 @@ const Services = ({
  const firstSectionRef = useRef<HTMLDivElement>(null);
 
  const handleProductSelect = (product: ServiceWithDecimalPrice) => {
-  const uniqueProduct: CartItem = {
-   ...product,
-   cartId: nanoid()
-  };
+  const uniqueProduct: CartItem = { ...product, cartId: nanoid() };
 
   setSelectedProduct(product);
   setIsModalOpen(true);
@@ -32,6 +29,7 @@ const Services = ({
   const cart = JSON.parse(localStorage.getItem("cart") || "[]");
   cart.push(uniqueProduct);
   localStorage.setItem("cart", JSON.stringify(cart));
+  window.dispatchEvent(new Event("storage"));
  };
 
  const scrollToFirstSection = () => {
@@ -40,10 +38,7 @@ const Services = ({
    const elementPosition = firstSectionRef.current.getBoundingClientRect().top;
    const offsetPosition = elementPosition + window.scrollY - offset;
 
-   window.scrollTo({
-    top: offsetPosition,
-    behavior: "smooth"
-   });
+   window.scrollTo({ top: offsetPosition, behavior: "smooth" });
   }
  };
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { Dispatch, SetStateAction, useEffect, useRef } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { FaShoppingBag } from "react-icons/fa";
 import { twMerge } from "tailwind-merge";
 
@@ -10,6 +10,7 @@ interface NavigationProps {
 }
 
 const Navigation = ({ setShowed, showed }: NavigationProps) => {
+ const [cartCount, setCartCount] = useState(0);
  const dropdownRef = useRef<HTMLDivElement>(null);
 
  useEffect(() => {
@@ -27,6 +28,21 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
   return () => {
    document.removeEventListener("mousedown", handleClickOutside);
   };
+ }, [setShowed]);
+
+ useEffect(() => {
+  const updateCartCount = () => {
+   const cartItems = JSON.parse(localStorage.getItem("cart") || "[]");
+   setCartCount(cartItems.length);
+  };
+
+  updateCartCount();
+
+  window.addEventListener("storage", updateCartCount);
+
+  return () => {
+   window.removeEventListener("storage", updateCartCount);
+  };
  }, []);
 
  return (
@@ -39,6 +55,7 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
      <img
       className="w-full h-full"
       src="/logos/mb-logo-light-3.svg"
+      alt="Logo"
      />
     </a>
     <div className="flex items-center gap-4 md:gap-8">
@@ -53,8 +70,16 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
        Usługi
       </button>
      </div>
-     <a href="/cart">
+     <a
+      href="/cart"
+      className="relative"
+     >
       <FaShoppingBag className="h-6 w-6" />
+      {cartCount > 0 && (
+       <span className="absolute top-[-4px] right-[-4px] bg-rose-500 text-white text-xs rounded-full px-1">
+        {cartCount}
+       </span>
+      )}
      </a>
     </div>
    </div>
