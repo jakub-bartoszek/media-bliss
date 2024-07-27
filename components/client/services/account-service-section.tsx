@@ -29,7 +29,7 @@ const AccountServiceSection = ({
   const accountProduct: CartItem = {
    ...service,
    cartId: nanoid(),
-   name: `${service.name} z ${quantity} Obserwującymi`,
+   name: `${service.name} × ${quantity} obserwujących`,
    price: accountPrice
   };
 

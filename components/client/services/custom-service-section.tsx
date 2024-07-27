@@ -28,7 +28,7 @@ const CustomServiceSection = ({
   const customProduct: CartItem = {
    ...selectedService,
    cartId: nanoid(),
-   name: `${quantity}x ${selectedService.name}`,
+   name: `${quantity} × ${selectedService.name}`,
    price: customServicePrice
   };
 
