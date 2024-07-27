@@ -26,7 +26,7 @@ const useOrders = () => {
   fetchOrders();
  }, []);
 
- return { orders, error, loading };
+ return { orders, error, loading, refetch: fetchOrders };
 };
 
 export default useOrders;
