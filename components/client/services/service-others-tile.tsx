@@ -19,12 +19,12 @@ const ServiceOthersTile = ({ service, onSelect }: ServiceOthersTileProps) => {
      <div className="p-4 flex flex-col h-full w-full md:justify-between gap-2 md:gap-4">
       <div className="font-bold text-xl">{service.name}</div>
       <div>
-       <button
+       {/* <button
         onClick={() => setModalOpen(true)}
         className="underline"
        >
         Dowiedz się więcej
-       </button>
+       </button> */}
        <div className="text-4xl font-bold text-primary">
         {service.price} PLN
        </div>
