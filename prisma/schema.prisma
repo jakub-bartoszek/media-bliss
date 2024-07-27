@@ -3,12 +3,12 @@ generator client {
 }
 
 datasource db {
-  provider = "cockroachdb"
+  provider = "postgres"
   url      = env("DATABASE_URL")
 }
 
 model Service {
-  id          Int             @id @default(sequence())
+  id          Int             @id @default(autoincrement())
   name        String
   description String?
   list        String[]
@@ -33,13 +33,13 @@ enum ServiceType {
 }
 
 model Customer {
-  id     Int     @id @default(sequence())
+  id     Int     @id @default(autoincrement())
   email  String  @unique
   orders Order[] @relation("CustomerOrders")
 }
 
 model Order {
-  id             Int         @id @default(sequence())
+  id             Int         @id @default(autoincrement())
   email          String
   contents       String
   customerName   String
