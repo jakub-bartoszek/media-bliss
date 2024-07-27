@@ -15,12 +15,13 @@ const AccountServiceSection = ({
  const [quantity, setQuantity] = useState<number>(0);
  const [accountPrice, setAccountPrice] = useState(0);
 
- const maxQuantity =
-  service.category === "Instagram"
-   ? 600000
-   : service.category === "TikTok"
-   ? 200000
-   : 100000;
+ const maxQuantity = service
+  ? service.category === "Instagram"
+    ? 600000
+    : service.category === "TikTok"
+    ? 200000
+    : 100000
+  : 100000;
 
  const handleAddCustomService = useCallback(() => {
   if (!service) return;
@@ -59,6 +60,10 @@ const AccountServiceSection = ({
   }
  };
 
+ if (!service) {
+  return null;
+ }
+
  return (
   <section className="flex flex-col md:flex-row justify-between gap-16 text-zinc-700 p-4 border-2 rounded-lg py-16">
    <div className="w-full md:w-2/3">
@@ -88,10 +93,12 @@ const AccountServiceSection = ({
       onBlur={handleQuantityBlur}
       min={100}
       max={maxQuantity}
+      disabled={!service}
      />
      <Button
       className="w-full"
       onClick={handleAddCustomService}
+      disabled={!service}
      >
       Dodaj do koszyka
      </Button>
