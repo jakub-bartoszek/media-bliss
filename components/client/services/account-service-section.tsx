@@ -12,7 +12,7 @@ const AccountServiceSection = ({
  setSelectedProduct: (product: CartItem) => void;
  setIsModalOpen: (isOpen: boolean) => void;
 }) => {
- const [quantity, setQuantity] = useState<number>(100); // Set initial quantity to 100 as minimum
+ const [quantity, setQuantity] = useState<number>(0);
  const [accountPrice, setAccountPrice] = useState<number>(0);
 
  const maxQuantity = service
