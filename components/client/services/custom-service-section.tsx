@@ -41,15 +41,18 @@ const CustomServiceSection = ({
  };
 
  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  const qty = Math.min(parseInt(e.target.value), maxQuantity);
+  const value = e.target.value;
+  const qty = value === "" ? 0 : Math.min(parseInt(value, 10), maxQuantity);
 
-  setQuantity(qty);
+  if (!isNaN(qty)) {
+   setQuantity(qty);
 
-  const selectedService = services.find(
-   (service) => service.id.toString() === customServiceId
-  );
-  if (selectedService) {
-   setCustomServicePrice(qty * selectedService.price);
+   const selectedService = services.find(
+    (service) => service.id.toString() === customServiceId
+   );
+   if (selectedService) {
+    setCustomServicePrice(qty * selectedService.price);
+   }
   }
  };
 
@@ -123,7 +126,7 @@ const CustomServiceSection = ({
      <input
       type="number"
       className="border-2 p-2 w-full mb-4 rounded-lg border-black/10"
-      placeholder="Quantity"
+      placeholder="Ilość"
       value={quantity}
       onChange={handleQuantityChange}
       onBlur={handleQuantityBlur}

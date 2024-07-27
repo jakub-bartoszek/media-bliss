@@ -12,8 +12,8 @@ const AccountServiceSection = ({
  setSelectedProduct: (product: CartItem) => void;
  setIsModalOpen: (isOpen: boolean) => void;
 }) => {
- const [quantity, setQuantity] = useState<number>(0);
- const [accountPrice, setAccountPrice] = useState(0);
+ const [quantity, setQuantity] = useState<number>(100); // Set initial quantity to 100 as minimum
+ const [accountPrice, setAccountPrice] = useState<number>(0);
 
  const maxQuantity = service
   ? service.category === "Instagram"
@@ -42,11 +42,15 @@ const AccountServiceSection = ({
  }, [service, quantity, accountPrice, setSelectedProduct, setIsModalOpen]);
 
  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  const qty = Math.min(parseInt(e.target.value), maxQuantity);
-  setQuantity(qty);
+  const value = e.target.value;
+  const qty = value === "" ? 0 : Math.min(parseInt(value, 10), maxQuantity);
 
-  if (service) {
-   setAccountPrice(qty * service.price);
+  if (!isNaN(qty)) {
+   setQuantity(qty);
+
+   if (service) {
+    setAccountPrice(qty * service.price);
+   }
   }
  };
 
@@ -87,13 +91,12 @@ const AccountServiceSection = ({
      <input
       type="number"
       className="border-2 p-2 w-full mb-4 rounded-lg border-black/10"
-      placeholder="Ilość obserwacji"
+      placeholder="Ilość"
       value={quantity}
       onChange={handleQuantityChange}
       onBlur={handleQuantityBlur}
       min={100}
       max={maxQuantity}
-      disabled={!service}
      />
      <Button
       className="w-full"
