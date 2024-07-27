@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
   }
 
   const session = await stripe.checkout.sessions.create({
-   payment_method_types: ["card"],
+   payment_method_types: ["card", "blik"],
    line_items: cartItems.map((item: CartItem) => ({
     price_data: {
      currency: "pln",
@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
   const serializedCartItems = JSON.stringify(cartItems);
   globalThis.sessions.set(session.id, {
    content: serializedCartItems,
-   dateOfPurchase: new Date().toISOString() // Add date of purchase
+   dateOfPurchase: new Date().toISOString()
   });
 
   console.log(`Session created: ${session.id}`);
