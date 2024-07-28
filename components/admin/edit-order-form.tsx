@@ -6,6 +6,7 @@ import { OrderStatus } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { OrderWithCustomer } from "@/types";
 import Button from "../button";
+import { twMerge } from "tailwind-merge";
 
 const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
  const [formState, setFormState] = useState({
@@ -155,13 +156,21 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
     <div>
      <h2 className="text-2xl font-bold mb-2">Status</h2>
      <select
-      className="bg-zinc-800 rounded-lg py-2 px-4"
+      className={twMerge(
+       "bg-zinc-800 rounded-lg py-2 px-4",
+       formState.status === "Niezrealizowane"
+        ? "text-rose-500"
+        : "text-green-500"
+      )}
       name="status"
       value={formState.status}
       onChange={handleChange}
      >
       {Object.values(OrderStatus).map((status) => (
        <option
+        className={twMerge(
+         status === "Niezrealizowane" ? "text-rose-500" : "text-green-500"
+        )}
         key={status}
         value={status}
        >

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import ServiceCreateForm from "@/components/admin/create-service-modal";
+import CreateServiceModal from "@/components/admin/create-service-modal";
 import useServices from "@/lib/hooks/useServices";
 import Loader from "@/components/loader";
 import Error from "@/components/error";
@@ -97,7 +97,7 @@ const AdminServices = () => {
     Dodaj usługę
    </Button>
    {isCreateModalOpen && (
-    <ServiceCreateForm
+    <CreateServiceModal
      isOpen={isCreateModalOpen}
      onClose={() => setIsCreateModalOpen(false)}
      onServiceAdded={handleAddService}

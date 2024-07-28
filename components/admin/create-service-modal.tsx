@@ -1,17 +1,17 @@
 import { useState } from "react";
 import axios from "axios";
 
-interface ServiceCreateFormProps {
+interface CreateServiceModalProps {
  isOpen: boolean;
  onClose: () => void;
  onServiceAdded: () => void;
 }
 
-const ServiceCreateForm = ({
+const CreateServiceModal = ({
  isOpen,
  onClose,
  onServiceAdded
-}: ServiceCreateFormProps) => {
+}: CreateServiceModalProps) => {
  const [name, setName] = useState("");
  const [price, setPrice] = useState("");
  const [description, setDescription] = useState("");
@@ -283,4 +283,4 @@ const ServiceCreateForm = ({
  );
 };
 
-export default ServiceCreateForm;
+export default CreateServiceModal;

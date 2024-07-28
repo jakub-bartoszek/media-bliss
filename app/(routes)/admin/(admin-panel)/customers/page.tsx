@@ -1,43 +1,46 @@
 "use client";
 
-import useCustomers from "@/lib/hooks/useCustomers";
 import Loader from "@/components/loader";
 import Error from "@/components/error";
+import useCustomers from "@/lib/hooks/useCustomers";
 
 const AdminCustomers = () => {
  const { customers, loading, error } = useCustomers();
 
- if (loading) return <Loader />;
- if (error) return <Error />;
+ if (loading) {
+  return <Loader />;
+ }
+
+ if (error) {
+  return <Error />;
+ }
 
  return (
-  <div className="w-full h-full flex flex-col items-center bg-zinc-900 text-white overflow-y-auto">
-   {!loading && (!customers || customers.length === 0) ? (
-    <h1 className="flex items-center justify-center h-screen text-zinc-500 text-2xl">
+  <div className="text-white w-full h-full min-h-screen flex items-center flex-col overflow-y-auto relative">
+   {!loading && !customers ? (
+    <h1 className="w-full h-screen flex items-center justify-center text-zinc-500 text-2xl">
      Nie znaleziono żadnych klientów
     </h1>
    ) : (
-    <div className="w-full p-6">
+    <div className="w-full p-6 mb-16">
      <h1 className="text-3xl font-bold mb-6 text-center">Klienci</h1>
-     {customers.map((customer) => (
-      <a
-       href={`/admin/customers/${customer.id}`}
-       key={customer.id}
-       className="flex justify-between items-center p-4 mb-4 bg-zinc-800 rounded-lg hover:bg-zinc-700 transition duration-300 w-full"
-      >
-       <div className="flex gap-2 items-center">
-        <p>{customer.id}</p>
-        <p className="text-lg font-semibold text-zinc-200">
-         {customer.email}
-        </p>
-       </div>
-       {customer.orders && (
-        <p className="text-sm text-zinc-400">
-         {customer.orders.length}{" "}
-        </p>
-       )}
-      </a>
-     ))}
+     <div className="w-full flex flex-col gap-y-2">
+      {customers.map((customer) => (
+       <a
+        className="flex px-4 py-2 bg-zinc-800 rounded-lg justify-between items-center gap-2"
+        href={`/admin/customers/${customer.id}`}
+        key={customer.id}
+       >
+        <div className="flex justify-between gap-4 overflow-hidden">
+         <span className="text-zinc-500">{customer.id}</span>
+         <span className="text-nowrap text-ellipsis overflow-hidden whitespace-nowrap">
+          {customer.email}
+         </span>
+        </div>
+        <span className="text-nowrap">{customer.orders?.length}</span>
+       </a>
+      ))}
+     </div>
     </div>
    )}
   </div>

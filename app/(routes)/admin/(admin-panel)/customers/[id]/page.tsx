@@ -12,9 +12,7 @@ interface CustomerIdPageProps {
  };
 }
 
-const CustomerIdPage: React.FC<CustomerIdPageProps> = ({
- params
-}) => {
+const CustomerIdPage: React.FC<CustomerIdPageProps> = ({ params }) => {
  const customerId = parseInt(params.id);
  const { customer, loading, error } = useCustomer(customerId);
 

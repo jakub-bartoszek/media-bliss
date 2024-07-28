@@ -3,8 +3,8 @@
 import React from "react";
 import useService from "@/lib/hooks/useService";
 import Loader from "@/components/loader";
-import EditServiceForm from "@/components/admin/edit-service-form";
 import Error from "@/components/error";
+import EditServiceForm from "@/components/admin/edit-service-form";
 
 interface ServiceIdPageProps {
  params: {

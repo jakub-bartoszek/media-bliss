@@ -5,6 +5,8 @@ import axios from "axios";
 import { ServiceCategory, ServiceType } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { ServiceWithDecimalPrice } from "@/types";
+import Button from "../button";
+import { FaTrashCan } from "react-icons/fa6";
 
 const EditServiceForm = ({ service }: { service: ServiceWithDecimalPrice }) => {
  const [formState, setFormState] = useState({
@@ -86,90 +88,80 @@ const EditServiceForm = ({ service }: { service: ServiceWithDecimalPrice }) => {
  return (
   <div className="w-full h-full min-h-screen flex flex-col relative">
    <div className="sticky top-0 z-10 w-full h-14 flex items-center justify-between gap-4 border-b-2 border-white/20 p-4 bg-zinc-900">
-    <button
-     className="text-white py-2 px-4 rounded-full bg-zinc-700 hover:bg-zinc-500 font-bold"
+    <Button
+     className="bg-zinc-700"
      onClick={() => router.back()}
     >
      Powrót
-    </button>
+    </Button>
     <div className="flex gap-4 items-center">
-     <button
-      className="text-white py-2 px-4 rounded-full bg-rose-700 hover:bg-rose-600 font-bold"
+     <Button
+      className="bg-rose-700"
       onClick={handleDelete}
      >
       Usuń
-     </button>
-     <button
-      className="text-white py-2 px-4 rounded-full bg-indigo-700 hover:bg-indigo-600 font-bold"
-      onClick={handleSave}
-     >
-      Zapisz
-     </button>
+     </Button>
+     <Button onClick={handleSave}>Zapisz</Button>
     </div>
    </div>
    <div className="flex flex-col gap-6 text-white p-4">
     <div>
      <h2 className="text-2xl font-bold mb-2">Nazwa</h2>
      <input
-      className="w-full bg-zinc-800 p-2 rounded-lg text-lg"
+      className="rounded-lg bg-zinc-800 px-4 py-2 w-full"
       type="text"
       name="name"
       value={formState.name}
       onChange={handleChange}
-      placeholder="Name"
+      placeholder="Nazwa"
      />
     </div>
     <div>
      <h2 className="text-2xl font-bold mb-2">Cena</h2>
      <input
-      className="w-full bg-zinc-800 p-2 rounded-lg text-lg"
+      className="rounded-lg bg-zinc-800 px-4 py-2 w-full"
       type="number"
       name="price"
       value={formState.price}
       onChange={handleChange}
-      placeholder="Price"
+      placeholder="Cena"
      />
     </div>
     <div>
      <h2 className="text-2xl font-bold mb-2">Opis</h2>
      <textarea
-      className="w-full bg-zinc-800 p-2 rounded-lg text-lg"
+      className="rounded-lg bg-zinc-800 px-4 py-2 w-full"
       name="description"
       value={formState.description}
       onChange={handleChange}
-      placeholder="Description"
+      placeholder="Opis"
      />
     </div>
     <div>
      <h2 className="text-2xl font-bold mb-2">Lista</h2>
      <div className="flex gap-2 mb-4">
       <input
-       className="w-full bg-zinc-800 p-2 rounded-lg text-lg"
+       className="rounded-lg bg-zinc-800 px-4 py-2 w-full"
        type="text"
        value={newListItem}
        onChange={(e) => setNewListItem(e.target.value)}
-       placeholder="Add item"
+       placeholder="Dodaj"
       />
-      <button
-       className="text-white py-2 px-4 rounded-full bg-indigo-700 hover:bg-indigo-600 font-bold"
-       onClick={handleAddListItem}
-      >
-       Add
-      </button>
+      <Button onClick={handleAddListItem}>Add</Button>
      </div>
      <ul>
       {formState.list.map((item, index) => (
        <li
         key={index}
-        className="flex justify-between items-center mb-2"
+        className="flex justify-between items-center mb-2 hover:bg-zinc-800 rounded-lg pl-2"
        >
         {item}
-        <button
-         className="text-red-600 hover:text-red-400 font-bold"
+        <Button
+         className="bg-rose-600 p-2"
          onClick={() => handleRemoveListItem(index)}
         >
-         Remove
-        </button>
+         <FaTrashCan className="" />
+        </Button>
        </li>
       ))}
      </ul>
@@ -177,7 +169,7 @@ const EditServiceForm = ({ service }: { service: ServiceWithDecimalPrice }) => {
     <div>
      <h2 className="text-2xl font-bold mb-2">Obraz</h2>
      <input
-      className="w-full bg-zinc-800 p-2 rounded-lg text-lg"
+      className="rounded-lg bg-zinc-800 px-4 py-2 w-full"
       type="text"
       name="image"
       value={formState.image}
@@ -188,7 +180,7 @@ const EditServiceForm = ({ service }: { service: ServiceWithDecimalPrice }) => {
     <div>
      <h2 className="text-2xl font-bold mb-2">Kategoria</h2>
      <select
-      className="w-full bg-zinc-800 p-2 rounded-lg text-lg"
+      className="rounded-lg bg-zinc-800 px-4 py-2 w-full"
       name="category"
       value={formState.category}
       onChange={handleChange}
@@ -206,7 +198,7 @@ const EditServiceForm = ({ service }: { service: ServiceWithDecimalPrice }) => {
     <div>
      <h2 className="text-2xl font-bold mb-2">Typ</h2>
      <select
-      className="w-full bg-zinc-800 p-2 rounded-lg text-lg"
+      className="rounded-lg bg-zinc-800 px-4 py-2 w-full"
       name="type"
       value={formState.type}
       onChange={handleChange}
@@ -224,7 +216,7 @@ const EditServiceForm = ({ service }: { service: ServiceWithDecimalPrice }) => {
     <div>
      <h2 className="text-2xl font-bold mb-2">Wymaga linku do konta</h2>
      <select
-      className="w-full bg-zinc-800 p-2 rounded-lg text-lg"
+      className="rounded-lg bg-zinc-800 px-4 py-2 w-full"
       name="requireLink"
       value={formState.requireLink}
       onChange={handleChange}
