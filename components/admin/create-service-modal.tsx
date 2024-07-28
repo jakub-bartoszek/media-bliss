@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
 import Button from "../button";
 import { FaTrashCan } from "react-icons/fa6";
 
@@ -54,9 +55,10 @@ const CreateServiceModal = ({
    onServiceAdded();
    handleClose();
   } catch (error) {
-   console.error("Failed to create service", error);
+   toast.error(`Coś poszło nie tak... ${error}`);
   } finally {
    setIsSubmitting(false);
+   toast.success("Dodano pomyślnie!");
   }
  };
 
@@ -169,7 +171,7 @@ const CreateServiceModal = ({
         Add
        </Button>
       </div>
-      <ul>
+      <ul className="pt-2">
        {list.map((item, index) => (
         <li
          key={index}
