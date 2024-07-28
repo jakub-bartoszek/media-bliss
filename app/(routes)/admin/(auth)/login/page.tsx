@@ -3,6 +3,7 @@
 import { useState } from "react";
 import axios from "axios";
 import Button from "@/components/button";
+import toast from "react-hot-toast";
 
 const LoginPage = () => {
  const [error, setError] = useState(false);
@@ -27,7 +28,7 @@ const LoginPage = () => {
     setError(true);
    }
   } catch (error) {
-   console.error("Error:", error);
+   toast.error(`Error: ${error}`);
    setAwaiting(false);
    setError(true);
   }

@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { LuLoader2 } from "react-icons/lu";
+import toast from "react-hot-toast";
 
 const LogoutPage = () => {
  const router = useRouter();
@@ -16,10 +17,10 @@ const LogoutPage = () => {
     if (response.status === 200) {
      router.push("/admin/login");
     } else {
-     console.error("Failed to log out");
+     toast.error("Failed to log out");
     }
    } catch (error) {
-    console.error("Logout error:", error);
+    toast.error(`Logout error: ${error}`);
    }
   };
 

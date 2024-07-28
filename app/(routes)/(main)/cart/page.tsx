@@ -8,6 +8,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { BiTrash } from "react-icons/bi";
 import Button from "@/components/button";
 import CheckBox from "@/components/check-box";
+import toast from "react-hot-toast";
 
 const stripePromise = loadStripe(
  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ""
@@ -100,14 +101,14 @@ const Cart = () => {
   event.preventDefault();
 
   if (!validateAllLinks()) {
-   console.error("Some account links are invalid.");
+   toast.error("Some account links are invalid.");
    return;
   }
 
   const stripe = await stripePromise;
 
   if (!stripe) {
-   console.error("Stripe has not loaded.");
+   toast.error("Stripe has not loaded.");
    return;
   }
 
@@ -131,7 +132,7 @@ const Cart = () => {
 
    await stripe.redirectToCheckout({ sessionId });
   } catch (error) {
-   console.error("Error redirecting to checkout", error);
+   toast.error(`Error redirecting to checkout ${error}`);
    setSubmitting(false);
   }
  };

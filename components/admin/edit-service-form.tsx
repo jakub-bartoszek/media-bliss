@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { ServiceWithDecimalPrice } from "@/types";
 import Button from "../button";
 import { FaTrashCan } from "react-icons/fa6";
+import toast from "react-hot-toast";
 
 const EditServiceForm = ({ service }: { service: ServiceWithDecimalPrice }) => {
  const [formState, setFormState] = useState({
@@ -45,9 +46,10 @@ const EditServiceForm = ({ service }: { service: ServiceWithDecimalPrice }) => {
 
    if (response.status === 200) {
     router.refresh();
+    toast.success("Zapisano pomyślnie!");
    }
   } catch (error) {
-   console.error("Error saving service:", error);
+   toast.error(`Coś poszło nie tak... ${error}`);
   }
  };
 
@@ -62,9 +64,10 @@ const EditServiceForm = ({ service }: { service: ServiceWithDecimalPrice }) => {
 
    if (response.status === 200) {
     router.push("/admin/services");
+    toast.success("Usunięto pomyślnie!");
    }
   } catch (error) {
-   console.error("Error deleting service:", error);
+   toast.error(`Coś poszło nie tak... ${error}`);
   }
  };
 
