@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { OrderWithCustomer } from "@/types";
 import Button from "../button";
 import { twMerge } from "tailwind-merge";
+import toast from "react-hot-toast";
 
 const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
  const [formState, setFormState] = useState({
@@ -25,7 +26,7 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
    const parsed = JSON.parse(order.contents);
    setParsedContents(Array.isArray(parsed) ? parsed : []);
   } catch (error) {
-   console.error("Error parsing contents:", error);
+   toast.error(`Error parsing contents: ${error}`);
    setParsedContents([]);
   }
  }, [order.contents]);
@@ -50,9 +51,10 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
 
    if (response.status === 200) {
     router.refresh();
+    toast.success("Zapisano pomyślnie!");
    }
   } catch (error) {
-   console.error("Error saving order:", error);
+   toast.error(`Coś poszło nie tak... ${error}`);
   }
  };
 
@@ -67,9 +69,11 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
 
    if (response.status === 200) {
     router.push("/admin/orders");
+    router.refresh();
+    toast.success("Usunięto pomyślnie!");
    }
   } catch (error) {
-   console.error("Error deleting order:", error);
+   toast.error(`Coś poszło nie tak... ${error}`);
   }
  };
 

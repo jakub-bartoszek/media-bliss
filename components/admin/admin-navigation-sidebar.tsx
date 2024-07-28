@@ -1,4 +1,3 @@
-import { MdMenu } from "react-icons/md";
 import { twMerge } from "tailwind-merge";
 import AdminNavigationButton from "./admin-navigation-button";
 import { Dispatch, SetStateAction } from "react";
@@ -37,8 +36,8 @@ const AdminNavigationSidebar = ({
     />
     {navMap.map((item, index) => (
      <AdminNavigationButton
-     setSidebarOpen={setSidebarOpen}
-      key={item.title}
+      setSidebarOpen={setSidebarOpen}
+      key={index}
       title={item.title}
       icon={item.icon}
       href={item.href}

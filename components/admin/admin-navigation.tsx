@@ -55,6 +55,7 @@ const AdminNavigation = () => {
     />
     {navMap.map((item, index) => (
      <AdminNavigationButton
+      key={index}
       hideOnSmall={true}
       title={item.title}
       icon={item.icon}

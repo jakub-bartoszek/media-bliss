@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { Dispatch, ReactNode, SetStateAction } from "react";
 import { twMerge } from "tailwind-merge";
 
-interface AdminNavigationButton {
+interface AdminNavigationButtonProps {
  href: string;
  icon: ReactNode;
  title: string;
@@ -21,7 +21,7 @@ const AdminNavigationButton = ({
  className,
  hideOnSmall,
  setSidebarOpen
-}: AdminNavigationButton) => {
+}: AdminNavigationButtonProps) => {
  const pathname = usePathname();
 
  return (

@@ -5,8 +5,9 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { CustomerWithOrders } from "@/types";
 import { Service } from "@prisma/client";
-import Button from "../button";
 import { twMerge } from "tailwind-merge";
+import Button from "../button";
+import toast from "react-hot-toast";
 
 const EditCustomerForm = ({ customer }: { customer: CustomerWithOrders }) => {
  const [formState, setFormState] = useState({
@@ -26,7 +27,7 @@ const EditCustomerForm = ({ customer }: { customer: CustomerWithOrders }) => {
     }));
     setParsedOrders(parsed);
    } catch (error) {
-    console.error("Error parsing order contents:", error);
+    toast.error(`Error parsing order contents: ${error}`);
     setParsedOrders([]);
    }
   } else {
@@ -56,9 +57,10 @@ const EditCustomerForm = ({ customer }: { customer: CustomerWithOrders }) => {
 
    if (response.status === 200) {
     router.refresh();
+    toast.success("Zapisano pomyślnie!");
    }
   } catch (error) {
-   console.error("Error saving customer:", error);
+   toast.error(`Coś poszło nie tak... ${error}`);
   }
  };
 
@@ -73,9 +75,11 @@ const EditCustomerForm = ({ customer }: { customer: CustomerWithOrders }) => {
 
    if (response.status === 200) {
     router.push("/admin/customers");
+    toast.success("Usunięto pomyślnie!");
    }
   } catch (error) {
    console.error("Error deleting customer:", error);
+   toast.error(`Coś poszło nie tak... ${error}`);
   }
  };
 
@@ -119,8 +123,8 @@ const EditCustomerForm = ({ customer }: { customer: CustomerWithOrders }) => {
         key={index}
         className="rounded-lg bg-zinc-800 px-4 py-2 hover:bg-zinc-700"
        >
-        {item.contents.map((service: Service) => (
-         <p>{service.name}</p>
+        {item.contents.map((service: Service, index: number) => (
+         <p key={index}>{service.name}</p>
         ))}
         <p
          className={twMerge(
