@@ -1,39 +1,23 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { OrderStatus } from "@prisma/client";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { OrderWithCustomer } from "@/types";
-import Button from "../button";
-import { twMerge } from "tailwind-merge";
+import { Order, OrderStatus } from "@prisma/client";
+import axios from "axios";
 import toast from "react-hot-toast";
+import Button from "../button";
+import { FaTrashCan } from "react-icons/fa6";
 
-const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
+const EditOrderForm = ({ order }: { order: Order }) => {
  const [formState, setFormState] = useState({
+  id: order.id,
   email: order.email,
-  contents: order.contents,
-  customerName: order.customerName,
-  status: order.status,
-  dateOfPurchase: new Date(order.dateOfPurchase)
+  status: order.status
  });
 
- const [parsedContents, setParsedContents] = useState<any[]>([]);
  const router = useRouter();
 
- useEffect(() => {
-  try {
-   const parsed = JSON.parse(order.contents);
-   setParsedContents(Array.isArray(parsed) ? parsed : []);
-  } catch (error) {
-   toast.error(`Error parsing contents: ${error}`);
-   setParsedContents([]);
-  }
- }, [order.contents]);
-
- const handleChange = (
-  e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
- ) => {
+ const handleChange = (e: any) => {
   const { name, value } = e.target;
   setFormState((prevState) => ({
    ...prevState,
@@ -69,23 +53,11 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
 
    if (response.status === 200) {
     router.push("/admin/orders");
-    router.refresh();
     toast.success("Usunięto pomyślnie!");
    }
   } catch (error) {
    toast.error(`Coś poszło nie tak... ${error}`);
   }
- };
-
- const formatDate = (date: Date) => {
-  return new Intl.DateTimeFormat("pl-PL", {
-   day: "2-digit",
-   month: "2-digit",
-   year: "numeric",
-   hour: "2-digit",
-   minute: "2-digit",
-   hour12: false
-  }).format(date);
  };
 
  return (
@@ -107,16 +79,12 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
      <Button onClick={handleSave}>Zapisz</Button>
     </div>
    </div>
-   <div className="flex flex-col gap-6 p-4">
-    <div>
-     <h2 className="text-2xl font-bold mb-2">Data zamówienia</h2>
-     <p className="text-zinc-500">{formatDate(formState.dateOfPurchase)}</p>
-    </div>
+   <div className="flex flex-col gap-6 text-white p-4">
     <div>
      <h2 className="text-2xl font-bold mb-2">Email</h2>
      <input
-      className="rounded-lg bg-zinc-800 px-4 py-2"
-      type="email"
+      className="rounded-lg bg-zinc-800 px-4 py-2 w-full"
+      type="text"
       name="email"
       value={formState.email}
       onChange={handleChange}
@@ -124,57 +92,15 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
      />
     </div>
     <div>
-     <h2 className="text-2xl font-bold mb-2">Usługi</h2>
-     <div className="flex flex-col gap-2 w-full">
-      {parsedContents.map((item, index) => (
-       <div
-        key={index}
-        className="bg-zinc-800 p-4 rounded-lg"
-       >
-        <h3 className="text-lg font-bold">{item.name}</h3>
-        <p className="text-zinc-300">{item.price} PLN</p>
-        {item.accountLink && (
-         <p className="text-sm text-zinc-500">
-          <a
-           href={item.accountLink}
-           target="_blank"
-           rel="noopener noreferrer"
-          >
-           {item.accountLink}
-          </a>
-         </p>
-        )}
-       </div>
-      ))}
-     </div>
-    </div>
-    <div className="w-full">
-     <h2 className="text-2xl font-bold mb-2">Klient</h2>
-     <a
-      className="flex w-full p-4 bg-zinc-800 hover:bg-zinc-600 transition rounded-lg"
-      href={`/admin/customers/${order.customerId}`}
-     >
-      {formState.customerName}
-     </a>
-    </div>
-    <div>
-     <h2 className="text-2xl font-bold mb-2">Status</h2>
+     <h2 className="text-2xl font-bold mb-2">Kategoria</h2>
      <select
-      className={twMerge(
-       "bg-zinc-800 rounded-lg py-2 px-4",
-       formState.status === "Niezrealizowane"
-        ? "text-rose-500"
-        : "text-green-500"
-      )}
-      name="status"
+      className="rounded-lg bg-zinc-800 px-4 py-2 w-full"
+      name="category"
       value={formState.status}
       onChange={handleChange}
      >
       {Object.values(OrderStatus).map((status) => (
        <option
-        className={twMerge(
-         status === "Niezrealizowane" ? "text-rose-500" : "text-green-500"
-        )}
         key={status}
         value={status}
        >

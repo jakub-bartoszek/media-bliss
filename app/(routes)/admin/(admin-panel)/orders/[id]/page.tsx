@@ -28,7 +28,7 @@ const OrderIdPage: React.FC<OrderIdPageProps> = ({ params }) => {
   <>
    {!loading && !order && (
     <h1 className="w-full h-screen flex items-center justify-center text-zinc-500 text-2xl">
-     Nie znaleziono zamówienia
+     Nie znaleziono usługi
     </h1>
    )}
    {order && <EditOrderForm order={order} />}

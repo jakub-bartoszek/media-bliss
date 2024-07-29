@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Order } from "@prisma/client";
@@ -10,11 +12,7 @@ const useOrders = () => {
  const fetchOrders = async () => {
   try {
    setLoading(true);
-   const response = await axios.get("/api/orders", {
-    headers: {
-     "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate"
-    }
-   });
+   const response = await axios.get("/api/orders");
    setOrders(response.data);
   } catch (error) {
    setError("Failed to fetch orders");

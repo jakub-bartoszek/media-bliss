@@ -32,21 +32,10 @@ enum ServiceType {
   Account
 }
 
-model Customer {
-  id     Int     @id @default(autoincrement())
-  email  String  @unique
-  orders Order[]
-}
-
 model Order {
-  id             Int         @id @default(autoincrement())
-  email          String
-  contents       String
-  customerName   String
-  status         OrderStatus
-  customerId     Int
-  customer       Customer    @relation(fields: [customerId], references: [id])
-  dateOfPurchase DateTime    @default(now())
+  id     Int         @id @default(autoincrement())
+  email  String
+  status OrderStatus
 }
 
 enum OrderStatus {

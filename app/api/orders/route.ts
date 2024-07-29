@@ -1,23 +1,38 @@
-import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/server/database/prisma";
+import { OrderStatus } from "@prisma/client";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
+ const statusParam = new URL(request.url).searchParams.get("status");
+ const status = statusParam as OrderStatus | undefined;
+
  try {
-  const orders = await prisma.order.findMany();
+  const orders = await prisma.order.findMany({
+   where: status ? { status } : {}
+  });
 
-  const response = NextResponse.json(orders);
-  response.headers.set(
-   "Cache-Control",
-   "no-store, no-cache, must-revalidate, proxy-revalidate"
-  );
-  response.headers.set("Expires", "0");
-  response.headers.set("Pragma", "no-cache");
-
-  return response;
+  return NextResponse.json(orders);
  } catch (error) {
   console.error(error);
   return NextResponse.error();
  }
 }
 
+export async function POST(request: NextRequest) {
+ try {
+  const { id, email, status } = await request.json();
 
+  const newOrder = await prisma.order.create({
+   data: {
+    id,
+    email,
+    status
+   }
+  });
+
+  return NextResponse.json(newOrder);
+ } catch (error) {
+  console.error(error);
+  return NextResponse.error();
+ }
+}

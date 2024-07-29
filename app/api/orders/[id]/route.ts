@@ -8,10 +8,7 @@ export async function GET(
  const orderId = parseInt(params.id);
 
  if (isNaN(orderId)) {
-  return NextResponse.json(
-   { error: "Invalid order ID" },
-   { status: 400 }
-  );
+  return NextResponse.json({ error: "Invalid order ID" }, { status: 400 });
  }
 
  try {
@@ -22,13 +19,29 @@ export async function GET(
   });
 
   if (!order) {
-   return NextResponse.json(
-    { error: "Order not found" },
-    { status: 404 }
-   );
+   return NextResponse.json({ error: "Order not found" }, { status: 404 });
   }
 
   return NextResponse.json(order);
+ } catch (error) {
+  console.error(error);
+  return NextResponse.error();
+ }
+}
+
+export async function POST(request: NextRequest) {
+ try {
+  const { id, email, status } = await request.json();
+
+  const newOrder = await prisma.order.create({
+   data: {
+    id,
+    email,
+    status
+   }
+  });
+
+  return NextResponse.json(newOrder);
  } catch (error) {
   console.error(error);
   return NextResponse.error();
@@ -42,15 +55,13 @@ export async function PATCH(
  const orderId = parseInt(params.id);
 
  try {
-  const { email, contents, customerName, status } =
-   await request.json();
+  const { id, email, status } = await request.json();
 
   const updatedOrder = await prisma.order.update({
    where: { id: orderId },
    data: {
+    id,
     email,
-    contents,
-    customerName,
     status
    }
   });
