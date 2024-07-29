@@ -1,9 +1,4 @@
-import {
- Customer,
- Order,
- ServiceCategory,
- ServiceType
-} from "@prisma/client";
+import { ServiceCategory, ServiceType } from "@prisma/client";
 
 export type ServiceWithDecimalPrice = {
  id: number;
@@ -23,12 +18,4 @@ export type CartItem = ServiceWithDecimalPrice & {
 
 export type CartItemWithAccountLink = CartItem & {
  accountLink: string;
-};
-
-export type OrderWithCustomer = Order & {
- customer: Customer | null;
-};
-
-export type CustomerWithOrders = Customer & {
- orders: Order[] | null;
 };
