@@ -37,9 +37,10 @@ const AdminOrders = () => {
      <h1 className="text-3xl font-bold mb-6 text-center">Zamówienia</h1>
      <div className="w-full flex flex-col gap-y-2">
       {orders.map((order) => (
-       <div
-        key={order.id}
+       <a
         className="flex px-4 py-2 bg-zinc-800 rounded-lg justify-between items-center gap-2"
+        href={`/admin/customers/${order.id}`}
+        key={order.id}
        >
         <div className="flex justify-between gap-4 overflow-hidden">
          <span className="text-zinc-500">{order.id}</span>
@@ -63,7 +64,7 @@ const AdminOrders = () => {
         >
          Delete
         </button>
-       </div>
+       </a>
       ))}
      </div>
     </div>

@@ -37,12 +37,26 @@ export async function PATCH(
  try {
   const { email, orders } = await request.json();
 
+  const updateData: any = { email };
+
+  if (orders && Array.isArray(orders)) {
+   updateData.orders = {
+    update: orders.map((order) => ({
+     where: { id: order.id },
+     data: {
+      email: order.email,
+      contents: order.contents,
+      customerName: order.customerName,
+      status: order.status,
+      dateOfPurchase: order.dateOfPurchase
+     }
+    }))
+   };
+  }
+
   const updatedCustomer = await prisma.customer.update({
    where: { id: customerId },
-   data: {
-    email,
-    orders
-   }
+   data: updateData
   });
 
   return NextResponse.json(updatedCustomer);
