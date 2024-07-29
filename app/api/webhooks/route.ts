@@ -22,8 +22,7 @@ declare global {
  var sessions: Map<string, SessionData>;
 }
 
-globalThis.sessions =
- globalThis.sessions || new Map<string, SessionData>();
+globalThis.sessions = globalThis.sessions || new Map<string, SessionData>();
 
 export async function POST(req: NextRequest) {
  const payload = await req.text();
@@ -45,10 +44,7 @@ export async function POST(req: NextRequest) {
   );
   console.log("Event constructed successfully");
  } catch (err: any) {
-  console.error(
-   "Webhook signature verification failed:",
-   err.message
-  );
+  console.error("Webhook signature verification failed:", err.message);
   return new NextResponse("Webhook Error: " + err.message, {
    status: 400
   });
@@ -64,7 +60,6 @@ export async function POST(req: NextRequest) {
   const sessionId = session.id;
   const customerEmail =
    session.customer_details?.email || "unknown@example.com";
-  const customerName = session.customer_details?.name || "Nie podano";
   const sessionData = globalThis.sessions.get(sessionId);
 
   console.log("Session ID:", sessionId);
@@ -72,9 +67,7 @@ export async function POST(req: NextRequest) {
   console.log("Session Data:", sessionData);
 
   if (!sessionData) {
-   console.error(
-    `Session ID: ${sessionId} has no associated cart items`
-   );
+   console.error(`Session ID: ${sessionId} has no associated cart items`);
    return new NextResponse("Session not found", { status: 400 });
   }
 
@@ -82,20 +75,10 @@ export async function POST(req: NextRequest) {
   console.log("Deserialized Cart Items:", cartItems);
 
   try {
-   const customer = await prisma.customer.upsert({
-    where: { email: customerEmail },
-    update: {},
-    create: { email: customerEmail }
-   });
-
    await prisma.order.create({
     data: {
-     contents: sessionData.content,
      email: customerEmail,
-     customerName: customerName,
-     status: "Niezrealizowane",
-     customer: { connect: { id: customer.id } },
-     dateOfPurchase: sessionData.dateOfPurchase
+     status: "Niezrealizowane"
     }
    });
 
