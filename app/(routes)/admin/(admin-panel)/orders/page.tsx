@@ -39,7 +39,7 @@ const AdminOrders = () => {
       {orders.map((order) => (
        <a
         className="flex px-4 py-2 bg-zinc-800 rounded-lg justify-between items-center gap-2"
-        href={`/admin/customers/${order.id}`}
+        href={`/admin/orders/${order.id}`}
         key={order.id}
        >
         <div className="flex justify-between gap-4 overflow-hidden">
