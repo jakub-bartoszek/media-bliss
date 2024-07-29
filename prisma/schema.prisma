@@ -17,6 +17,8 @@ model Service {
   category    ServiceCategory
   type        ServiceType
   requireLink String?
+  Order       Order?          @relation(fields: [orderId], references: [id])
+  orderId     Int?
 }
 
 enum ServiceCategory {
@@ -33,12 +35,22 @@ enum ServiceType {
 }
 
 model Order {
-  id     Int         @id @default(autoincrement())
-  email  String
-  status OrderStatus
+  id         Int         @id @default(autoincrement())
+  email      String
+  services   Service[]
+  status     OrderStatus
+  Customer   Customer?   @relation(fields: [customerId], references: [id])
+  customerId Int?
 }
 
 enum OrderStatus {
   Niezrealizowane
   Zrealizowane
+}
+
+model Customer {
+  id     Int     @id @default(autoincrement())
+  name   String
+  email  String
+  orders Order[]
 }
