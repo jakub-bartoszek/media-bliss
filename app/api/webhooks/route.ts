@@ -60,6 +60,7 @@ export async function POST(req: NextRequest) {
   const sessionId = session.id;
   const customerEmail =
    session.customer_details?.email || "unknown@example.com";
+  const customerName = session.customer_details?.name || "Nie podano";
   const sessionData = globalThis.sessions.get(sessionId);
 
   console.log("Session ID:", sessionId);
@@ -75,13 +76,6 @@ export async function POST(req: NextRequest) {
   console.log("Deserialized Cart Items:", cartItems);
 
   try {
-   await prisma.order.create({
-    data: {
-     email: customerEmail,
-     status: "Niezrealizowane"
-    }
-   });
-
    globalThis.sessions.delete(sessionId);
 
    console.log("Order created successfully!");

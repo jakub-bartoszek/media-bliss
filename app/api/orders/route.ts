@@ -17,22 +17,3 @@ export async function GET(request: NextRequest) {
   return NextResponse.error();
  }
 }
-
-export async function POST(request: NextRequest) {
- try {
-  const { id, email, status } = await request.json();
-
-  const newOrder = await prisma.order.create({
-   data: {
-    id,
-    email,
-    status
-   }
-  });
-
-  return NextResponse.json(newOrder);
- } catch (error) {
-  console.error(error);
-  return NextResponse.error();
- }
-}

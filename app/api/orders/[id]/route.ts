@@ -29,25 +29,6 @@ export async function GET(
  }
 }
 
-export async function POST(request: NextRequest) {
- try {
-  const { id, email, status } = await request.json();
-
-  const newOrder = await prisma.order.create({
-   data: {
-    id,
-    email,
-    status
-   }
-  });
-
-  return NextResponse.json(newOrder);
- } catch (error) {
-  console.error(error);
-  return NextResponse.error();
- }
-}
-
 export async function PATCH(
  request: NextRequest,
  { params }: { params: { id: string } }
@@ -55,12 +36,11 @@ export async function PATCH(
  const orderId = parseInt(params.id);
 
  try {
-  const { id, email, status } = await request.json();
+  const { email, status } = await request.json();
 
   const updatedOrder = await prisma.order.update({
    where: { id: orderId },
    data: {
-    id,
     email,
     status
    }

@@ -1,19 +1,19 @@
 "use client";
 
 import React from "react";
-import useOrder from "@/lib/hooks/useOrder";
+import useCustomer from "@/lib/hooks/useCustomer";
 import Loader from "@/components/loader";
 import Error from "@/components/error";
 
-interface OrderIdPageProps {
+interface CustomerIdPageProps {
  params: {
   id: string;
  };
 }
 
-const OrderIdPage: React.FC<OrderIdPageProps> = ({ params }) => {
- const orderId = parseInt(params.id);
- const { order, loading, error } = useOrder(orderId);
+const CustomerIdPage: React.FC<CustomerIdPageProps> = ({ params }) => {
+ const customerId = parseInt(params.id);
+ const { customer, loading, error } = useCustomer(customerId);
 
  if (loading) {
   return <Loader />;
@@ -25,14 +25,14 @@ const OrderIdPage: React.FC<OrderIdPageProps> = ({ params }) => {
 
  return (
   <>
-   {!loading && !order && (
+   {!loading && !customer && (
     <h1 className="w-full h-screen flex items-center justify-center text-zinc-500 text-2xl">
      Nie znaleziono usługi
     </h1>
    )}
-   {order && <div>{order.email}</div>}
+   {customer && <div>{customer?.email}</div>}
   </>
  );
 };
 
-export default OrderIdPage;
+export default CustomerIdPage;
