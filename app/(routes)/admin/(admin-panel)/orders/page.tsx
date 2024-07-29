@@ -1,12 +1,22 @@
 "use client";
 
+import axios from "axios";
+import { twMerge } from "tailwind-merge";
+import useOrders from "@/lib/hooks/useOrders";
 import Loader from "@/components/loader";
 import Error from "@/components/error";
-import useOrders from "@/lib/hooks/useOrders";
-import { twMerge } from "tailwind-merge";
 
 const AdminOrders = () => {
- const { orders, loading, error } = useOrders();
+ const { orders, loading, error, refetch } = useOrders();
+
+ const handleDeleteOrder = async (orderId: number) => {
+  try {
+   await axios.delete(`/api/orders/${orderId}`);
+   refetch();
+  } catch (error) {
+   console.error("Error deleting order:", error);
+  }
+ };
 
  if (loading) {
   return <Loader />;
@@ -27,10 +37,9 @@ const AdminOrders = () => {
      <h1 className="text-3xl font-bold mb-6 text-center">Zamówienia</h1>
      <div className="w-full flex flex-col gap-y-2">
       {orders.map((order) => (
-       <a
-        className="flex px-4 py-2 bg-zinc-800 rounded-lg justify-between items-center gap-2"
-        href={`/admin/orders/${order.id}`}
+       <div
         key={order.id}
+        className="flex px-4 py-2 bg-zinc-800 rounded-lg justify-between items-center gap-2"
        >
         <div className="flex justify-between gap-4 overflow-hidden">
          <span className="text-zinc-500">{order.id}</span>
@@ -48,7 +57,13 @@ const AdminOrders = () => {
         >
          {order.status}
         </span>
-       </a>
+        <button
+         onClick={() => handleDeleteOrder(order.id)}
+         className="ml-4 text-red-500"
+        >
+         Delete
+        </button>
+       </div>
       ))}
      </div>
     </div>
