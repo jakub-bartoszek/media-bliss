@@ -76,9 +76,34 @@ export async function POST(req: NextRequest) {
   console.log("Deserialized Cart Items:", cartItems);
 
   try {
-   globalThis.sessions.delete(sessionId);
+   let customer = await prisma.customer.findUnique({
+    where: { email: customerEmail }
+   });
 
-   console.log("Order created successfully!");
+   if (!customer) {
+    customer = await prisma.customer.create({
+     data: {
+      name: customerName,
+      email: customerEmail
+     }
+    });
+    console.log("Customer created:", customer);
+   } else {
+    console.log("Customer found:", customer);
+   }
+
+   const order = await prisma.order.create({
+    data: {
+     email: customerEmail,
+     contents: JSON.stringify(cartItems),
+     status: "Niezrealizowane",
+     customerId: customer.id
+    }
+   });
+
+   console.log("Order created successfully!", order);
+
+   globalThis.sessions.delete(sessionId);
   } catch (err: any) {
    console.error("Error creating order:", err.message);
    return new NextResponse("Order creation error: " + err.message, {
