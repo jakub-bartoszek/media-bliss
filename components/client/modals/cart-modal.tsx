@@ -29,7 +29,7 @@ const CartModal: React.FC<CartModalProps> = ({
       {selectedProduct.price} PLN
      </p>
     </div>
-    {filteredList.length > 0 && (
+    {filteredList.length > 0 && selectedProduct.type === "Package" && (
      <ul className="list-disc pl-4 pt-4 marker:text-zinc-400">
       {filteredList.map((item, index) => (
        <li key={index}>{item}</li>

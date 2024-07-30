@@ -161,7 +161,6 @@ const Cart = () => {
           <div className="w-1/2">
            <h2 className="text-xl font-semibold">{item.name}</h2>
            <p className="text-sm text-zinc-500">{item.category}</p>
-           <p className="text-sm text-zinc-500">{item.description}</p>
            <span className="text-lg font-semibold mr-4 text-primary">
             {Number(item.price).toFixed(2)} PLN
            </span>
