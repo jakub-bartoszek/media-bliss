@@ -1,6 +1,6 @@
+import { Dispatch, SetStateAction } from "react";
 import { twMerge } from "tailwind-merge";
 import AdminNavigationButton from "./admin-navigation-button";
-import { Dispatch, SetStateAction } from "react";
 import AdminMenuButton from "./admin-menu-button";
 
 interface AdminNavigationSidebarProps {

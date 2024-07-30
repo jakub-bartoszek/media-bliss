@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Customer } from "@prisma/client";
 import { CustomerWithOrders } from "@/types";
 
 const useCustomer = (customerId?: number) => {

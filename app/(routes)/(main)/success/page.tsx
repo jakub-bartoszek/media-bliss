@@ -1,7 +1,7 @@
 "use client";
 
-import Button from "@/components/button";
 import { useEffect } from "react";
+import Button from "@/components/button";
 
 const Success = () => {
  useEffect(() => {

@@ -1,10 +1,10 @@
 "use client";
 
-import Error from "@/components/error";
-import Loader from "@/components/loader";
-import useTermsOfService from "@/lib/hooks/useTermsOfService";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import useTermsOfService from "@/lib/hooks/useTermsOfService";
+import Error from "@/components/error";
+import Loader from "@/components/loader";
 
 export default function TermsOfServicePage() {
  const { termsOfService, loading, error } = useTermsOfService();

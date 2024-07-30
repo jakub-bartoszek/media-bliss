@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import useTermsOfService from "@/lib/hooks/useTermsOfService";
-import Loader from "@/components/loader";
-import Error from "@/components/error";
 import { useRouter } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import useTermsOfService from "@/lib/hooks/useTermsOfService";
+import Loader from "@/components/loader";
+import Error from "@/components/error";
 
 const TermsOfService = () => {
  const router = useRouter();

@@ -1,8 +1,8 @@
 "use client";
 
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
-import { FaShoppingBag } from "react-icons/fa";
 import { twMerge } from "tailwind-merge";
+import { FaShoppingBag } from "react-icons/fa";
 
 interface NavigationProps {
  setShowed: Dispatch<SetStateAction<boolean>>;

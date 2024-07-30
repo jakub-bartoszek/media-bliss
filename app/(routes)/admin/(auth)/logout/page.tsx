@@ -3,8 +3,8 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { LuLoader2 } from "react-icons/lu";
 import toast from "react-hot-toast";
+import { LuLoader2 } from "react-icons/lu";
 
 const LogoutPage = () => {
  const router = useRouter();

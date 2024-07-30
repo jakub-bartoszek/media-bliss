@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import axios from "axios";
-import { ServiceCategory, ServiceType } from "@prisma/client";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { ServiceCategory, ServiceType } from "@prisma/client";
 import { ServiceWithDecimalPrice } from "@/types";
 import Button from "../button";
 import { FaTrashCan } from "react-icons/fa6";
-import toast from "react-hot-toast";
 
 const EditServiceForm = ({ service }: { service: ServiceWithDecimalPrice }) => {
  const [formState, setFormState] = useState({

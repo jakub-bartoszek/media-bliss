@@ -1,11 +1,9 @@
 "use client";
 
-import Button from "@/components/button";
-import { ServiceWithDecimalPrice } from "@/types";
 import { useState } from "react";
+import { ServiceWithDecimalPrice } from "@/types";
+import Button from "@/components/button";
 import LearnMoreModal from "../modals/learn-more-modal";
-import { BsInfo } from "react-icons/bs";
-import { BiInfoCircle } from "react-icons/bi";
 
 interface ServiceOthersTileProps {
  service: ServiceWithDecimalPrice;

@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import axios from "axios";
-import Button from "@/components/button";
 import toast from "react-hot-toast";
+import Button from "@/components/button";
 
 const LoginPage = () => {
  const [error, setError] = useState(false);

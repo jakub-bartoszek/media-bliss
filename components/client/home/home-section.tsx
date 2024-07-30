@@ -1,9 +1,9 @@
 "use client";
 
-import { useIsVisible } from "@/lib/hooks/useIsVisible";
-import { Inter } from "next/font/google";
 import { useRef } from "react";
 import { twMerge } from "tailwind-merge";
+import { useIsVisible } from "@/lib/hooks/useIsVisible";
+import { Inter } from "next/font/google";
 
 interface HomeSectionProps {
  header: string;

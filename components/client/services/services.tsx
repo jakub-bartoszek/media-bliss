@@ -1,11 +1,11 @@
 import { useRef, useState } from "react";
+import { ServiceCategory } from "@prisma/client";
+import { CartItem, ServiceWithDecimalPrice } from "@/types";
+import { nanoid } from "nanoid";
 import HeaderSection from "./header-section";
 import ServiceSection from "./service-section";
 import CustomServiceSection from "./custom-service-section";
 import CartModal from "@/components/client/modals/cart-modal";
-import { ServiceCategory } from "@prisma/client";
-import { nanoid } from "nanoid";
-import { CartItem, ServiceWithDecimalPrice } from "@/types";
 import AccountServiceSection from "./account-service-section";
 
 const Services = ({

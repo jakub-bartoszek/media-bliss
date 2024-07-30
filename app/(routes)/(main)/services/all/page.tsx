@@ -1,9 +1,9 @@
 "use client";
 
+import useServices from "@/lib/hooks/useServices";
 import Error from "@/components/error";
 import Loader from "@/components/loader";
 import Services from "@/components/client/services/services";
-import useServices from "@/lib/hooks/useServices";
 
 const AllServicesPage = () => {
  const { services, loading, error } = useServices();

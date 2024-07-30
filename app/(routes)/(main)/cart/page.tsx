@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
+import { loadStripe } from "@stripe/stripe-js";
 import { CartItemWithAccountLink } from "@/types";
-import { FaShoppingCart } from "react-icons/fa";
-import { BiTrash } from "react-icons/bi";
+import toast from "react-hot-toast";
 import Button from "@/components/button";
 import CheckBox from "@/components/check-box";
-import toast from "react-hot-toast";
+import { BiTrash } from "react-icons/bi";
+import { FaShoppingCart } from "react-icons/fa";
 
 const stripePromise = loadStripe(
  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ""
