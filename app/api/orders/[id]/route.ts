@@ -17,7 +17,7 @@ export async function GET(
     id: orderId
    },
    include: {
-    Customer: true // Include the related customer
+    Customer: true
    }
   });
 

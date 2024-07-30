@@ -122,28 +122,30 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
     </div>
     <div>
      <h2 className="text-2xl font-bold mb-2">Zawartość</h2>
-     {contents.map((item: CartItemWithAccountLink, index) => (
-      <div
-       key={index}
-       className="rounded-lg bg-zinc-800 px-4 py-2 w-full"
-      >
-       <p className="text-xl font-bold">{item.name}</p>
-       <p className="text-sm">{item.category}</p>
-       <p>{item.price} PLN</p>
-       {item.accountLink && (
-        <p>
-         <a
-          href={item.accountLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-500"
-         >
-          {item.accountLink}
-         </a>
-        </p>
-       )}
-      </div>
-     ))}
+     <div className="flex flex-col gap-2">
+      {contents.map((item: CartItemWithAccountLink, index) => (
+       <div
+        key={index}
+        className="rounded-lg bg-zinc-800 px-4 py-2 w-full"
+       >
+        <p className="text-xl font-bold">{item.name}</p>
+        <p className="text-sm">{item.category}</p>
+        <p>{item.price} PLN</p>
+        {item.accountLink && (
+         <p>
+          <a
+           href={item.accountLink}
+           target="_blank"
+           rel="noopener noreferrer"
+           className="text-blue-500"
+          >
+           {item.accountLink}
+          </a>
+         </p>
+        )}
+       </div>
+      ))}
+     </div>
     </div>
     <div>
      <h2 className="text-2xl font-bold mb-2">Klient</h2>

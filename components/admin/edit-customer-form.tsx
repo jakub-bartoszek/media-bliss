@@ -1,13 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { CartItem, CartItemWithAccountLink, CustomerWithOrders } from "@/types";
+import { CartItem, CustomerWithOrders } from "@/types";
 import Button from "../button";
 import toast from "react-hot-toast";
 import { Order } from "@prisma/client";
-import Link from "next/link";
 
 const EditCustomerForm = ({ customer }: { customer: CustomerWithOrders }) => {
  const [formState, setFormState] = useState({
