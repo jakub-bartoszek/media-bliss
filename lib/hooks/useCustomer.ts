@@ -3,9 +3,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Customer } from "@prisma/client";
+import { CustomerWithOrders } from "@/types";
 
 const useCustomer = (customerId?: number) => {
- const [customer, setCustomer] = useState<Customer | null>(null);
+ const [customer, setCustomer] = useState<CustomerWithOrders | null>(null);
  const [error, setError] = useState<string | null>(null);
  const [loading, setLoading] = useState<boolean>(false);
 

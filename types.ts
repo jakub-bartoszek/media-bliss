@@ -23,3 +23,7 @@ export type CartItemWithAccountLink = CartItem & {
 export type OrderWithCustomer = Order & {
  Customer: Customer;
 };
+
+export type CustomerWithOrders = Customer & {
+ orders: OrderWithCustomer[];
+};
