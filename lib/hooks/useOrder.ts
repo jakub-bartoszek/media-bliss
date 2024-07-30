@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Order } from "@prisma/client";
+import { OrderWithCustomer } from "@/types";
 
 const useOrder = (orderId?: number) => {
- const [order, setOrder] = useState<Order | null>(null);
+ const [order, setOrder] = useState<OrderWithCustomer | null>(null);
  const [error, setError] = useState<string | null>(null);
  const [loading, setLoading] = useState<boolean>(false);
 

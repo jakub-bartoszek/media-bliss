@@ -15,6 +15,9 @@ export async function GET(
   const order = await prisma.order.findUnique({
    where: {
     id: orderId
+   },
+   include: {
+    Customer: true // Include the related customer
    }
   });
 

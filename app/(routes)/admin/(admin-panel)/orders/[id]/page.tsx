@@ -4,6 +4,7 @@ import React from "react";
 import useOrder from "@/lib/hooks/useOrder";
 import Loader from "@/components/loader";
 import Error from "@/components/error";
+import EditOrderForm from "@/components/admin/edit-order-form";
 
 interface OrderIdPageProps {
  params: {
@@ -30,7 +31,7 @@ const OrderIdPage: React.FC<OrderIdPageProps> = ({ params }) => {
      Nie znaleziono usługi
     </h1>
    )}
-   {order && <div>{order.email}</div>}
+   {order && <EditOrderForm order={order} />}
   </>
  );
 };
