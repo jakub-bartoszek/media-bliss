@@ -110,7 +110,7 @@ const EditCustomerForm = ({ customer }: { customer: CustomerWithOrders }) => {
       <a
        href={`/admin/orders/${order.id}`}
        key={index}
-       className="flex flex-col rounded-lg bg-zinc-800 px-4 py-2 w-full"
+       className="flex flex-col rounded-lg bg-zinc-800 px-4 py-2 w-full mb-2"
       >
        <p className="text-xl font-bold">Zamówienie #{order.id}</p>
        <ul className="list-disc">

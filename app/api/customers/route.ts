@@ -7,7 +7,10 @@ export async function GET(request: NextRequest) {
 
  try {
   const customers = await prisma.customer.findMany({
-   where: email ? { email } : {}
+   where: email ? { email } : {},
+   include: {
+    orders: true
+   }
   });
   return NextResponse.json(customers);
  } catch (error) {

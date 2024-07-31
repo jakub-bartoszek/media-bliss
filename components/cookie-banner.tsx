@@ -15,9 +15,9 @@ export default function CookieBanner() {
  useEffect(() => {
   const timeout = setTimeout(() => {
    setConsentGiven(getCookieConsent());
-  }, 500); // 500ms delay
+  }, 500);
 
-  return () => clearTimeout(timeout); // Cleanup timeout on unmount
+  return () => clearTimeout(timeout);
  }, []);
 
  useEffect(() => {

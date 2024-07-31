@@ -3,6 +3,7 @@
 import useOrders from "@/lib/hooks/useOrders";
 import Loader from "@/components/loader";
 import Error from "@/components/error";
+import { twMerge } from "tailwind-merge";
 
 const AdminOrders = () => {
  const { orders, loading, error } = useOrders();
@@ -23,6 +24,8 @@ const AdminOrders = () => {
     </h1>
    ) : (
     <div className="w-full p-6 mb-16">
+     <h1 className="text-3xl font-bold mb-6 text-center">Zamówienia</h1>
+
      <div className="w-full flex flex-col gap-y-2">
       {orders.map((order) => (
        <a
@@ -36,7 +39,15 @@ const AdminOrders = () => {
           {order.email}
          </span>
         </div>
-        <span>{order.status}</span>
+        <span
+         className={twMerge(
+          order.status === "Niezrealizowane"
+           ? "text-rose-500"
+           : "text-green-400"
+         )}
+        >
+         {order.status}
+        </span>
        </a>
       ))}
      </div>

@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Customer } from "@prisma/client";
+import { CustomerWithOrders } from "@/types";
 
 const useCustomers = () => {
- const [customers, setCustomers] = useState<Customer[]>([]);
+ const [customers, setCustomers] = useState<CustomerWithOrders[]>([]);
  const [error, setError] = useState<string | null>(null);
  const [loading, setLoading] = useState<boolean>(false);
 

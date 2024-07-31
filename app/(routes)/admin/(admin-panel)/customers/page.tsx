@@ -23,6 +23,7 @@ const AdminCustomers = () => {
     </h1>
    ) : (
     <div className="w-full p-6 mb-16">
+     <h1 className="text-3xl font-bold mb-6 text-center">Klienci</h1>
      <div className="w-full flex flex-col gap-y-2">
       {customers.map((customer) => (
        <a
@@ -37,6 +38,7 @@ const AdminCustomers = () => {
          </span>
         </div>
         <span>{customer.name}</span>
+        <span>{customer.orders.length}</span>
        </a>
       ))}
      </div>
