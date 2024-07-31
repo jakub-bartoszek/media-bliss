@@ -3,16 +3,21 @@
 import { useEffect, useState } from "react";
 import Button from "./button";
 
+export function getCookieConsent(): string {
+ const consent =
+  typeof window !== "undefined" ? localStorage.getItem("cookie_consent") : null;
+ return consent ? consent : "undecided";
+}
+
 export default function CookieBanner() {
  const [consentGiven, setConsentGiven] = useState<string>("loading");
 
  useEffect(() => {
   const timeout = setTimeout(() => {
-   const consent = localStorage.getItem("cookie_consent");
-   setConsentGiven(consent ? consent : "undecided");
-  }, 500);
+   setConsentGiven(getCookieConsent());
+  }, 500); // 500ms delay
 
-  return () => clearTimeout(timeout);
+  return () => clearTimeout(timeout); // Cleanup timeout on unmount
  }, []);
 
  useEffect(() => {

@@ -1,4 +1,4 @@
-import { cookieConsentGiven } from "@/components/cookie-banner";
+import { getCookieConsent } from "@/components/cookie-banner";
 
 export const trackPixelEvent = (
  eventName: string,
@@ -7,7 +7,7 @@ export const trackPixelEvent = (
  if (
   typeof window !== "undefined" &&
   typeof window.fbq === "function" &&
-  cookieConsentGiven() === "yes"
+  getCookieConsent() === "yes"
  ) {
   window.fbq("track", eventName, eventData);
  } else {
