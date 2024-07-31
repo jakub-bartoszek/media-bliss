@@ -29,6 +29,7 @@
   "next-transpile-modules": "^10.0.1",
   "oslo": "^1.2.1",
   "pino": "^9.3.1",
+  "posthog-js": "^1.151.1",
   "prisma": "^5.16.2",
   "react": "^18",
   "react-dom": "^18",

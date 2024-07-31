@@ -7,6 +7,7 @@ import ServiceSection from "./service-section";
 import CustomServiceSection from "./custom-service-section";
 import CartModal from "@/components/client/modals/cart-modal";
 import AccountServiceSection from "./account-service-section";
+import { trackPixelEvent } from "@/lib/utils/facebookPixel";
 
 const Services = ({
  services,
@@ -30,6 +31,11 @@ const Services = ({
   cart.push(uniqueProduct);
   localStorage.setItem("cart", JSON.stringify(cart));
   window.dispatchEvent(new Event("storage"));
+
+  trackPixelEvent("AddToCart", {
+   name: "Product",
+   content: uniqueProduct
+  });
  };
 
  const scrollToFirstSection = () => {

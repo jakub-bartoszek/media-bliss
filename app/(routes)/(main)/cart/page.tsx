@@ -9,6 +9,7 @@ import Button from "@/components/button";
 import CheckBox from "@/components/check-box";
 import { BiTrash } from "react-icons/bi";
 import { FaShoppingCart } from "react-icons/fa";
+import { trackPixelEvent } from "@/lib/utils/facebookPixel";
 
 const stripePromise = loadStripe(
  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ""
@@ -129,6 +130,8 @@ const Cart = () => {
     )
    });
    const sessionId = response.data.id;
+
+   trackPixelEvent("InitiateCheckout");
 
    await stripe.redirectToCheckout({ sessionId });
   } catch (error) {

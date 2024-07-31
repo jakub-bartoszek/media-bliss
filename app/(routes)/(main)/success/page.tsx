@@ -2,10 +2,19 @@
 
 import { useEffect } from "react";
 import Button from "@/components/button";
+import { trackPixelEvent } from "@/lib/utils/facebookPixel";
 
 const Success = () => {
  useEffect(() => {
   localStorage.removeItem("cart");
+
+  const params = new URLSearchParams(window.location.search);
+  const purchaseValue = params.get("value") || "0.00";
+
+  trackPixelEvent("Purchase", {
+   value: parseFloat(purchaseValue),
+   currency: "PLN"
+  });
  }, []);
 
  return (

@@ -20,8 +20,7 @@ declare global {
  var sessions: Map<string, SessionData>;
 }
 
-globalThis.sessions =
- globalThis.sessions || new Map<string, SessionData>();
+globalThis.sessions = globalThis.sessions || new Map<string, SessionData>();
 
 export async function POST(req: NextRequest) {
  try {
@@ -31,6 +30,10 @@ export async function POST(req: NextRequest) {
   if (!Array.isArray(cartItems) || cartItems.length === 0) {
    throw new Error("Cart items are invalid or empty.");
   }
+
+  const totalAmount = cartItems.reduce((total, item) => {
+   return total + item.price * 100;
+  }, 0);
 
   const session = await stripe.checkout.sessions.create({
    payment_method_types: ["card", "blik"],
@@ -50,7 +53,9 @@ export async function POST(req: NextRequest) {
     quantity: 1
    })),
    mode: "payment",
-   success_url: `${req.nextUrl.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
+   success_url: `${
+    req.nextUrl.origin
+   }/success?session_id={CHECKOUT_SESSION_ID}&value=${totalAmount / 100}`,
    cancel_url: `${req.nextUrl.origin}/cancel`
   });
 

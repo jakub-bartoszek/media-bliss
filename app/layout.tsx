@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import ToasterProvider from "@/components/toaster-provider";
+import CookieBanner from "@/components/cookie-banner";
 
 const roboto = Roboto({
  weight: "400",
@@ -53,6 +54,7 @@ export default function RootLayout({
    <body className={roboto.className}>
     <ToasterProvider />
     {children}
+    <CookieBanner />
    </body>
   </html>
  );
