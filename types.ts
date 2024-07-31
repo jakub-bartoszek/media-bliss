@@ -18,6 +18,7 @@ export type CartItem = ServiceWithDecimalPrice & {
 
 export type CartItemWithAccountLink = CartItem & {
  accountLink: string;
+ additionalInfo?: string | null;
 };
 
 export type OrderWithCustomer = Order & {

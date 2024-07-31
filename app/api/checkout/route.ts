@@ -1,15 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
-
-interface CartItem {
- name: string;
- price: number;
- accountLink: string;
- description: string;
- image: string;
- category: string;
- type: string;
-}
+import { CartItemWithAccountLink } from "@/types";
 
 interface SessionData {
  content: string;
@@ -25,7 +16,7 @@ globalThis.sessions = globalThis.sessions || new Map<string, SessionData>();
 export async function POST(req: NextRequest) {
  try {
   const body = await req.json();
-  const cartItems: CartItem[] = body.cartItems;
+  const cartItems: CartItemWithAccountLink[] = body.cartItems;
 
   if (!Array.isArray(cartItems) || cartItems.length === 0) {
    throw new Error("Cart items are invalid or empty.");
@@ -37,7 +28,7 @@ export async function POST(req: NextRequest) {
 
   const session = await stripe.checkout.sessions.create({
    payment_method_types: ["card", "blik"],
-   line_items: cartItems.map((item: CartItem) => ({
+   line_items: cartItems.map((item: CartItemWithAccountLink) => ({
     price_data: {
      currency: "pln",
      product_data: {
@@ -45,7 +36,8 @@ export async function POST(req: NextRequest) {
       metadata: {
        category: item.category,
        type: item.type,
-       accountLink: item.accountLink
+       accountLink: item.accountLink,
+       additionalInfo: item.additionalInfo ?? null
       }
      },
      unit_amount: item.price * 100

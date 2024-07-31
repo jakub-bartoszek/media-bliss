@@ -10,6 +10,7 @@ import CheckBox from "@/components/check-box";
 import { BiTrash } from "react-icons/bi";
 import { FaShoppingCart } from "react-icons/fa";
 import { trackPixelEvent } from "@/lib/utils/facebookPixel";
+import { twMerge } from "tailwind-merge";
 
 const stripePromise = loadStripe(
  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ""
@@ -36,6 +37,15 @@ const Cart = () => {
  const updateAccountLink = (cartId: string, accountLink: string) => {
   const updatedCart = cartItems.map((item) =>
    item.cartId === cartId ? { ...item, accountLink } : item
+  );
+  setCartItems(updatedCart);
+  localStorage.setItem("cart", JSON.stringify(updatedCart));
+  window.dispatchEvent(new Event("storage"));
+ };
+
+ const updateAdditionalInfo = (cartId: string, additionalInfo: string) => {
+  const updatedCart = cartItems.map((item) =>
+   item.cartId === cartId ? { ...item, additionalInfo } : item
   );
   setCartItems(updatedCart);
   localStorage.setItem("cart", JSON.stringify(updatedCart));
@@ -118,10 +128,20 @@ const Cart = () => {
   try {
    const response = await axios.post("/api/checkout", {
     cartItems: cartItems.map(
-     ({ name, price, accountLink, description, image, category, type }) => ({
+     ({
       name,
       price,
       accountLink,
+      additionalInfo,
+      description,
+      image,
+      category,
+      type
+     }) => ({
+      name,
+      price,
+      accountLink,
+      additionalInfo, // Include additionalInfo in the payload
       description,
       image,
       category,
@@ -159,50 +179,60 @@ const Cart = () => {
         {cartItems.map((item) => (
          <div
           key={item.cartId}
-          className="flex justify-between items-center p-4 py-6 md:py-4 border rounded-lg gap-4"
+          className="flex flex-col border rounded-lg  p-4 py-6 md:py-4"
          >
-          <div className="w-1/2">
-           <h2 className="text-xl font-semibold">{item.name}</h2>
-           <p className="text-sm text-zinc-500">{item.category}</p>
-           <span className="text-lg font-semibold mr-4 text-primary">
-            {Number(item.price).toFixed(2)} PLN
-           </span>
-          </div>
-          <div className="flex items-center w-2/3 justify-between">
-           <div className="w-full">
-            {item.requireLink === "true" ? (
-             <div className="relative">
-              <input
-               required
-               className="py-1 px-2 border border-zinc-300 rounded-md text-zinc-700 w-full"
-               placeholder="Link do konta"
-               value={item.accountLink}
-               onChange={(e) => {
-                const newLink = e.target.value;
-                updateAccountLink(item.cartId, newLink);
-                validateAccountLink(item.cartId, newLink, item.category);
-               }}
-              />
-              {errors[item.cartId] && (
-               <div className="absolute text-red-500 text-xs mt-1">
-                {errors[item.cartId]}
-               </div>
-              )}
-             </div>
-            ) : (
-             <p className="text-sm text-center">
-              Produkt zostanie dostarczony na adres email
-             </p>
-            )}
+          <div className="flex justify-between items-centergap-4">
+           <div className="w-1/2">
+            <h2 className="text-xl font-semibold">{item.name}</h2>
+            <p className="text-sm text-zinc-500">{item.category}</p>
+            <span className="text-lg font-semibold mr-4 text-primary">
+             {Number(item.price).toFixed(2)} PLN
+            </span>
            </div>
+           <div className="flex items-center w-2/3 justify-between"></div>
+           <Button
+            type="button"
+            className="p-2 bg-rose-500 h-min"
+            onClick={() => removeItemFromCart(item.cartId)}
+           >
+            <BiTrash className="w-5 h-5" />
+           </Button>
           </div>
-          <Button
-           type="button"
-           className="p-2 bg-rose-500"
-           onClick={() => removeItemFromCart(item.cartId)}
-          >
-           <BiTrash className="w-5 h-5" />
-          </Button>
+          <div className="w-full flex flex-col gap-4">
+           {item.requireLink === "true" ? (
+            <div>
+             {errors[item.cartId] && (
+              <div className="text-red-500 text-xs mt-1">
+               {errors[item.cartId]}
+              </div>
+             )}
+             <input
+              required
+              className={twMerge("py-1 px-2 border border-zinc-300 rounded-md text-zinc-700 w-full", errors[item.cartId] && "outline-red-500 border-red-500")}
+              placeholder="Link do konta"
+              value={item.accountLink}
+              onChange={(e) => {
+               const newLink = e.target.value;
+               updateAccountLink(item.cartId, newLink);
+               validateAccountLink(item.cartId, newLink, item.category);
+              }}
+             />
+            </div>
+           ) : (
+            <p className="text-sm text-center">
+             Produkt zostanie dostarczony na adres email
+            </p>
+           )}
+           <textarea
+            className="py-1 px-2 border border-zinc-300 rounded-md text-zinc-700 w-full"
+            placeholder="Dodatkowe informacje (linki do postów, rolek itp.)"
+            value={item.additionalInfo || ""}
+            onChange={(e) => {
+             const newInfo = e.target.value;
+             updateAdditionalInfo(item.cartId, newInfo);
+            }}
+           />
+          </div>
          </div>
         ))}
        </div>

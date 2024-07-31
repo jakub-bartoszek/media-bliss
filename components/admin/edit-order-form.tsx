@@ -143,6 +143,9 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
           </a>
          </p>
         )}
+        {item.additionalInfo && (
+         <p className="text-zinc-500 text-sm">{item.additionalInfo}</p>
+        )}
        </div>
       ))}
      </div>
