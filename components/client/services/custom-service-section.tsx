@@ -6,11 +6,11 @@ import Button from "@/components/button";
 const CustomServiceSection = ({
  services,
  setSelectedProduct,
- setIsModalOpen
+ setIsCartModalOpen
 }: {
  services: ServiceWithDecimalPrice[];
  setSelectedProduct: (product: CartItem) => void;
- setIsModalOpen: (isOpen: boolean) => void;
+ setIsCartModalOpen: (isOpen: boolean) => void;
 }) => {
  const [customServiceId, setCustomServiceId] = useState<string>("");
  const [quantity, setQuantity] = useState<number>(0);
@@ -37,7 +37,7 @@ const CustomServiceSection = ({
   localStorage.setItem("cart", JSON.stringify(cart));
 
   setSelectedProduct(customProduct);
-  setIsModalOpen(true);
+  setIsCartModalOpen(true);
  };
 
  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {

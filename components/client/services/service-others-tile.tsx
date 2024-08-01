@@ -11,7 +11,11 @@ interface ServiceOthersTileProps {
 }
 
 const ServiceOthersTile = ({ service, onSelect }: ServiceOthersTileProps) => {
- const [isModalOpen, setIsModalOpen] = useState(false);
+ const [isLearnMoreModalOpen, setIsLearnMoreModalOpen] = useState(false);
+
+ const handleLearnMore = () => {
+  setIsLearnMoreModalOpen(true);
+ };
 
  return (
   <>
@@ -19,7 +23,6 @@ const ServiceOthersTile = ({ service, onSelect }: ServiceOthersTileProps) => {
     <div className="flex flex-row-reverse md:flex-col justify-between h-full border-b-2">
      <div className="p-4 flex flex-col h-full w-full md:justify-between gap-2 md:gap-4">
       <div className="font-bold text-xl">{service.name}</div>
-
       <div className="text-4xl font-bold text-primary">{service.price} PLN</div>
      </div>
      <img
@@ -36,16 +39,16 @@ const ServiceOthersTile = ({ service, onSelect }: ServiceOthersTileProps) => {
      </Button>
      <Button
       className="w-full whitespace-nowrap bg-zinc-600"
-      onClick={onSelect}
+      onClick={handleLearnMore}
      >
       Dowiedz się więcej
      </Button>
     </div>
    </div>
-   {isModalOpen && (
+   {isLearnMoreModalOpen && (
     <LearnMoreModal
-     isOpen={isModalOpen}
-     onClose={() => setIsModalOpen(false)}
+     isOpen={isLearnMoreModalOpen}
+     onClose={() => setIsLearnMoreModalOpen(false)}
      service={service}
     />
    )}

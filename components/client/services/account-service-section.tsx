@@ -6,11 +6,11 @@ import Button from "@/components/button";
 const AccountServiceSection = ({
  service,
  setSelectedProduct,
- setIsModalOpen
+ setIsCartModalOpen
 }: {
  service: ServiceWithDecimalPrice;
  setSelectedProduct: (product: CartItem) => void;
- setIsModalOpen: (isOpen: boolean) => void;
+ setIsCartModalOpen: (isOpen: boolean) => void;
 }) => {
  const [quantity, setQuantity] = useState<number>(0);
  const [accountPrice, setAccountPrice] = useState<number>(0);
@@ -38,8 +38,8 @@ const AccountServiceSection = ({
   localStorage.setItem("cart", JSON.stringify(cart));
 
   setSelectedProduct(accountProduct);
-  setIsModalOpen(true);
- }, [service, quantity, accountPrice, setSelectedProduct, setIsModalOpen]);
+  setIsCartModalOpen(true);
+ }, [service, quantity, accountPrice, setSelectedProduct, setIsCartModalOpen]);
 
  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   const value = e.target.value;

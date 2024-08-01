@@ -16,7 +16,7 @@ const Services = ({
  services: ServiceWithDecimalPrice[];
  category: ServiceCategory;
 }) => {
- const [isModalOpen, setIsModalOpen] = useState(false);
+ const [isCartModalOpen, setIsCartModalOpen] = useState(false);
  const [selectedProduct, setSelectedProduct] =
   useState<ServiceWithDecimalPrice | null>(null);
  const firstSectionRef = useRef<HTMLDivElement>(null);
@@ -25,7 +25,7 @@ const Services = ({
   const uniqueProduct: CartItem = { ...product, cartId: nanoid() };
 
   setSelectedProduct(product);
-  setIsModalOpen(true);
+  setIsCartModalOpen(true);
 
   const cart = JSON.parse(localStorage.getItem("cart") || "[]");
   cart.push(uniqueProduct);
@@ -52,9 +52,7 @@ const Services = ({
   (service) => service.type === "CustomService"
  );
 
- const accountService = services.filter(
-  (service) => service.type === "Account"
- )[0];
+ const accountService = services.find((service) => service.type === "Account");
 
  return (
   <div className="w-full h-full p-4">
@@ -74,15 +72,17 @@ const Services = ({
        services={services}
        handleProductSelect={handleProductSelect}
       />
-      <AccountServiceSection
-       service={accountService}
-       setSelectedProduct={setSelectedProduct}
-       setIsModalOpen={setIsModalOpen}
-      />
+      {accountService && (
+       <AccountServiceSection
+        service={accountService}
+        setSelectedProduct={setSelectedProduct}
+        setIsCartModalOpen={setIsCartModalOpen}
+       />
+      )}
       <CustomServiceSection
        services={customServices}
        setSelectedProduct={setSelectedProduct}
-       setIsModalOpen={setIsModalOpen}
+       setIsCartModalOpen={setIsCartModalOpen}
       />
      </div>
     </>
@@ -90,8 +90,8 @@ const Services = ({
 
    {selectedProduct && (
     <CartModal
-     isOpen={isModalOpen}
-     onClose={() => setIsModalOpen(false)}
+     isOpen={isCartModalOpen}
+     onClose={() => setIsCartModalOpen(false)}
      selectedProduct={selectedProduct}
     />
    )}
