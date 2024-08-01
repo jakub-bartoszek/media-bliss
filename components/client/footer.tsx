@@ -12,26 +12,34 @@ const Footer = () => {
     />
     <div className="flex flex-col justify-between h-full">
      <div className="flex flex-col gap-2">
-      <div className="flex gap-2 items-center hover:text-white w-max">
+      <a
+       href="mailto:kontakt@mediabliss.pl"
+       className="flex gap-2 items-center hover:text-white w-max"
+      >
        <div>
         <MdMailOutline className="w-6 h-6" />
        </div>
-       <a href="mailto:kontakt@mediabliss.pl">
-        kontakt@mediabliss.pl
-       </a>
-      </div>
-      <div className="flex gap-2 items-center hover:text-white w-max">
+       <span>kontakt@mediabliss.pl</span>
+      </a>
+      <a
+       href="tel:+48536-951-442"
+       className="flex gap-2 items-center hover:text-white w-max"
+      >
        <div>
         <BiPhone className="w-6 h-6" />
        </div>
-       <a href="tel:+48536-951-442">+48 536 951 442</a>
-      </div>
-      <div className="flex gap-2 items-center hover:text-white w-max">
+       <span>+48 536 951 442</span>
+      </a>
+      <a
+       href="https://www.instagram.com/mediabliss_pl/"
+       target="_blank"
+       className="flex gap-2 items-center hover:text-white w-max"
+      >
        <div>
         <FaInstagram className="w-6 h-6" />
        </div>
-       <a>mediabliss</a>
-      </div>
+       <span>mediabliss</span>
+      </a>
      </div>
      <a
       className="hover:text-white w-max"
