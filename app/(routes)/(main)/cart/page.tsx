@@ -174,55 +174,49 @@ const Cart = () => {
     >
      <h1 className="text-3xl font-bold mb-8 text-zinc-800 mt-8">Twój koszyk</h1>
      <div className="w-full flex flex-col md:flex-row gap-4">
-      <div className="w-full md:w-2/3">
-       <div className="flex flex-col gap-4">
-        {cartItems.map((item) => (
-         <div
-          key={item.cartId}
-          className="flex flex-col border rounded-lg  p-4 py-6 md:py-4"
-         >
-          <div className="flex justify-between items-centergap-4">
-           <div className="w-1/2">
-            <h2 className="text-xl font-semibold">{item.name}</h2>
-            <p className="text-sm text-zinc-500">{item.category}</p>
-            <span className="text-lg font-semibold mr-4 text-primary">
-             {Number(item.price).toFixed(2)} PLN
-            </span>
-           </div>
-           <div className="flex items-center w-2/3 justify-between"></div>
-           <Button
-            type="button"
-            className="p-2 bg-rose-500 h-min"
-            onClick={() => removeItemFromCart(item.cartId)}
-           >
-            <BiTrash className="w-5 h-5" />
-           </Button>
+      <div className="w-full md:w-2/3 flex flex-col gap-4">
+       {cartItems.map((item) => (
+        <div
+         key={item.cartId}
+         className="flex flex-col border rounded-lg p-4 py-6 md:py-4"
+        >
+         <div className="flex justify-between">
+          <div className="mb-4 w-full">
+           <h2 className="text-xl font-semibold">{item.name}</h2>
+           <p className="text-sm text-zinc-500">{item.category}</p>
+           <span className="text-lg font-semibold mr-4 text-primary">
+            {Number(item.price).toFixed(2)} PLN
+           </span>
           </div>
-          <div className="w-full flex flex-col gap-4">
-           {item.requireLink === "true" ? (
-            <div>
-             {errors[item.cartId] && (
-              <div className="text-red-500 text-xs mt-1">
-               {errors[item.cartId]}
-              </div>
-             )}
-             <input
-              required
-              className={twMerge("py-1 px-2 border border-zinc-300 rounded-md text-zinc-700 w-full", errors[item.cartId] && "outline-red-500 border-red-500")}
-              placeholder="Link do konta"
-              value={item.accountLink}
-              onChange={(e) => {
-               const newLink = e.target.value;
-               updateAccountLink(item.cartId, newLink);
-               validateAccountLink(item.cartId, newLink, item.category);
-              }}
-             />
+          <Button
+           type="button"
+           className="p-2 bg-rose-500 h-min"
+           onClick={() => removeItemFromCart(item.cartId)}
+          >
+           <BiTrash className="w-5 h-5" />
+          </Button>
+         </div>
+         {item.requireLink === "true" ? (
+          <div className="flex flex-col gap-2 relative">
+           {errors[item.cartId] && (
+            <div className="text-red-500 text-xs mt-1 absolute top-[-20px]">
+             {errors[item.cartId]}
             </div>
-           ) : (
-            <p className="text-sm text-center">
-             Produkt zostanie dostarczony na adres email
-            </p>
            )}
+           <input
+            required
+            className={twMerge(
+             "py-1 px-2 border border-zinc-300 rounded-md text-zinc-700 w-full",
+             errors[item.cartId] && "outline-red-500 border-red-500"
+            )}
+            placeholder="Link do konta"
+            value={item.accountLink}
+            onChange={(e) => {
+             const newLink = e.target.value;
+             updateAccountLink(item.cartId, newLink);
+             validateAccountLink(item.cartId, newLink, item.category);
+            }}
+           />
            <textarea
             className="py-1 px-2 border border-zinc-300 rounded-md text-zinc-700 w-full"
             placeholder="Dodatkowe informacje (linki do postów, rolek itp.)"
@@ -233,9 +227,11 @@ const Cart = () => {
             }}
            />
           </div>
-         </div>
-        ))}
-       </div>
+         ) : (
+          <p className="text-sm">Produkt zostanie dostarczony na adres email.</p>
+         )}
+        </div>
+       ))}
       </div>
       <div className="w-full md:w-1/3">
        <div className="p-4 border rounded-lg bg-white">
