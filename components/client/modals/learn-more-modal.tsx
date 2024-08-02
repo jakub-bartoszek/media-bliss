@@ -22,8 +22,13 @@ const LearnMoreModal: React.FC<LearnMoreModalProps> = ({
    <div className="max-w-[500px]">
     <div className="mb-6 text-center text-lg">{service.description}</div>
     <ul className="list-disc marker:text-primary ml-6">
-     {service.list.map((item) => (
-      <li className="mb-2">{item}</li>
+     {service.list.map((item, index) => (
+      <li
+       key={index}
+       className="mb-2"
+      >
+       {item}
+      </li>
      ))}
     </ul>
    </div>

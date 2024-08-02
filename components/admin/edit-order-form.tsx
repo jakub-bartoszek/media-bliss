@@ -6,7 +6,7 @@ import Link from "next/link";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { OrderStatus } from "@prisma/client";
-import { CartItemWithAccountLink, OrderWithCustomer } from "@/types";
+import { CartItem, OrderWithCustomer } from "@/types";
 import Button from "../button";
 
 const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
@@ -71,6 +71,16 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
   }
  };
 
+ // Format dateOfPurchase for display
+ const formattedDate = new Date(order.dateOfPurchase).toLocaleDateString(
+  "pl-PL",
+  {
+   year: "numeric",
+   month: "long",
+   day: "numeric"
+  }
+ );
+
  return (
   <div className="w-full h-full min-h-screen flex flex-col relative">
    <div className="sticky top-0 z-10 w-full h-14 flex items-center justify-between gap-4 border-b-2 border-white/20 p-4 bg-zinc-900">
@@ -91,6 +101,12 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
     </div>
    </div>
    <div className="flex flex-col gap-6 text-white p-4">
+    <div>
+     <h2 className="text-2xl font-bold mb-2">Data zakupu</h2>
+     <div className="rounded-lg bg-zinc-800 px-4 py-2 w-full">
+      <p>{formattedDate}</p>
+     </div>
+    </div>
     <div>
      <h2 className="text-2xl font-bold mb-2">Email</h2>
      <input
@@ -123,7 +139,7 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
     <div>
      <h2 className="text-2xl font-bold mb-2">Zawartość</h2>
      <div className="flex flex-col gap-2">
-      {contents.map((item: CartItemWithAccountLink, index) => (
+      {contents.map((item: CartItem, index) => (
        <div
         key={index}
         className="rounded-lg bg-zinc-800 px-4 py-2 w-full"
@@ -158,7 +174,7 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
         href={`/admin/customers/${order.Customer.id}`}
         className="text-blue-500"
        >
-        {order.Customer.email}
+        {order.Customer.name}
        </Link>
       ) : (
        <p>Brak powiązanego klienta</p>

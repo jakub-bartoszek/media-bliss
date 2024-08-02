@@ -11,7 +11,8 @@ import Button from "../button";
 const EditCustomerForm = ({ customer }: { customer: CustomerWithOrders }) => {
  const [formState, setFormState] = useState({
   name: customer.name,
-  email: customer.email
+  email: customer.email,
+  phoneNumber: customer.phoneNumber
  });
  const router = useRouter();
 
@@ -100,6 +101,17 @@ const EditCustomerForm = ({ customer }: { customer: CustomerWithOrders }) => {
       type="text"
       name="email"
       value={formState.email}
+      onChange={handleChange}
+      placeholder="Email klienta"
+     />
+    </div>
+    <div>
+     <h2 className="text-2xl font-bold mb-2">Numer telefonu</h2>
+     <input
+      className="rounded-lg bg-zinc-800 px-4 py-2 w-full"
+      type="text"
+      name="phoneNumber"
+      value={formState.phoneNumber}
       onChange={handleChange}
       placeholder="Email klienta"
      />

@@ -1,10 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
-import { CartItemWithAccountLink } from "@/types";
+import { CartItem } from "@/types";
 
 interface SessionData {
  content: string;
  dateOfPurchase: string;
+ customerInfo: {
+  name: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+ };
 }
 
 declare global {
@@ -16,7 +22,7 @@ globalThis.sessions = globalThis.sessions || new Map<string, SessionData>();
 export async function POST(req: NextRequest) {
  try {
   const body = await req.json();
-  const cartItems: CartItemWithAccountLink[] = body.cartItems;
+  const { cartItems, customerInfo } = body;
 
   if (!Array.isArray(cartItems) || cartItems.length === 0) {
    throw new Error("Cart items are invalid or empty.");
@@ -28,7 +34,7 @@ export async function POST(req: NextRequest) {
 
   const session = await stripe.checkout.sessions.create({
    payment_method_types: ["card", "blik"],
-   line_items: cartItems.map((item: CartItemWithAccountLink) => ({
+   line_items: cartItems.map((item: CartItem) => ({
     price_data: {
      currency: "pln",
      product_data: {
@@ -36,7 +42,7 @@ export async function POST(req: NextRequest) {
       metadata: {
        category: item.category,
        type: item.type,
-       accountLink: item.accountLink,
+       accountLink: item.accountLink ?? "",
        additionalInfo: item.additionalInfo ?? null
       }
      },
@@ -54,7 +60,8 @@ export async function POST(req: NextRequest) {
   const serializedCartItems = JSON.stringify(cartItems);
   globalThis.sessions.set(session.id, {
    content: serializedCartItems,
-   dateOfPurchase: new Date().toISOString()
+   dateOfPurchase: new Date().toISOString(),
+   customerInfo
   });
 
   console.log(`Session created: ${session.id}`);
