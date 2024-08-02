@@ -7,6 +7,7 @@ const Footer = () => {
   <footer className="bg-black text-zinc-400 h-[300px] p-4 flex justify-center">
    <div className="w-full h-full max-w-[1400px] flex flex-col">
     <img
+     alt="Media Bliss"
      className="w-64 mb-6"
      src="/logos/mb-logo-dark-3.svg"
     />

@@ -32,12 +32,12 @@ const AdminCustomers = () => {
         key={customer.id}
        >
         <div className="flex justify-between gap-4 overflow-hidden">
-         <span className="text-zinc-500">{customer.id}</span>
+         <span className="text-zinc-500 w-4">{customer.id}</span>
          <span className="text-nowrap text-ellipsis overflow-hidden whitespace-nowrap">
-          {customer.email}
+          {customer.name}
          </span>
         </div>
-        <span>{customer.name}</span>
+        <span>{customer.email}</span>
         <span>{customer.orders.length}</span>
        </a>
       ))}

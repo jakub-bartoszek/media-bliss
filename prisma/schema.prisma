@@ -34,12 +34,13 @@ enum ServiceType {
 }
 
 model Order {
-  id         Int         @id @default(autoincrement())
-  email      String
-  contents   String?
-  status     OrderStatus
-  Customer   Customer?   @relation(fields: [customerId], references: [id])
-  customerId Int?
+  id             Int         @id @default(autoincrement())
+  email          String
+  contents       String
+  status         OrderStatus
+  Customer       Customer?   @relation(fields: [customerId], references: [id])
+  customerId     Int?
+  dateOfPurchase DateTime   @default(now())
 }
 
 enum OrderStatus {
@@ -48,8 +49,9 @@ enum OrderStatus {
 }
 
 model Customer {
-  id     Int     @id @default(autoincrement())
-  name   String
-  email  String  @unique
-  orders Order[]
+  id          Int     @id @default(autoincrement())
+  name        String
+  email       String  @unique
+  phoneNumber String
+  orders      Order[]
 }

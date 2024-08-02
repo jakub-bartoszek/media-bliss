@@ -34,7 +34,7 @@ const AdminOrders = () => {
         key={order.id}
        >
         <div className="flex justify-between gap-4 overflow-hidden">
-         <span className="text-zinc-500">{order.id}</span>
+         <span className="text-zinc-500 w-4">{order.id}</span>
          <span className="text-nowrap text-ellipsis overflow-hidden whitespace-nowrap">
           {order.email}
          </span>

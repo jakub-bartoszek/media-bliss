@@ -2,20 +2,17 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/server/database/prisma";
 import { stripe } from "@/lib/stripe";
 import Stripe from "stripe";
-
-interface CartItem {
- name: string;
- price: number;
- accountLink: string;
- description: string;
- image: string;
- category: string;
- type: string;
-}
+import { CartItem } from "@/types";
 
 interface SessionData {
  content: string;
  dateOfPurchase: string;
+ customerInfo: {
+  name: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+ };
 }
 
 declare global {
@@ -58,14 +55,7 @@ export async function POST(req: NextRequest) {
   console.log("Session:", session);
 
   const sessionId = session.id;
-  const customerEmail =
-   session.customer_details?.email || "unknown@example.com";
-  const customerName = session.customer_details?.name || "Nie podano";
   const sessionData = globalThis.sessions.get(sessionId);
-
-  console.log("Session ID:", sessionId);
-  console.log("Customer Email:", customerEmail);
-  console.log("Session Data:", sessionData);
 
   if (!sessionData) {
    console.error(`Session ID: ${sessionId} has no associated cart items`);
@@ -73,18 +63,21 @@ export async function POST(req: NextRequest) {
   }
 
   const cartItems: CartItem[] = JSON.parse(sessionData.content);
+  const { name, lastName, email, phoneNumber } = sessionData.customerInfo;
+
   console.log("Deserialized Cart Items:", cartItems);
 
   try {
    let customer = await prisma.customer.findUnique({
-    where: { email: customerEmail }
+    where: { email: email }
    });
 
    if (!customer) {
     customer = await prisma.customer.create({
      data: {
-      name: customerName,
-      email: customerEmail
+      name: `${name} ${lastName}`,
+      email: email,
+      phoneNumber: phoneNumber
      }
     });
     console.log("Customer created:", customer);
@@ -94,10 +87,11 @@ export async function POST(req: NextRequest) {
 
    const order = await prisma.order.create({
     data: {
-     email: customerEmail,
+     email: email,
      contents: JSON.stringify(cartItems),
      status: "Niezrealizowane",
-     customerId: customer.id
+     customerId: customer.id,
+     dateOfPurchase: new Date()
     }
    });
 

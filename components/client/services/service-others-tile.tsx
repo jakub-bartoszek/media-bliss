@@ -26,6 +26,7 @@ const ServiceOthersTile = ({ service, onSelect }: ServiceOthersTileProps) => {
       <div className="text-4xl font-bold text-primary">{service.price} PLN</div>
      </div>
      <img
+      alt="Service image"
       className="h-[200px] md:w-full md:h-auto"
       src={service.image}
      />
