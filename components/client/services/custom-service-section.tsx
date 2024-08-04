@@ -28,7 +28,7 @@ const CustomServiceSection = ({
   const customProduct: CartItem = {
    ...selectedService,
    cartId: nanoid(),
-   name: `${quantity} × ${selectedService.name}`,
+   name: `${selectedService.name} × ${quantity}`,
    price: customServicePrice
   };
 
@@ -134,6 +134,7 @@ const CustomServiceSection = ({
       max={maxQuantity}
      />
      <Button
+      disabled={quantity < 100}
       className="w-full"
       onClick={handleAddCustomService}
      >

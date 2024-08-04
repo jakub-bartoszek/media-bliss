@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ServiceWithDecimalPrice } from "@/types";
 import Button from "@/components/button";
 import LearnMoreModal from "../modals/learn-more-modal";
+import { BiInfoCircle } from "react-icons/bi";
 
 interface ServiceOthersTileProps {
  service: ServiceWithDecimalPrice;
@@ -19,30 +20,46 @@ const ServiceOthersTile = ({ service, onSelect }: ServiceOthersTileProps) => {
 
  return (
   <>
-   <div className="bg-white rounded-md border-2 border-black/10 flex flex-col justify-between flex-shrink box-border overflow-hidden w-full md:min-w-[214px] md:basis-0">
-    <div className="flex flex-row-reverse md:flex-col justify-between h-full border-b-2">
-     <div className="p-4 flex flex-col h-full w-full md:justify-between gap-2 md:gap-4">
-      <div className="font-bold text-xl">{service.name}</div>
-      <div className="text-4xl font-bold text-primary">{service.price} PLN</div>
+   <div className="box-border flex w-full flex-shrink flex-col justify-between overflow-hidden rounded-md border-2 border-black/10 bg-white md:min-w-[214px] md:basis-0">
+    <div className="flex h-full flex-row justify-between md:relative md:flex-col">
+     <div className="hidden p-2 text-base font-bold md:block md:text-center">
+      {service.name}
      </div>
-     <img
-      alt="Service image"
-      className="h-[200px] md:w-full md:h-auto"
-      src={service.image}
-     />
+
+     <div className="relative min-w-[120px]">
+      <img
+       alt="Service image"
+       src={service.image}
+      />
+      <div className="hidden p-2 text-center text-3xl font-bold text-primary md:block">
+       {service.price} PLN
+      </div>
+      <Button
+       onClick={handleLearnMore}
+       className="absolute right-0 top-0 mr-2 mt-2 hidden h-min w-min p-[3px] md:flex"
+      >
+       <BiInfoCircle className="h-5 w-5 text-white sm:h-7 sm:w-7" />
+      </Button>
+     </div>
+     <div className="flex h-full w-full flex-col justify-between p-2 md:hidden">
+      <div className="mb-4">{service.name}</div>
+      <div className="text-2xl font-bold text-primary sm:text-3xl md:text-center">
+       {service.price} PLN
+      </div>
+     </div>
+     <Button
+      onClick={handleLearnMore}
+      className="right-0 top-0 mr-2 mt-2 h-min w-min p-[3px] md:hidden"
+     >
+      <BiInfoCircle className="h-5 w-5 text-white sm:h-7 sm:w-7" />
+     </Button>
     </div>
-    <div className="flex flex-col items-center justify-center gap-2 p-4">
+    <div className="flex flex-col items-center justify-center p-2 md:pt-0">
      <Button
       className="w-full whitespace-nowrap"
       onClick={onSelect}
      >
       Dodaj do koszyka
-     </Button>
-     <Button
-      className="w-full whitespace-nowrap bg-zinc-600"
-      onClick={handleLearnMore}
-     >
-      Dowiedz się więcej
      </Button>
     </div>
    </div>

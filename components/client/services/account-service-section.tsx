@@ -101,7 +101,7 @@ const AccountServiceSection = ({
      <Button
       className="w-full"
       onClick={handleAddCustomService}
-      disabled={!service}
+      disabled={!service || quantity < 100}
      >
       Dodaj do koszyka
      </Button>
