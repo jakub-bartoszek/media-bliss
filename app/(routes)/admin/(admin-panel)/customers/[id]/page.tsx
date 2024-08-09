@@ -28,7 +28,7 @@ const CustomerIdPage: React.FC<CustomerIdPageProps> = ({ params }) => {
   <>
    {!loading && !customer && (
     <h1 className="w-full h-screen flex items-center justify-center text-zinc-500 text-2xl">
-     Nie znaleziono usługi
+     Nie znaleziono klienta
     </h1>
    )}
    {customer && <EditCustomerForm customer={customer} />}
