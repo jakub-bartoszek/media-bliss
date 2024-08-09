@@ -72,7 +72,7 @@ const AccountServiceSection = ({
   <section className="flex flex-col md:flex-row justify-between gap-16 text-zinc-700 p-4 border-2 rounded-lg py-16">
    <div className="w-full md:w-2/3">
     <h2 className="w-full text-5xl text-center md:text-left font-bold mb-4 text-primary">
-     Konto na zamówienie
+     Konto {service.category} na zamówienie
     </h2>
     <p className="text-xl mb-8">
      Potrzebujesz konta o wybranej liczbie obserwacji? Zajmiemy się tym!
@@ -84,7 +84,7 @@ const AccountServiceSection = ({
    </div>
    <div className="flex flex-col items-center p-4 rounded-lg border-2 justify-between border-black/10 w-full md:w-[300px] h-[300px]">
     <div className="w-full mb-16">
-     <p className="w-full text-xl font-bold text-nowrap">Konto</p>
+     <p className="w-full text-xl font-bold text-nowrap">Konto {service.category}</p>
      <p className="w-full text-3xl font-bold">{accountPrice.toFixed(2)} PLN</p>
     </div>
     <div className="w-full">
