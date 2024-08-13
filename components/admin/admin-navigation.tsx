@@ -4,7 +4,7 @@ import { useState } from "react";
 import AdminNavigationButton from "./admin-navigation-button";
 import AdminNavigationSidebar from "./admin-navigation-sidebar";
 import AdminMenuButton from "./admin-menu-button";
-import { MdArticle } from "react-icons/md";
+import { MdAccountBox, MdArticle } from "react-icons/md";
 import { FaGear } from "react-icons/fa6";
 import { BiHome, BiLogOut } from "react-icons/bi";
 import { TbShoppingCartCopy } from "react-icons/tb";
@@ -20,6 +20,11 @@ const navMap = [
   title: "Usługi",
   href: "/admin/services",
   icon: <FaGear className="w-6 h-6" />
+ },
+ {
+  title: "Konta",
+  href: "/admin/accounts",
+  icon: <MdAccountBox className="w-6 h-6" />
  },
  {
   title: "Zamówienia",
