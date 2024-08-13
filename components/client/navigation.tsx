@@ -108,7 +108,7 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
      TikTok
     </a>
     <a
-     href="/services/accounts"
+     href="/accounts"
      className="px-4 py-2 hover:bg-zinc-200 rounded-lg"
     >
      Konta
