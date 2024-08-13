@@ -26,3 +26,14 @@ export type OrderWithCustomer = Order & {
 export type CustomerWithOrders = Customer & {
  orders: OrderWithCustomer[];
 };
+
+export type AccountWithDecimalPrice = {
+ id: number;
+ category: ServiceCategory;
+ price: number;
+ followsCount: number;
+ genderType: string;
+ genderPercentage: number;
+ polishFollowersPercentage: number;
+ age18to24Percentage: number;
+};

@@ -40,7 +40,7 @@ model Order {
   status         OrderStatus
   Customer       Customer?   @relation(fields: [customerId], references: [id])
   customerId     Int?
-  dateOfPurchase DateTime   @default(now())
+  dateOfPurchase DateTime    @default(now())
 }
 
 enum OrderStatus {
@@ -54,4 +54,20 @@ model Customer {
   email       String  @unique
   phoneNumber String
   orders      Order[]
+}
+
+model Account {
+  id                        Int             @id @default(autoincrement())
+  category                  ServiceCategory
+  price                     Decimal
+  followsCount              Int
+  genderType                GenderType
+  genderPercentage          Int
+  polishFollowersPercentage Int
+  age18to24Percentage       Int
+}
+
+enum GenderType {
+  Male
+  Female
 }

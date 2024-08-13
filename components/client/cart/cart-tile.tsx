@@ -105,7 +105,7 @@ const CartTile = ({
        <BiTrash className="w-5 h-5" />
       </Button>
      </div>
-     {item.requireLink === "true" && (
+     {item.requireLink === "true" ? (
       <div className="flex flex-col gap-2 relative">
        {errors[item.cartId] && (
         <div className="text-red-500 text-xs mt-1 absolute top-[-20px]">
@@ -132,6 +132,10 @@ const CartTile = ({
         value={item.additionalInfo || ""}
         onChange={(e) => updateAdditionalInfo(item.cartId, e.target.value)}
        />
+      </div>
+     ) : (
+      <div className="text-sm text-zinc-600">
+       Produkt zostanie dostarczony na adres email
       </div>
      )}
     </div>
