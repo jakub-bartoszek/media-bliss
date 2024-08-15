@@ -41,7 +41,6 @@ export async function POST(req: NextRequest) {
       name: item.name,
       metadata: {
        category: item.category,
-       type: item.type,
        accountLink: item.accountLink ?? "",
        additionalInfo: item.additionalInfo ?? null
       }
