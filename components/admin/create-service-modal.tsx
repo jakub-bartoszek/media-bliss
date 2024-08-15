@@ -17,13 +17,12 @@ const CreateServiceModal = ({
 }: CreateServiceModalProps) => {
  const [name, setName] = useState("");
  const [price, setPrice] = useState("");
- const [description, setDescription] = useState("");
- const [list, setList] = useState<string[]>([]);
- const [newListItem, setNewListItem] = useState("");
- const [image, setImage] = useState("");
  const [category, setCategory] = useState("");
- const [type, setType] = useState("");
- const [requireLink, setRequireLink] = useState("");
+ const [image, setImage] = useState("");
+ const [description, setDescription] = useState("");
+ const [benefits, setBenefits] = useState<string[]>([]);
+ const [newListItem, setNewListItem] = useState("");
+
  const [isSubmitting, setIsSubmitting] = useState(false);
 
  const handleSubmit = async (e: React.FormEvent) => {
@@ -38,12 +37,10 @@ const CreateServiceModal = ({
     {
      name,
      price: parseFloat(price),
-     description,
-     list,
-     image,
      category,
-     type,
-     requireLink
+     image,
+     description,
+     benefits
     },
     {
      headers: {
@@ -70,31 +67,29 @@ const CreateServiceModal = ({
  const resetForm = () => {
   setName("");
   setPrice("");
-  setDescription("");
-  setList([]);
-  setNewListItem("");
-  setImage("");
   setCategory("");
-  setType("");
-  setRequireLink("");
+  setImage("");
+  setDescription("");
+  setBenefits([]);
+  setNewListItem("");
  };
 
  const handleAddListItem = () => {
   if (newListItem.trim() !== "") {
-   setList((prevList) => [...prevList, newListItem.trim()]);
+   setBenefits((prevList) => [...prevList, newListItem.trim()]);
    setNewListItem("");
   }
  };
 
  const handleRemoveListItem = (index: number) => {
-  setList((prevList) => prevList.filter((_, i) => i !== index));
+  setBenefits((prevList) => prevList.filter((_, i) => i !== index));
  };
 
  if (!isOpen) return null;
 
  return (
   <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-   <div className="bg-zinc-900 border-2 rounded-lg border-white/20 w-2/3 h-[90vh] flex flex-col">
+   <div className="bg-zinc-900 border-2 rounded-lg border-white/20 w-2/3 h-min max-h-[90vh] flex flex-col">
     <h2 className="text-xl text-center font-bold border-b border-white/20 p-4">
      Utwórz usługę
     </h2>
@@ -172,7 +167,7 @@ const CreateServiceModal = ({
        </Button>
       </div>
       <ul className="pt-2">
-       {list.map((item, index) => (
+       {benefits.map((item, index) => (
         <li
          key={index}
          className="flex justify-between items-center mb-2 hover:bg-zinc-800 rounded-lg pl-2"
@@ -220,47 +215,6 @@ const CreateServiceModal = ({
        <option value="">Wybierz kategorię</option>
        <option value="Instagram">Instagram</option>
        <option value="TikTok">TikTok</option>
-       <option value="Others">Pozostałe</option>
-      </select>
-     </div>
-     <div>
-      <label
-       className="block font-medium mb-1"
-       htmlFor="type"
-      >
-       Typ
-      </label>
-      <select
-       id="type"
-       value={type}
-       onChange={(e) => setType(e.target.value)}
-       className="rounded-lg bg-zinc-800 px-4 py-2 w-full"
-       required
-      >
-       <option value="">Wybierz typ</option>
-       <option value="Package">Pakiet</option>
-       <option value="Service">Usługa</option>
-       <option value="CustomService">Niestandardowa usługa</option>
-       <option value="Account">Konto</option>
-      </select>
-     </div>
-     <div>
-      <label
-       className="block font-medium mb-1"
-       htmlFor="requireLink"
-      >
-       Wymaga linku
-      </label>
-      <select
-       id="requireLink"
-       value={requireLink}
-       onChange={(e) => setRequireLink(e.target.value)}
-       className="rounded-lg bg-zinc-800 px-4 py-2 w-full"
-       required
-      >
-       <option value="">Wybierz opcję</option>
-       <option value="true">Tak</option>
-       <option value="false">Nie</option>
       </select>
      </div>
      <div className="flex justify-end gap-4">

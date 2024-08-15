@@ -30,7 +30,7 @@ const AccountIdPage = ({ params }: AccountIdPageProps) => {
   <>
    {!loading && !account && (
     <h1 className="w-full h-screen flex items-center justify-center text-zinc-500 text-2xl">
-     Nie znaleziono usługi
+     Nie znaleziono konta
     </h1>
    )}
    {account && <EditAccountForm account={account} />}

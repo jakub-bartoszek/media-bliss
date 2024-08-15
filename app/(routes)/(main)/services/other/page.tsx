@@ -57,10 +57,10 @@ const OtherServicesPage = () => {
     </h1>
     <p className="text-lg md:text-2xl mb-8 leading-relaxed">
      Nasza firma oferuje także zróżnicowane usługi poza mediami
-     społecznościowymi, lecz z uwagi na ich indywidualną naturę, nie
-     jesteśmy w stanie ujednolicić ceny. Jeśli jesteś zainteresowany/a
-     owymi usługami, proszę skontaktować się z nami na drodze mailowej
-     - <b>kontakt@mediabliss.pl</b>
+     społecznościowymi, lecz z uwagi na ich indywidualną naturę, nie jesteśmy w
+     stanie ujednolicić ceny. Jeśli jesteś zainteresowany/a owymi usługami,
+     proszę skontaktować się z nami na drodze mailowej -{" "}
+     <b>kontakt@mediabliss.pl</b>
     </p>
    </div>
    <div className="max-w-4xl mx-auto mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">

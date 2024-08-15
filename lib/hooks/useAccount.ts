@@ -2,14 +2,14 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { AccountWithDecimalPrice } from "@/types";
+import { AccountForSale } from "@prisma/client";
 
 const useAccount = (accountId?: number) => {
- const [account, setAccount] = useState<AccountWithDecimalPrice | null>(null);
+ const [account, setAccount] = useState<AccountForSale | null>(null);
  const [error, setError] = useState<string | null>(null);
  const [loading, setLoading] = useState<boolean>(false);
 
- const fetchAccount = async () => {
+ const fetchService = async () => {
   try {
    setLoading(true);
 
@@ -24,7 +24,7 @@ const useAccount = (accountId?: number) => {
  };
 
  useEffect(() => {
-  fetchAccount();
+  fetchService();
  }, [accountId]);
 
  return { account, error, loading };

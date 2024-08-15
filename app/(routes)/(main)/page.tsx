@@ -1,5 +1,5 @@
 import Button from "@/components/button";
-import HomeSection from "@/components/client/home/home-section";
+import HomeSection from "@/components/home-section";
 
 const sections = [
  {

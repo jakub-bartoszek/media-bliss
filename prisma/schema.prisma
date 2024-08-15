@@ -7,30 +7,57 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Service {
-  id          Int             @id @default(autoincrement())
+model Package {
+  id          Int      @id @default(autoincrement())
   name        String
-  description String?
-  list        String[]
-  image       String?
   price       Decimal
-  category    ServiceCategory
-  type        ServiceType
-  requireLink String?
-  orderId     Int?
+  category    Category
+  benefits    String[]
+  requireLink Boolean
 }
 
-enum ServiceCategory {
-  TikTok
+model Service {
+  id          Int      @id @default(autoincrement())
+  name        String
+  price       Decimal
+  category    Category
+  image       String
+  description String
+  benefits    String[]
+}
+
+model CustomAccount {
+  id             Int      @id @default(autoincrement())
+  pricePerFollow Decimal
+  category       Category
+}
+
+model CustomService {
+  id           Int      @id @default(autoincrement())
+  name         String
+  pricePerUnit Decimal
+  category     Category
+}
+
+model AccountForSale {
+  id                  Int      @id @default(autoincrement())
+  price               Decimal
+  category            Category
+  followerCount       Int
+  predominantGender   Gender
+  genderPercentage    Float
+  polishPercentage    Float
+  age18To24Percentage Float
+}
+
+enum Category {
   Instagram
-  Others
+  TikTok
 }
 
-enum ServiceType {
-  Package
-  Service
-  CustomService
-  Account
+enum Gender {
+  Male
+  Female
 }
 
 model Order {
@@ -54,20 +81,4 @@ model Customer {
   email       String  @unique
   phoneNumber String
   orders      Order[]
-}
-
-model Account {
-  id                        Int             @id @default(autoincrement())
-  category                  ServiceCategory
-  price                     Decimal
-  followsCount              Int
-  genderType                GenderType
-  genderPercentage          Int
-  polishFollowersPercentage Int
-  age18to24Percentage       Int
-}
-
-enum GenderType {
-  Male
-  Female
 }

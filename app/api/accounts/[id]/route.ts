@@ -12,7 +12,7 @@ export async function GET(
  }
 
  try {
-  const account = await prisma.account.findUnique({
+  const account = await prisma.accountForSale.findUnique({
    where: {
     id: accountId
    }
@@ -34,22 +34,22 @@ export async function POST(request: NextRequest) {
   const {
    price,
    category,
-   followsCount,
-   genderType,
+   followerCount,
+   predominantGender,
    genderPercentage,
-   polishFollowersPercentage,
-   age18to24Percentage
+   polishPercentage,
+   age18To24Percentage
   } = await request.json();
 
-  const newAccount = await prisma.account.create({
+  const newAccount = await prisma.accountForSale.create({
    data: {
     price,
     category,
-    followsCount,
-    genderType,
+    followerCount,
+    predominantGender,
     genderPercentage,
-    polishFollowersPercentage,
-    age18to24Percentage
+    polishPercentage,
+    age18To24Percentage
    }
   });
 
@@ -70,23 +70,23 @@ export async function PATCH(
   const {
    price,
    category,
-   followsCount,
-   genderType,
+   followerCount,
+   predominantGender,
    genderPercentage,
-   polishFollowersPercentage,
-   age18to24Percentage
+   polishPercentage,
+   age18To24Percentage
   } = await request.json();
 
-  const updatedAccount = await prisma.account.update({
+  const updatedAccount = await prisma.accountForSale.update({
    where: { id: accountId },
    data: {
     price,
     category,
-    followsCount,
-    genderType,
+    followerCount,
+    predominantGender,
     genderPercentage,
-    polishFollowersPercentage,
-    age18to24Percentage
+    polishPercentage,
+    age18To24Percentage
    }
   });
 
@@ -104,7 +104,7 @@ export async function DELETE(
  const accountId = parseInt(params.id);
 
  try {
-  const updatedAccount = await prisma.account.delete({
+  const updatedAccount = await prisma.accountForSale.delete({
    where: { id: accountId }
   });
 

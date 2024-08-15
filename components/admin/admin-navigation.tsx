@@ -4,9 +4,13 @@ import { useState } from "react";
 import AdminNavigationButton from "./admin-navigation-button";
 import AdminNavigationSidebar from "./admin-navigation-sidebar";
 import AdminMenuButton from "./admin-menu-button";
-import { MdAccountBox, MdArticle } from "react-icons/md";
+import {
+ MdAccountBalanceWallet,
+ MdAccountBox,
+ MdArticle
+} from "react-icons/md";
 import { FaGear } from "react-icons/fa6";
-import { BiHome, BiLogOut } from "react-icons/bi";
+import { BiHome, BiLogOut, BiPackage } from "react-icons/bi";
 import { TbShoppingCartCopy } from "react-icons/tb";
 import { BsPeopleFill } from "react-icons/bs";
 
@@ -22,9 +26,19 @@ const navMap = [
   icon: <FaGear className="w-6 h-6" />
  },
  {
+  title: "Pakiety",
+  href: "/admin/packages",
+  icon: <BiPackage className="w-6 h-6" />
+ },
+ {
   title: "Konta",
   href: "/admin/accounts",
   icon: <MdAccountBox className="w-6 h-6" />
+ },
+ {
+  title: "Cennik kont",
+  href: "/admin/account-prices",
+  icon: <MdAccountBalanceWallet className="w-6 h-6" />
  },
  {
   title: "Zamówienia",

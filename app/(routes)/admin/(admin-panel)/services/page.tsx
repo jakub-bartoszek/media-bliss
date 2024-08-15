@@ -19,14 +19,6 @@ const AdminServices = () => {
  const categories = Array.from(
   new Set(services.map((service) => service.category))
  );
- const types = Array.from(new Set(services.map((service) => service.type)));
-
- const typeLabels: { [key: string]: string } = {
-  Package: "Pakiety",
-  Service: "Usługi",
-  CustomService: "Niestandardowa usługi",
-  Account: "Konto"
- };
 
  if (loading) {
   return <Loader />;
@@ -50,42 +42,28 @@ const AdminServices = () => {
        className="mb-4"
        key={category}
       >
-       <h1 className="text-3xl text-primary font-bold">{category}</h1>
-       {types.map((type) => {
-        const servicesOfType = services.filter(
-         (service) => service.category === category && service.type === type
-        );
-
-        return servicesOfType.length > 0 ? (
-         <div
-          className="mb-4"
-          key={type}
+       <h1 className="text-3xl text-primary font-bold mb-2">{category}</h1>
+       <div className="w-full flex flex-col gap-y-2">
+        {services.map((service) => (
+         <a
+          className="flex px-4 py-2 bg-zinc-800 rounded-lg justify-between items-center gap-2"
+          href={`/admin/services/${service.id}`}
+          key={service.id}
          >
-          <h2 className="text-xl mb-2">{typeLabels[type]}</h2>
-          <div className="w-full flex flex-col gap-y-2">
-           {servicesOfType.map((service) => (
-            <a
-             className="flex px-4 py-2 bg-zinc-800 rounded-lg justify-between items-center gap-2"
-             href={`/admin/services/${service.id}`}
-             key={service.id}
-            >
-             <div className="flex justify-between gap-4 overflow-hidden">
-              <span className="text-zinc-500">{service.id}</span>
-              <span className="text-nowrap text-ellipsis overflow-hidden whitespace-nowrap">
-               {service.name}
-              </span>
-             </div>
-             <span className="text-nowrap">
-              {!service.price
-               ? "Cena zależna od potrzeb klienta"
-               : `${service.price.toString()} PLN`}
-             </span>
-            </a>
-           ))}
+          <div className="flex justify-between gap-4 overflow-hidden">
+           <span className="text-zinc-500">{service.id}</span>
+           <span className="text-nowrap text-ellipsis overflow-hidden whitespace-nowrap">
+            {service.name}
+           </span>
           </div>
-         </div>
-        ) : null;
-       })}
+          <span className="text-nowrap">
+           {!service.price
+            ? "Cena zależna od potrzeb klienta"
+            : `${service.price.toString()} PLN`}
+          </span>
+         </a>
+        ))}
+       </div>
       </div>
      ))}
     </div>

@@ -20,7 +20,7 @@ const AdminNavigationSidebar = ({
 }: AdminNavigationSidebarProps) => {
  return (
   <div
-   className="h-screen w-screen bg-black bg-opacity-75 absolute top-0 left-0 z-10 md:hidden"
+   className="h-screen w-screen bg-black bg-opacity-75 absolute top-0 left-0 z-20 md:hidden"
    onClick={() => setSidebarOpen(false)}
   >
    <div

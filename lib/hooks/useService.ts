@@ -2,11 +2,10 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { ServiceWithDecimalPrice } from "@/types";
+import { Service } from "@prisma/client";
 
 const useService = (serviceId?: number) => {
- const [service, setService] =
-  useState<ServiceWithDecimalPrice | null>(null);
+ const [service, setService] = useState<Service | null>(null);
  const [error, setError] = useState<string | null>(null);
  const [loading, setLoading] = useState<boolean>(false);
 

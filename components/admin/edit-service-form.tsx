@@ -4,21 +4,19 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { ServiceCategory, ServiceType } from "@prisma/client";
-import { ServiceWithDecimalPrice } from "@/types";
+import { Category, Service } from "@prisma/client";
+
 import Button from "../button";
 import { FaTrashCan } from "react-icons/fa6";
 
-const EditServiceForm = ({ service }: { service: ServiceWithDecimalPrice }) => {
+const EditServiceForm = ({ service }: { service: Service }) => {
  const [formState, setFormState] = useState({
   name: service.name,
   price: service.price,
-  description: service.description,
-  list: service.list,
-  image: service.image,
   category: service.category,
-  type: service.type,
-  requireLink: service.requireLink
+  image: service.image,
+  description: service.description,
+  benefits: service.benefits
  });
 
  const [newListItem, setNewListItem] = useState("");
@@ -75,7 +73,7 @@ const EditServiceForm = ({ service }: { service: ServiceWithDecimalPrice }) => {
   if (newListItem.trim() !== "") {
    setFormState((prevState) => ({
     ...prevState,
-    list: [...prevState.list, newListItem.trim()]
+    benefits: [...prevState.benefits, newListItem.trim()]
    }));
    setNewListItem("");
   }
@@ -84,7 +82,7 @@ const EditServiceForm = ({ service }: { service: ServiceWithDecimalPrice }) => {
  const handleRemoveListItem = (index: number) => {
   setFormState((prevState) => ({
    ...prevState,
-   list: prevState.list.filter((_, i) => i !== index)
+   benefits: prevState.benefits.filter((_, i) => i !== index)
   }));
  };
 
@@ -125,7 +123,7 @@ const EditServiceForm = ({ service }: { service: ServiceWithDecimalPrice }) => {
       className="rounded-lg bg-zinc-800 px-4 py-2 w-full"
       type="number"
       name="price"
-      value={formState.price}
+      value={parseFloat(formState.price.toString())}
       onChange={handleChange}
       placeholder="Cena"
      />
@@ -153,7 +151,7 @@ const EditServiceForm = ({ service }: { service: ServiceWithDecimalPrice }) => {
       <Button onClick={handleAddListItem}>Add</Button>
      </div>
      <ul>
-      {formState.list.map((item, index) => (
+      {formState.benefits.map((item, index) => (
        <li
         key={index}
         className="flex justify-between items-center mb-2 hover:bg-zinc-800 rounded-lg pl-2"
@@ -188,7 +186,7 @@ const EditServiceForm = ({ service }: { service: ServiceWithDecimalPrice }) => {
       value={formState.category}
       onChange={handleChange}
      >
-      {Object.values(ServiceCategory).map((category) => (
+      {Object.values(Category).map((category) => (
        <option
         key={category}
         value={category}
@@ -196,36 +194,6 @@ const EditServiceForm = ({ service }: { service: ServiceWithDecimalPrice }) => {
         {category}
        </option>
       ))}
-     </select>
-    </div>
-    <div>
-     <h2 className="text-2xl font-bold mb-2">Typ</h2>
-     <select
-      className="rounded-lg bg-zinc-800 px-4 py-2 w-full"
-      name="type"
-      value={formState.type}
-      onChange={handleChange}
-     >
-      {Object.values(ServiceType).map((type) => (
-       <option
-        key={type}
-        value={type}
-       >
-        {type}
-       </option>
-      ))}
-     </select>
-    </div>
-    <div>
-     <h2 className="text-2xl font-bold mb-2">Wymaga linku do konta</h2>
-     <select
-      className="rounded-lg bg-zinc-800 px-4 py-2 w-full"
-      name="requireLink"
-      value={formState.requireLink}
-      onChange={handleChange}
-     >
-      <option value="true">Tak</option>
-      <option value="false">Nie</option>
      </select>
     </div>
    </div>

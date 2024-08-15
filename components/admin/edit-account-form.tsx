@@ -4,23 +4,20 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { GenderType, ServiceCategory, ServiceType } from "@prisma/client";
-import { AccountWithDecimalPrice } from "@/types";
 import Button from "../button";
-import { FaTrashCan } from "react-icons/fa6";
+import { AccountForSale } from "@prisma/client";
 
-const EditAccountForm = ({ account }: { account: AccountWithDecimalPrice }) => {
+const EditAccountForm = ({ account }: { account: AccountForSale }) => {
  const [formState, setFormState] = useState({
   category: account.category,
   price: account.price,
-  followsCount: account.followsCount,
-  genderType: account.genderType,
+  followerCount: account.followerCount,
+  predominantGender: account.predominantGender,
   genderPercentage: account.genderPercentage,
-  polishFollowersPercentage: account.polishFollowersPercentage,
-  age18to24Percentage: account.age18to24Percentage
+  polishPercentage: account.polishPercentage,
+  age18To24Percentage: account.age18To24Percentage
  });
 
- const [newListItem, setNewListItem] = useState("");
  const router = useRouter();
 
  const handleChange = (e: any) => {
@@ -96,7 +93,7 @@ const EditAccountForm = ({ account }: { account: AccountWithDecimalPrice }) => {
       className="rounded-lg bg-zinc-800 px-4 py-2 w-full"
       type="number"
       name="price"
-      value={formState.price}
+      value={parseFloat(formState.price.toString())}
       onChange={handleChange}
       placeholder="Cena"
      />
@@ -106,8 +103,8 @@ const EditAccountForm = ({ account }: { account: AccountWithDecimalPrice }) => {
      <input
       className="rounded-lg bg-zinc-800 px-4 py-2 w-full"
       type="number"
-      name="followsCount"
-      value={formState.followsCount}
+      name="followerCount"
+      value={formState.followerCount}
       onChange={handleChange}
       placeholder="Ilość obserwujących"
      />
@@ -138,8 +135,8 @@ const EditAccountForm = ({ account }: { account: AccountWithDecimalPrice }) => {
      <h2 className="text-2xl font-bold mb-2">Przeważająca płeć</h2>
      <select
       className="rounded-lg bg-zinc-800 px-4 py-2 w-full"
-      name="type"
-      value={formState.genderType}
+      name="predominantGender"
+      value={formState.predominantGender}
       onChange={handleChange}
      >
       <option
@@ -172,8 +169,8 @@ const EditAccountForm = ({ account }: { account: AccountWithDecimalPrice }) => {
      <input
       className="rounded-lg bg-zinc-800 px-4 py-2 w-full"
       type="number"
-      name="polishFollowersPercentage"
-      value={formState.polishFollowersPercentage}
+      name="polishPercentage"
+      value={formState.polishPercentage}
       onChange={handleChange}
       placeholder="0-100"
      />
@@ -183,8 +180,8 @@ const EditAccountForm = ({ account }: { account: AccountWithDecimalPrice }) => {
      <input
       className="rounded-lg bg-zinc-800 px-4 py-2 w-full"
       type="number"
-      name="age18to24Percentage"
-      value={formState.age18to24Percentage}
+      name="age18To24Percentage"
+      value={formState.age18To24Percentage}
       onChange={handleChange}
       placeholder="0-100"
      />

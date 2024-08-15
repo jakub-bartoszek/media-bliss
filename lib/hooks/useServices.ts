@@ -2,19 +2,19 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { ServiceWithDecimalPrice } from "@/types";
+import { Service } from "@prisma/client";
 
-const useServices = () => {
- const [services, setServices] = useState<ServiceWithDecimalPrice[]>(
-  []
- );
+const useServices = (category?: string) => {
+ const [services, setServices] = useState<Service[]>([]);
  const [error, setError] = useState<string | null>(null);
- const [loading, setLoading] = useState<boolean>(false);
+ const [loading, setLoading] = useState(false);
 
  const fetchServices = async () => {
   try {
    setLoading(true);
-   const response = await axios.get("/api/services");
+   const response = await axios.get("/api/services", {
+    params: { category }
+   });
    setServices(response.data);
   } catch (error) {
    setError("Failed to fetch services");

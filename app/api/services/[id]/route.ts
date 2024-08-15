@@ -5,63 +5,24 @@ export async function GET(
  request: NextRequest,
  { params }: { params: { id: string } }
 ) {
- const serviceId = parseInt(params.id);
+ const packageId = parseInt(params.id);
 
- if (isNaN(serviceId)) {
-  return NextResponse.json(
-   { error: "Invalid service ID" },
-   { status: 400 }
-  );
+ if (isNaN(packageId)) {
+  return NextResponse.json({ error: "Invalid package ID" }, { status: 400 });
  }
 
  try {
-  const service = await prisma.service.findUnique({
+  const response = await prisma.package.findUnique({
    where: {
-    id: serviceId
+    id: packageId
    }
   });
 
-  if (!service) {
-   return NextResponse.json(
-    { error: "Service not found" },
-    { status: 404 }
-   );
+  if (!response) {
+   return NextResponse.json({ error: "Package not found" }, { status: 404 });
   }
 
-  return NextResponse.json(service);
- } catch (error) {
-  console.error(error);
-  return NextResponse.error();
- }
-}
-
-export async function POST(request: NextRequest) {
- try {
-  const {
-   name,
-   price,
-   description,
-   list,
-   image,
-   category,
-   type,
-   requireLink
-  } = await request.json();
-
-  const newService = await prisma.service.create({
-   data: {
-    name,
-    price,
-    description,
-    list,
-    image,
-    category,
-    type,
-    requireLink
-   }
-  });
-
-  return NextResponse.json(newService);
+  return NextResponse.json(response);
  } catch (error) {
   console.error(error);
   return NextResponse.error();
@@ -72,35 +33,22 @@ export async function PATCH(
  request: NextRequest,
  { params }: { params: { id: string } }
 ) {
- const serviceId = parseInt(params.id);
+ const packageId = parseInt(params.id);
 
  try {
-  const {
-   name,
-   price,
-   description,
-   list,
-   image,
-   category,
-   type,
-   requireLink
-  } = await request.json();
+  const { name, price, category, benefits } = await request.json();
 
-  const updatedService = await prisma.service.update({
-   where: { id: serviceId },
+  const response = await prisma.package.update({
+   where: { id: packageId },
    data: {
     name,
     price,
-    description,
-    list,
-    image,
     category,
-    type,
-    requireLink
+    benefits
    }
   });
 
-  return NextResponse.json(updatedService);
+  return NextResponse.json(response);
  } catch (error) {
   console.error(error);
   return NextResponse.error();
@@ -111,14 +59,14 @@ export async function DELETE(
  request: NextRequest,
  { params }: { params: { id: string } }
 ) {
- const serviceId = parseInt(params.id);
+ const packageId = parseInt(params.id);
 
  try {
-  const updatedService = await prisma.service.delete({
-   where: { id: serviceId }
+  const response = await prisma.package.delete({
+   where: { id: packageId }
   });
 
-  return NextResponse.json(updatedService);
+  return NextResponse.json(response);
  } catch (error) {
   console.error(error);
   return NextResponse.error();

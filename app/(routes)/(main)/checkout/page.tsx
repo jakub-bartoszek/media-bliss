@@ -1,14 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { loadStripe } from "@stripe/stripe-js";
-import axios from "axios";
-import Button from "@/components/button";
 import { CartItem } from "@/types";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import InputMask from "react-input-mask";
 import CheckBox from "@/components/check-box";
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
+import Button from "@/components/button";
 
 const stripePromise = loadStripe(
  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ""
@@ -67,13 +67,12 @@ const Checkout = () => {
   try {
    const response = await axios.post("/api/checkout", {
     cartItems: selectedItems.map(
-     ({ name, price, accountLink, additionalInfo, category, type }) => ({
+     ({ name, price, accountLink, additionalInfo, category }) => ({
       name,
       price,
       accountLink,
       additionalInfo,
-      category,
-      type
+      category
      })
     ),
     customerInfo: {
@@ -166,7 +165,7 @@ const Checkout = () => {
        </div>
        {selectedItems.map((item) => (
         <div
-         key={item.cartId}
+         key={item.id}
          className="flex flex-col border rounded-lg p-4"
         >
          <div className="flex flex-col justify-between">
@@ -188,7 +187,7 @@ const Checkout = () => {
          {selectedItems.map((item) => (
           <div
            className="flex justify-between gap-2 items-center"
-           key={item.cartId}
+           key={item.id}
           >
            <span className="truncate">{item.name}</span>
            <span className="whitespace-nowrap font-bold">{item.price} PLN</span>

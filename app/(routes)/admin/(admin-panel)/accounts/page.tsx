@@ -44,9 +44,9 @@ const AdminAccounts = () => {
        >
         <div className="flex justify-between gap-4 overflow-hidden">
          <span className="text-zinc-500 w-4">{account.id}</span>
-         <span>{`Konto ${account.category} × ${account.followsCount} obserwujących`}</span>
+         <span>{`Konto ${account.category} × ${account.followerCount} obserwujących`}</span>
         </div>
-        <span>{account.price} PLN</span>
+        <span>{parseFloat(account.price.toString())} PLN</span>
        </a>
       ))}
      </div>
@@ -56,7 +56,7 @@ const AdminAccounts = () => {
     className="fixed bottom-8"
     onClick={() => setIsCreateModalOpen(true)}
    >
-    Dodaj usługę
+    Dodaj konto
    </Button>
    {isCreateModalOpen && (
     <CreateAccountModal

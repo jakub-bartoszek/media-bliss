@@ -21,7 +21,7 @@ const Button = ({
    disabled={disabled}
    type={type}
    className={twMerge(
-    "bg-primary bg-gradient-to-bl from-white/20 rounded-lg py-2 px-4 w-max text-white transition hover:brightness-125 disabled:bg-zinc-500 disabled:hover:brightness-100",
+    "bg-primary bg-gradient-to-bl from-white/20 rounded-lg py-2 px-4 w-max text-white transition whitespace-nowrap hover:brightness-125 disabled:bg-zinc-500 disabled:hover:brightness-100",
     className
    )}
    onClick={onClick}

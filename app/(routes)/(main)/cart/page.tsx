@@ -4,9 +4,10 @@ import { useEffect, useState } from "react";
 import { CartItem } from "@/types";
 import toast from "react-hot-toast";
 import Button from "@/components/button";
-import CartTile from "@/components/client/cart/cart-tile";
 import { FaShoppingCart } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { nanoid } from "nanoid";
+import CartTile from "@/components/cart-tile";
 
 const Cart = () => {
  const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -21,7 +22,7 @@ const Cart = () => {
  }, []);
 
  const removeItemFromCart = (cartId: string) => {
-  const updatedCart = cartItems.filter((item) => item.cartId !== cartId);
+  const updatedCart = cartItems.filter((item) => item.id !== cartId);
   setCartItems(updatedCart);
   localStorage.setItem("cart", JSON.stringify(updatedCart));
   window.dispatchEvent(new Event("storage"));
@@ -30,7 +31,7 @@ const Cart = () => {
  const validateAllLinks = () => {
   let valid = true;
   cartItems.forEach((item) => {
-   if (item.selected && item.requireLink === "true") {
+   if (item.selected && item.requireLink === true) {
     const regex =
      item.category === "Instagram"
       ? /^(https?:\/\/)?(www\.)?instagram\.com\/[a-zA-Z0-9(_)\.]+\/?$/
@@ -39,7 +40,7 @@ const Cart = () => {
      valid = false;
      setErrors((prev) => ({
       ...prev,
-      [item.cartId]:
+      [item.id]:
        item.category === "Instagram"
         ? "Please enter a valid Instagram account link."
         : "Please enter a valid TikTok account link."
@@ -92,7 +93,7 @@ const Cart = () => {
       <div className="w-full md:w-2/3 flex flex-col gap-4">
        {cartItems.map((item) => (
         <CartTile
-         key={item.cartId}
+         key={item.id}
          item={item}
          removeItemFromCart={removeItemFromCart}
          cartItems={cartItems}

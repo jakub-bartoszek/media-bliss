@@ -26,7 +26,7 @@ const CartTile = ({
 }: CartTileProps) => {
  const updateAccountLink = (cartId: string, accountLink: string) => {
   const updatedCart = cartItems.map((i) =>
-   i.cartId === cartId ? { ...i, accountLink } : i
+   i.id === cartId ? { ...i, accountLink } : i
   );
   setCartItems(updatedCart);
   localStorage.setItem("cart", JSON.stringify(updatedCart));
@@ -35,7 +35,7 @@ const CartTile = ({
 
  const updateAdditionalInfo = (cartId: string, additionalInfo: string) => {
   const updatedCart = cartItems.map((i) =>
-   i.cartId === cartId ? { ...i, additionalInfo } : i
+   i.id === cartId ? { ...i, additionalInfo } : i
   );
   setCartItems(updatedCart);
   localStorage.setItem("cart", JSON.stringify(updatedCart));
@@ -44,7 +44,7 @@ const CartTile = ({
 
  const toggleItemSelected = (cartId: string) => {
   const updatedCart = cartItems.map((i) =>
-   i.cartId === cartId ? { ...i, selected: !i.selected } : i
+   i.id === cartId ? { ...i, selected: !i.selected } : i
   );
   setCartItems(updatedCart);
  };
@@ -84,7 +84,7 @@ const CartTile = ({
    <div className="flex">
     <div className="h-full pl-4 pt-5 pr-2">
      <CheckBox
-      onClick={() => toggleItemSelected(item.cartId)}
+      onClick={() => toggleItemSelected(item.id)}
       checked={item.selected}
      />
     </div>
@@ -100,37 +100,37 @@ const CartTile = ({
       <Button
        type="button"
        className="p-2 bg-rose-500 h-min"
-       onClick={() => removeItemFromCart(item.cartId)}
+       onClick={() => removeItemFromCart(item.id)}
       >
        <BiTrash className="w-5 h-5" />
       </Button>
      </div>
-     {item.requireLink === "true" ? (
+     {item.requireLink ? (
       <div className="flex flex-col gap-2 relative">
-       {errors[item.cartId] && (
+       {errors[item.id] && (
         <div className="text-red-500 text-xs mt-1 absolute top-[-20px]">
-         {errors[item.cartId]}
+         {errors[item.id]}
         </div>
        )}
        <input
         required={item.selected}
         className={twMerge(
          "py-1 px-2 border border-zinc-300 rounded-md text-zinc-700 w-full",
-         errors[item.cartId] && "outline-red-500 border-red-500"
+         errors[item.id] && "outline-red-500 border-red-500"
         )}
         placeholder="Link do konta"
         value={item.accountLink || ""}
         onChange={(e) => {
          const newLink = e.target.value;
-         updateAccountLink(item.cartId, newLink);
-         validateAccountLink(item.cartId, newLink, item.category);
+         updateAccountLink(item.id, newLink);
+         validateAccountLink(item.id, newLink, item.category);
         }}
        />
        <textarea
         className="py-1 px-2 border border-zinc-300 rounded-md text-zinc-700 w-full"
         placeholder="Dodatkowe informacje (linki do postów, rolek itp.)"
         value={item.additionalInfo || ""}
-        onChange={(e) => updateAdditionalInfo(item.cartId, e.target.value)}
+        onChange={(e) => updateAdditionalInfo(item.id, e.target.value)}
        />
       </div>
      ) : (

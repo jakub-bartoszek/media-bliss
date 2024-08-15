@@ -16,11 +16,11 @@ const CreateAccountModal = ({
 }: CreateAccountModalProps) => {
  const [price, setPrice] = useState("");
  const [category, setCategory] = useState("");
- const [followsCount, setFollowsCount] = useState("");
- const [genderType, setGenderType] = useState("");
+ const [followerCount, setFollowerCount] = useState("");
+ const [predominantGender, setPredominantGender] = useState("");
  const [genderPercentage, setGenderPercentage] = useState("");
- const [polishFollowersPercentage, setPolishFollowersPercentage] = useState("");
- const [age18to24Percentage, setAge18to24Percentage] = useState("");
+ const [polishPercentage, setPolishPercentage] = useState("");
+ const [age18To24Percentage, setAge18To24Percentage] = useState("");
  const [isSubmitting, setIsSubmitting] = useState(false);
 
  const handleSubmit = async (e: React.FormEvent) => {
@@ -35,11 +35,11 @@ const CreateAccountModal = ({
     {
      price: parseFloat(price),
      category,
-     followsCount: parseFloat(followsCount),
-     genderType,
+     followerCount: parseFloat(followerCount),
+     predominantGender,
      genderPercentage: parseFloat(genderPercentage),
-     polishFollowersPercentage: parseFloat(polishFollowersPercentage),
-     age18to24Percentage: parseFloat(age18to24Percentage)
+     polishPercentage: parseFloat(polishPercentage),
+     age18To24Percentage: parseFloat(age18To24Percentage)
     },
     {
      headers: {
@@ -66,18 +66,18 @@ const CreateAccountModal = ({
  const resetForm = () => {
   setPrice("");
   setCategory("");
-  setFollowsCount("");
-  setGenderType("");
+  setFollowerCount("");
+  setPredominantGender("");
   setGenderPercentage("");
-  setPolishFollowersPercentage("");
-  setAge18to24Percentage("");
+  setPolishPercentage("");
+  setAge18To24Percentage("");
  };
 
  if (!isOpen) return null;
 
  return (
   <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-   <div className="bg-zinc-900 border-2 rounded-lg border-white/20 w-2/3 h-[90vh] flex flex-col">
+   <div className="bg-zinc-900 border-2 rounded-lg border-white/20 w-2/3 h-min max-h-[90vh] flex flex-col">
     <h2 className="text-xl text-center font-bold border-b border-white/20 p-4">
      Utwórz konto
     </h2>
@@ -104,15 +104,15 @@ const CreateAccountModal = ({
      <div>
       <label
        className="block font-medium mb-1"
-       htmlFor="followsCount"
+       htmlFor="followerCount"
       >
        Ilość obserwujących
       </label>
       <input
        type="number"
-       id="followsCount"
-       value={followsCount}
-       onChange={(e) => setFollowsCount(e.target.value)}
+       id="followerCount"
+       value={followerCount}
+       onChange={(e) => setFollowerCount(e.target.value)}
        className="rounded-lg bg-zinc-800 px-4 py-2 w-full"
        required
       />
@@ -139,14 +139,14 @@ const CreateAccountModal = ({
      <div>
       <label
        className="block font-medium mb-1"
-       htmlFor="genderType"
+       htmlFor="predominantGender"
       >
        Przeważająca płeć
       </label>
       <select
-       id="genderType"
-       value={genderType}
-       onChange={(e) => setGenderType(e.target.value)}
+       id="predominantGender"
+       value={predominantGender}
+       onChange={(e) => setPredominantGender(e.target.value)}
        className="rounded-lg bg-zinc-800 px-4 py-2 w-full"
        required
       >
@@ -174,15 +174,15 @@ const CreateAccountModal = ({
      <div>
       <label
        className="block font-medium mb-1"
-       htmlFor="genderPercentage"
+       htmlFor="polishPercentage"
       >
        % polaków
       </label>
       <input
        type="number"
-       id="polishFollowersPercentage"
-       value={polishFollowersPercentage}
-       onChange={(e) => setPolishFollowersPercentage(e.target.value)}
+       id="polishPercentage"
+       value={polishPercentage}
+       onChange={(e) => setPolishPercentage(e.target.value)}
        className="rounded-lg bg-zinc-800 px-4 py-2 w-full"
        required
       />
@@ -190,15 +190,15 @@ const CreateAccountModal = ({
      <div>
       <label
        className="block font-medium mb-1"
-       htmlFor="genderPercentage"
+       htmlFor="age18To24Percentage"
       >
        % 18-24
       </label>
       <input
        type="number"
-       id="age18to24Percentage"
-       value={age18to24Percentage}
-       onChange={(e) => setAge18to24Percentage(e.target.value)}
+       id="age18To24Percentage"
+       value={age18To24Percentage}
+       onChange={(e) => setAge18To24Percentage(e.target.value)}
        className="rounded-lg bg-zinc-800 px-4 py-2 w-full"
        required
       />
