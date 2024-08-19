@@ -18,6 +18,7 @@ const config: Config = {
     "aztec-purple": "#8e38ff",
     "neon-purple": "#eb07ff",
     "dark-indigo": "#250f4a",
+    ebony: "#120b20",
     white: "#efefef",
     black: "#101010"
    },

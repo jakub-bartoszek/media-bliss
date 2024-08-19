@@ -20,7 +20,7 @@ export const PackageTile = ({
  return (
   <div
    className={twMerge(
-    "relative box-border flex w-full flex-shrink flex-col justify-between overflow-hidden rounded-md border-[3px] border-neon-purple bg-[#120b20] md:min-w-[260px] md:basis-0",
+    "relative box-border flex w-full flex-shrink flex-col justify-between overflow-hidden rounded-md border-[3px] border-neon-purple bg-ebony md:min-w-[260px] md:basis-0",
     className
    )}
   >
