@@ -28,8 +28,9 @@ const Header = () => {
  return (
   <header
    className={twMerge(
-    "h-[56px] fixed top-0 left-0 w-full z-30 transition-all duration-500",
-    (opacity > 0 || showed) && "bg-[#250f4a] shadow-[0_0_40px_rgba(0,0,0,0.2)]"
+    "h-[56px] fixed top-0 left-0 w-full z-30 transition-all",
+    (opacity > 0 || showed) &&
+     "bg-white dark:bg-[#250f4a] shadow-[0_0_40px_rgba(0,0,0,0.2)]"
    )}
   >
    <Navigation

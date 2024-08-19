@@ -23,22 +23,21 @@ export const ServiceTile = ({ service, onSelect }: ServiceTileProps) => {
  };
 
  return (
-  <div className="box-border flex w-full flex-shrink flex-col justify-between overflow-hidden rounded-md border-2 bg-white md:min-w-[214px] md:basis-0">
+  <div className="box-border flex w-full flex-shrink flex-col justify-between overflow-hidden rounded-md border-2 border-neon-purple bg-white dark:bg-ebony md:min-w-[214px] md:basis-0">
    <div className="flex h-full flex-row justify-between md:relative md:flex-col">
-    <div className="hidden p-2 text-base font-bold md:block md:text-center">
+    <div className="hidden p-2 text-base font-bold md:block md:text-center mt-auto mb-auto">
      {service.name}
     </div>
-
     <div className="relative min-w-[120px]">
      <img
       alt="Service image"
       src={service.image}
      />
-     <div className="hidden p-2 text-center text-3xl font-bold text-primary md:block">
+     <div className="hidden p-2 text-center text-3xl font-bold text-fade md:block w-max ml-auto mr-auto">
       {parseFloat(service.price.toString())} PLN
      </div>
      <Button
-      className="absolute right-0 top-0 mr-2 mt-2 hidden h-min w-min p-[3px] md:flex"
+      className="absolute right-0 top-0 mr-2 mt-2 hidden h-min w-min p-[3px] md:flex bg-fade"
       onClick={handleOpenModal}
      >
       <BiInfoCircle className="h-5 w-5 text-white sm:h-7 sm:w-7" />
@@ -46,12 +45,12 @@ export const ServiceTile = ({ service, onSelect }: ServiceTileProps) => {
     </div>
     <div className="flex h-full w-full flex-col justify-between p-2 md:hidden">
      <div className="mb-4">{service.name}</div>
-     <div className="text-2xl font-bold text-primary sm:text-3xl md:text-center">
+     <div className="text-2xl font-bold sm:text-3xl md:text-center">
       {parseFloat(service.price.toString())} PLN
      </div>
     </div>
     <Button
-     className="right-0 top-0 mr-2 mt-2 h-min w-min p-[3px] md:hidden"
+     className="right-0 top-0 mr-2 mt-2 h-min w-min p-[3px] md:hidden bg-fade"
      onClick={handleOpenModal}
     >
      <BiInfoCircle className="h-5 w-5 text-white sm:h-7 sm:w-7" />
@@ -59,7 +58,7 @@ export const ServiceTile = ({ service, onSelect }: ServiceTileProps) => {
    </div>
    <div className="flex flex-col items-center justify-center p-2 md:pt-0">
     <Button
-     className="w-full"
+     className="w-full bg-fade"
      onClick={() =>
       onSelect({
        id: nanoid(),

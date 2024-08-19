@@ -21,7 +21,7 @@ const Success = () => {
   <div className="w-full h-screen flex flex-col items-center justify-center text-zinc-800 p-4">
    <div className="max-w-lg w-full p-6 text-center">
     <svg
-     className="w-16 h-16 mx-auto text-primary"
+     className="w-16 h-16 mx-auto  "
      fill="none"
      stroke="currentColor"
      viewBox="0 0 24 24"

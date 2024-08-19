@@ -3,6 +3,7 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { FaShoppingBag } from "react-icons/fa";
+import { ModeToggle } from "./mode-toggle";
 
 interface NavigationProps {
  setShowed: Dispatch<SetStateAction<boolean>>;
@@ -58,7 +59,8 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
       alt="Logo"
      />
     </a>
-    <div className="flex items-center gap-4 md:gap-8">
+
+    <div className="flex items-center gap-4">
      <div
       className="relative flex flex-col items-center justify-center"
       ref={dropdownRef}
@@ -71,7 +73,7 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
       </button>
       <div
        className={twMerge(
-        "absolute p-2 top-[calc(100%+8px)] flex flex-col gap-2 rounded-[0_0_8px_8px] opacity-0 transition duration-500 origin-top scale-y-0 z-[-1] bg-[#250f4a]",
+        "absolute p-2 top-[calc(100%+8px)] flex flex-col gap-2 rounded-[0_0_8px_8px] opacity-0 transition duration-500 origin-top scale-y-0 z-[-1] bg-[#250f4a] shadow-xl",
         showed && "opacity-100 scale-y-100"
        )}
       >
@@ -101,19 +103,20 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
        </a>
       </div>
      </div>
-     <a
-      href="/cart"
-      className="relative"
-     >
-      <FaShoppingBag className="h-6 w-6" />
-      {cartCount > 0 && (
-       <span className="absolute top-[-4px] right-[-4px] bg-rose-500 text-white text-xs rounded-full px-1">
-        {cartCount}
-       </span>
-      )}
-     </a>
+      <a
+       href="/cart"
+       className="relative"
+      >
+       <FaShoppingBag className="h-6 w-6" />
+       {cartCount > 0 && (
+        <span className="absolute top-[-4px] right-[-4px] bg-rose-500 text-white text-xs rounded-full px-1">
+         {cartCount}
+        </span>
+       )}
+      </a>
+      <ModeToggle />
+     </div>
     </div>
-   </div>
   </nav>
  );
 };

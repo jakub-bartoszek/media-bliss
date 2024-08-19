@@ -20,7 +20,7 @@ export const PackageTile = ({
  return (
   <div
    className={twMerge(
-    "relative box-border flex w-full flex-shrink flex-col justify-between overflow-hidden rounded-md border-[3px] border-neon-purple bg-ebony md:min-w-[260px] md:basis-0",
+    "relative box-border flex w-full flex-shrink flex-col justify-between overflow-hidden rounded-md border-2 border-neon-purple bg-white dark:bg-ebony md:min-w-[260px] md:basis-0",
     className
    )}
   >
@@ -36,8 +36,8 @@ export const PackageTile = ({
       {parseFloat(pkg.price.toString())} PLN
      </div>
     </div>
-    <div className="border-t-2 border-white/10 pt-4">
-     <ul className="list-disc pl-4 marker:text-zinc-700 flex flex-col gap-2">
+    <div className="border-t-2 border-zinc-300 dark:border-zinc-700 pt-4">
+     <ul className="list-disc pl-4 marker:text-neon-purple flex flex-col gap-2">
       {pkg.benefits.map((item) => (
        <li key={nanoid()}>{item}</li>
       ))}

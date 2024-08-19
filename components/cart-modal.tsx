@@ -25,14 +25,14 @@ const CartModal = ({
    <div className="flex flex-col gap-4">
     <div className="border-2 p-4 w-full rounded-md">
      <div className="text-xl font-bold">{latestItem.name}</div>
-     <div className="text-3xl font-bold text-primary">
+     <div className="text-3xl font-bold  ">
       {latestItem.price} PLN
      </div>
     </div>
     <div className="flex gap-4 justify-between">
      <Button onClick={onViewCart}>Zobacz koszyk</Button>
      <Button
-      className="bg-primary-light"
+      className="     "
       onClick={onClose}
      >
       Kontynuuj zakupy

@@ -39,7 +39,7 @@ const LoginPage = () => {
    onSubmit={handleSubmit}
    className="w-1/2 ml-auto mr-auto h-screen flex flex-col items-center justify-center gap-y-6"
   >
-   <h1 className="text-primary text-5xl">Admin</h1>
+   <h1 className="  text-5xl">Admin</h1>
    <div className="w-full flex gap-y-2 flex-col">
     <input
      name="password"

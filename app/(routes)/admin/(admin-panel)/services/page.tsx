@@ -42,7 +42,7 @@ const AdminServices = () => {
        className="mb-4"
        key={category}
       >
-       <h1 className="text-3xl text-primary font-bold mb-2">{category}</h1>
+       <h1 className="text-3xl   font-bold mb-2">{category}</h1>
        <div className="w-full flex flex-col gap-y-2">
         {services.map((service) => (
          <a

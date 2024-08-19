@@ -93,7 +93,7 @@ const CartTile = ({
       <div className="mb-4 w-full">
        <h2 className="text-xl font-semibold">{item.name}</h2>
        <p className="text-sm text-zinc-500">{item.category}</p>
-       <span className="text-lg font-semibold mr-4 text-primary">
+       <span className="text-lg font-semibold mr-4  ">
         {Number(item.price).toFixed(2)} PLN
        </span>
       </div>

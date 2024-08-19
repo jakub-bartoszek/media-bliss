@@ -22,7 +22,7 @@ const ServiceInfoModal = ({
   >
    <div className="flex flex-col gap-4 border-2 p-4 w-full rounded-md max-w-lg">
     <p className="text-lg">{service.description}</p>
-    <ul className="list-disc ml-6 marker:text-primary text-zinc-700">
+    <ul className="list-disc ml-6 text-zinc-700">
      {service.benefits.map((benefit) => (
       <li key={nanoid()}>{benefit}</li>
      ))}

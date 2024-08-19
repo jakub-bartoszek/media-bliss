@@ -9,7 +9,7 @@ const Footer = () => {
     <img
      alt="Media Bliss"
      className="w-64 mb-6"
-     src="/logos/mb-logo-dark-3.svg"
+     src="/logos/mb-logo-dark-fade-3.svg"
     />
     <div className="flex flex-col justify-between h-full">
      <div className="flex flex-col gap-2">

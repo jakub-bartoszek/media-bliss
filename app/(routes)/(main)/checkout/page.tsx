@@ -111,7 +111,7 @@ const Checkout = () => {
         <div className="mt-4 flex flex-col gap-4">
          <div className="flex flex-col">
           <label htmlFor="name">
-           Imię<span className="text-primary">*</span>
+           Imię<span className=" ">*</span>
           </label>
           <input
            id="name"
@@ -124,7 +124,7 @@ const Checkout = () => {
          </div>
          <div className="flex flex-col">
           <label htmlFor="lastName">
-           Nazwisko<span className="text-primary">*</span>
+           Nazwisko<span className=" ">*</span>
           </label>
           <input
            type="text"
@@ -137,7 +137,7 @@ const Checkout = () => {
          </div>
          <div className="flex flex-col">
           <label htmlFor="email">
-           Email<span className="text-primary">*</span>
+           Email<span className=" ">*</span>
           </label>
           <input
            type="email"
@@ -150,7 +150,7 @@ const Checkout = () => {
          </div>
          <div className="flex flex-col">
           <label htmlFor="phoneNumber">
-           Numer telefonu<span className="text-primary">*</span>
+           Numer telefonu<span className=" ">*</span>
           </label>
           <InputMask
            mask="+99 999 999 999"
@@ -171,7 +171,7 @@ const Checkout = () => {
          <div className="flex flex-col justify-between">
           <h2 className="text-xl font-semibold">{item.name}</h2>
           <p className="text-sm text-zinc-500">{item.category}</p>
-          <p className="text-lg font-semibold mr-4 text-primary">
+          <p className="text-lg font-semibold mr-4  ">
            {Number(item.price).toFixed(2)} PLN
           </p>
           {item.accountLink && <p>{item.accountLink}</p>}

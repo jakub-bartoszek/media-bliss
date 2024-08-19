@@ -43,7 +43,7 @@ const webDevelopmentServices = [
 
 const ServiceCard = ({ name, Icon }: { name: string; Icon: any }) => (
  <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow flex items-center space-x-4">
-  <Icon className="text-primary text-3xl" />
+  <Icon className="  text-3xl" />
   <span className="text-lg md:text-xl font-medium">{name}</span>
  </div>
 );
@@ -52,7 +52,7 @@ const OtherServicesPage = () => {
  return (
   <div className="p-6 py-32">
    <div className="max-w-4xl mx-auto text-center">
-    <h1 className="text-primary text-4xl md:text-6xl font-extrabold mb-8">
+    <h1 className="  text-4xl md:text-6xl font-extrabold mb-8">
      Pozostałe usługi
     </h1>
     <p className="text-lg md:text-2xl mb-8 leading-relaxed">
