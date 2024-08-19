@@ -14,8 +14,12 @@ const config: Config = {
      "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))"
    },
    colors: {
-    primary: "#7038ff",
-    "primary-light": "#8e38ff"
+    "bluish-purple": "#7038ff",
+    "aztec-purple": "#8e38ff",
+    "neon-purple": "#eb07ff",
+    "dark-indigo": "#250f4a",
+    white: "#efefef",
+    black: "#101010"
    },
    keyframes: {
     "logo-appear": {
@@ -73,6 +77,18 @@ const config: Config = {
      "& a": {
       color: "currentColor"
      }
+    }
+   });
+  },
+  function ({ addUtilities }: { addUtilities: any }) {
+   addUtilities({
+    ".text-fade": {
+     color: "transparent",
+     "background-image": "linear-gradient(to bottom left, #eb07ff, #7038ff)",
+     "background-clip": "text"
+    },
+    ".bg-fade": {
+     "background-image": "linear-gradient(to bottom left, #eb07ff, #7038ff)"
     }
    });
   }
