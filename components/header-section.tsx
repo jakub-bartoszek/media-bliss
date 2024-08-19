@@ -41,43 +41,48 @@ export const HeaderSection = ({
  return (
   <div className="w-full h-screen flex items-center gap-16 p-8">
    <div className="w-full lg:w-1/2 flex flex-col items-center md:items-start">
-    <h1 className="text-primary text-center md:text-left text-5xl md:text-6xl font-bold mb-4">
+    <h1 className="text-fade text-center md:text-left text-5xl md:text-6xl font-bold mb-4 py-2">
      Usługi {category}
     </h1>
     <p className="text-lg md:text-2xl mb-4 text-center md:text-left">
      Poszerz swoje zasięgi i zyskaj nową popularność, która pozwoli ci dotrzeć
      do niespotykanej dotąd ilości osób.
     </p>
-    <Button onClick={scrollToPackages}>Poznaj naszą ofertę</Button>
+    <Button
+     className="bg-fade text-xl"
+     onClick={scrollToPackages}
+    >
+     Poznaj naszą ofertę
+    </Button>
    </div>
 
    <div className="w-1/2 h-full relative hidden lg:flex items-center justify-center">
-    {loading && <LuLoader2 className="animate-spin w-16 h-16 text-primary" />}
+    {loading && <LuLoader2 className="animate-spin w-16 h-16  " />}
 
     {packages && (
      <>
       {starterPackage && (
        <PackageTile
-        className="w-[300px] h-[450px] absolute left-0 scale-[80%]"
+        className="w-[300px] h-[450px] absolute left-0 scale-[80%] opacity-50"
         pkg={starterPackage}
         onSelect={handleAddToCart}
+        fake
        />
       )}
       {proPackage && (
        <PackageTile
-        className="w-[300px] h-[450px] absolute right-0 scale-[80%]"
+        className="w-[300px] h-[450px] absolute right-0 scale-[80%] opacity-50"
         pkg={proPackage}
         onSelect={handleAddToCart}
+        fake
        />
       )}
       {highPackage && (
-       <div className="absolute bg-white w-full flex justify-center bg-opacity-40">
-        <PackageTile
-         className="w-[300px] h-[450px]"
-         pkg={highPackage}
-         onSelect={handleAddToCart}
-        />
-       </div>
+       <PackageTile
+        className="w-[300px] h-[450px]"
+        pkg={highPackage}
+        onSelect={handleAddToCart}
+       />
       )}
      </>
     )}
