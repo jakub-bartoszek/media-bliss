@@ -47,10 +47,10 @@ export default function Home() {
      <img
       className="animate-[logo-appear_2000ms]"
       alt="Media Bliss"
-      src="/logos/mb-logo-light-1.svg"
+      src="/logos/mb-logo-dark-fade-1.svg"
      />
      <a href="/services/all">
-      <Button className="text-lg md:text-xl animate-[button-appear_2000ms]">
+      <Button className="text-lg md:text-xl animate-[button-appear_2000ms] bg-fade">
        Sprawdź naszą ofertę
       </Button>
      </a>
