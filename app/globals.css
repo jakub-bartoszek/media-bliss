@@ -6,18 +6,19 @@
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 255, 255, 255;
-    --background-end-rgb: 255, 255, 255;
+    --foreground-rgb: 16, 16, 16;
+    --background-start-rgb: 16, 16, 16;
+    --background-end-rgb: 16, 16, 16;
   }
 }
 
 body {
   position: relative;
-  color: #27272a;
-  background-color: #fff
+  color: #efefef;
+  background: rgb(16, 16, 16);
+  background: linear-gradient(to bottom, rgb(37, 15, 74) 0%, rgb(16, 7, 33) 1500px);
 }
 
 @layer utilities {
