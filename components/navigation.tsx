@@ -47,14 +47,14 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
 
  return (
   <nav className="ml-auto mr-auto max-w-[1400px] w-full h-full z-30 relative">
-   <div className="w-full h-full p-4 flex justify-between items-center bg-white">
+   <div className="w-full h-full p-4 flex justify-between items-center">
     <a
      href="/"
      className="h-full"
     >
      <img
       className="w-full h-full"
-      src="/logos/mb-logo-light-3.svg"
+      src="/logos/mb-logo-dark-fade-3.svg"
       alt="Logo"
      />
     </a>
@@ -69,6 +69,37 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
       >
        Usługi
       </button>
+      <div
+       className={twMerge(
+        "absolute p-2 top-[calc(100%+8px)] flex flex-col gap-2 rounded-[0_0_8px_8px] opacity-0 transition duration-500 origin-top scale-y-0 z-[-1] bg-[#250f4a]",
+        showed && "opacity-100 scale-y-100"
+       )}
+      >
+       <a
+        href="/services/all"
+        className="px-4 py-2 rounded-lg hover:bg-[#3d1a79] transition-colors"
+       >
+        Wszystkie
+       </a>
+       <a
+        href="/services/instagram"
+        className="px-4 py-2 rounded-lg hover:bg-[#3d1a79] transition-colors"
+       >
+        Instagram
+       </a>
+       <a
+        href="/services/tiktok"
+        className="px-4 py-2 rounded-lg hover:bg-[#3d1a79] transition-colors"
+       >
+        TikTok
+       </a>
+       <a
+        href="/services/other"
+        className="px-4 py-2 rounded-lg hover:bg-[#3d1a79] transition-colors"
+       >
+        Pozostałe
+       </a>
+      </div>
      </div>
      <a
       href="/cart"
@@ -82,37 +113,6 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
       )}
      </a>
     </div>
-   </div>
-   <div
-    className={twMerge(
-     "absolute top-[54px] right-[50px] bg-white p-2 flex flex-col gap-2 rounded-[0_0_8px_8px] opacity-0 transition duration-500 origin-top scale-y-0 z-[-1] shadow-[0_10px_40px_rgba(0,0,0,0.2)]",
-     showed && "opacity-100 scale-y-100"
-    )}
-   >
-    <a
-     href="/services/all"
-     className="px-4 py-2 hover:bg-zinc-200 rounded-lg"
-    >
-     Wszystkie
-    </a>
-    <a
-     href="/services/instagram"
-     className="px-4 py-2 hover:bg-zinc-200 rounded-lg"
-    >
-     Instagram
-    </a>
-    <a
-     href="/services/tiktok"
-     className="px-4 py-2 hover:bg-zinc-200 rounded-lg"
-    >
-     TikTok
-    </a>
-    <a
-     href="/services/other"
-     className="px-4 py-2 hover:bg-zinc-200 rounded-lg"
-    >
-     Pozostałe
-    </a>
    </div>
   </nav>
  );
