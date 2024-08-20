@@ -40,9 +40,9 @@ export default function CookieBanner() {
  if (consentGiven === "undecided") {
   return (
    <div className="fixed bottom-0 left-0 w-full p-4">
-    <div className="p-4 flex flex-col gap-4 rounded-lg shadow-[0_0_50px_0_#00000070] animate-slide-in-bottom max-w-[1400px] ml-auto mr-auto bg-white dark:bg-ebony">
+    <div className="p-4 flex flex-col gap-4 rounded-lg shadow-[0_0_25px_0_#00000030] animate-slide-in-bottom max-w-[1400px] ml-auto mr-auto bg-bg-content border-2 border-muted">
      <h1 className="font-bold text-2xl">Używamy plików cookie!</h1>
-     <p className="text-zinc-700 dark:text-zinc-300">
+     <p className="text-muted">
       Używamy plików cookie, aby zrozumieć, jak korzystasz z naszego produktu, i
       aby pomóc nam go ulepszyć. Pliki cookie to małe fragmenty danych
       przechowywane na Twoim urządzeniu, które pomagają nam analizować ruch na

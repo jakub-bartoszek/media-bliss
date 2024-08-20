@@ -77,12 +77,12 @@ const CartTile = ({
  return (
   <div
    className={twMerge(
-    "flex flex-col border rounded-lg",
-    item.selected && "outline outline-primary"
+    "flex flex-col border border-secondary-muted bg-secondary rounded-lg",
+    item.selected && "outline-1 outline outline-accent border-accent"
    )}
   >
    <div className="flex">
-    <div className="h-full pl-4 pt-5 pr-2">
+    <div className="h-full pl-4 pt-5 pr-4">
      <CheckBox
       onClick={() => toggleItemSelected(item.id)}
       checked={item.selected}
@@ -92,7 +92,7 @@ const CartTile = ({
      <div className="flex justify-between">
       <div className="mb-4 w-full">
        <h2 className="text-xl font-semibold">{item.name}</h2>
-       <p className="text-sm text-zinc-500">{item.category}</p>
+       <p className="text-sm text-secondary-muted">{item.category}</p>
        <span className="text-lg font-semibold mr-4  ">
         {Number(item.price).toFixed(2)} PLN
        </span>
@@ -115,7 +115,7 @@ const CartTile = ({
        <input
         required={item.selected}
         className={twMerge(
-         "py-1 px-2 border border-zinc-300 rounded-md text-zinc-700 w-full",
+         "py-1 px-2 border border-secondary-muted bg-bg-content placeholder:text-secondary-muted rounded-md w-full",
          errors[item.id] && "outline-red-500 border-red-500"
         )}
         placeholder="Link do konta"
@@ -127,14 +127,14 @@ const CartTile = ({
         }}
        />
        <textarea
-        className="py-1 px-2 border border-zinc-300 rounded-md text-zinc-700 w-full"
+        className="py-1 px-2 border border-secondary-muted bg-bg-content placeholder:text-secondary-muted rounded-md w-full"
         placeholder="Dodatkowe informacje (linki do postów, rolek itp.)"
         value={item.additionalInfo || ""}
         onChange={(e) => updateAdditionalInfo(item.id, e.target.value)}
        />
       </div>
      ) : (
-      <div className="text-sm text-zinc-600">
+      <div className="text-sm text-muted">
        Produkt zostanie dostarczony na adres email
       </div>
      )}

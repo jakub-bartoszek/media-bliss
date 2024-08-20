@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
- darkMode: ["class"],
+ darkMode: ["class"], // Enable dark mode via class strategy
  content: [
   "./pages/**/*.{js,ts,jsx,tsx,mdx}",
   "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -14,15 +14,19 @@ const config: Config = {
     "gradient-conic":
      "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))"
    },
+
    colors: {
-    "bluish-purple": "#7038ff",
-    "aztec-purple": "#8e38ff",
-    "neon-purple": "#eb07ff",
-    "dark-indigo": "#250f4a",
-    ebony: "#120b20",
-    white: "#efefef",
-    black: "#101010"
+    primary: "var(--color-primary)",
+    secondary: "var(--color-secondary)",
+    accent: "var(--color-accent)",
+    "secondary-accent": "var(--color-secondary-accent)",
+    muted: "var(--color-muted)",
+    "secondary-muted": "var(--color-secondary-muted)",
+    "bg-nav": "var(--color-bg-nav)",
+    "bg-content": "var(--color-bg-content)",
+    text: "var(--color-text)"
    },
+
    keyframes: {
     "logo-appear": {
      "0%": {

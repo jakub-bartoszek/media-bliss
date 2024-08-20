@@ -19,7 +19,7 @@ const Modal = ({ title, onClose, children }: ModalProps) => {
    onClick={handleBackgroundClick}
   >
    <div
-    className="relative rounded-lg bg-white p-6 shadow-lg overflow-auto max-h-screen"
+    className="relative rounded-lg bg-bg-content p-6 shadow-lg overflow-auto max-h-screen"
     onClick={(e) => e.stopPropagation()}
    >
     <div className="flex flex-col items-center">

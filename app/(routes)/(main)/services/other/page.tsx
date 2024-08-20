@@ -42,17 +42,17 @@ const webDevelopmentServices = [
 ];
 
 const ServiceCard = ({ name, Icon }: { name: string; Icon: any }) => (
- <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow flex items-center space-x-4">
-  <Icon className="  text-3xl" />
+ <div className="flex items-center space-x-4 rounded-lg bg-bg-content p-6 shadow-lg transition-shadow hover:shadow-xl">
+  <Icon className="text-3xl text-accent" />
   <span className="text-lg md:text-xl font-medium">{name}</span>
  </div>
 );
 
 const OtherServicesPage = () => {
  return (
-  <div className="p-6 py-32">
-   <div className="max-w-4xl mx-auto text-center">
-    <h1 className="  text-4xl md:text-6xl font-extrabold mb-8">
+  <div className="w-full h-full">
+   <div className="p-8 text-center h-screen flex items-center flex-col justify-center">
+    <h1 className="text-4xl md:text-6xl font-extrabold pb-8 text-fade">
      Pozostałe usługi
     </h1>
     <p className="text-lg md:text-2xl mb-8 leading-relaxed">
@@ -63,7 +63,7 @@ const OtherServicesPage = () => {
      <b>kontakt@mediabliss.pl</b>
     </p>
    </div>
-   <div className="max-w-4xl mx-auto mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+   <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-8">
     {services.map((service, index) => (
      <ServiceCard
       key={index}
@@ -72,7 +72,7 @@ const OtherServicesPage = () => {
      />
     ))}
    </div>
-   <div className="max-w-4xl mx-auto mt-12">
+   <div className="p-4 mt-20">
     <h2 className="text-2xl md:text-3xl font-bold mb-6">
      Tworzenie stron internetowych
     </h2>

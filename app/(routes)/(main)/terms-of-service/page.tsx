@@ -13,7 +13,7 @@ export default function TermsOfServicePage() {
  if (error) return <Error />;
 
  return (
-  <div className="w-full pt-24">
+  <div className="w-full pt-20">
    <div className="prose p-4">
     <h1>Terms of Service</h1>
     <ReactMarkdown remarkPlugins={[remarkGfm]}>

@@ -1,8 +1,8 @@
 import { Package } from "@prisma/client";
 import { nanoid } from "nanoid";
-import Button from "../button";
 import { CartItem } from "@/types";
 import { twMerge } from "tailwind-merge";
+import Button from "../button";
 
 interface PackageTile {
  pkg: Package;
@@ -20,24 +20,24 @@ export const PackageTile = ({
  return (
   <div
    className={twMerge(
-    "relative box-border flex w-full flex-shrink flex-col justify-between overflow-hidden rounded-md border-2 border-neon-purple bg-white dark:bg-ebony md:min-w-[260px] md:basis-0",
+    "relative box-border flex w-full flex-shrink flex-col justify-between overflow-hidden rounded-md border-2 border-accent bg-bg-content shadow-lg md:min-w-[260px] md:basis-0",
     className
    )}
   >
    {pkg.name === "Pakiet High" && (
-    <div className="absolute -right-8 top-4 w-fit rotate-45 px-8 py-1 text-xs text-white bg-neon-purple">
+    <div className="absolute -right-8 top-4 w-fit rotate-45 bg-accent text-white px-8 py-1 text-xs">
      Bestseller
     </div>
    )}
    <div className="p-4">
     <div className="pb-4">
      <div className="text-xl font-bold">{pkg.name}</div>
-     <div className="text-4xl font-bold text-fade w-max">
+     <div className="w-max text-4xl font-bold text-fade">
       {parseFloat(pkg.price.toString())} PLN
      </div>
     </div>
-    <div className="border-t-2 border-zinc-300 dark:border-zinc-700 pt-4">
-     <ul className="list-disc pl-4 marker:text-neon-purple flex flex-col gap-2">
+    <div className="border-t-2 border-secondary-muted pt-4">
+     <ul className="flex list-disc flex-col gap-2 pl-4 marker:text-secondary-muted">
       {pkg.benefits.map((item) => (
        <li key={nanoid()}>{item}</li>
       ))}

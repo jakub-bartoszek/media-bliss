@@ -91,32 +91,30 @@ const Checkout = () => {
  };
 
  return (
-  <div className="w-full h-full text-black flex flex-col justify-center">
+  <div className="w-full h-full flex flex-col justify-center">
    {selectedItems.length === 0 ? (
-    <div className="w-full h-screen flex items-center justify-center flex-col text-zinc-400">
+    <div className="w-full h-screen flex items-center justify-center flex-col">
      <div>Brak wybranych produktów do zakupu</div>
     </div>
    ) : (
     <div className="p-4 pt-16">
-     <h1 className="text-3xl font-bold mb-8 text-zinc-800 mt-8">
-      Podsumowanie zakupu
-     </h1>
+     <h1 className="text-3xl font-bold mb-8 mt-8">Podsumowanie zakupu</h1>
      <form
       className="w-full flex flex-col md:flex-row gap-4"
       onSubmit={handleCheckout}
      >
-      <div className="w-full md:w-2/3 flex flex-col gap-4">
-       <div className="p-4 border-2 rounded-lg">
+      <div className="w-full md:w-2/3 flex flex-col gap-4 ">
+       <div className="p-4 border-2 border-secondary-muted bg-secondary rounded-lg">
         <h2 className="text-2xl font-semibold">Informacje kontaktowe</h2>
         <div className="mt-4 flex flex-col gap-4">
          <div className="flex flex-col">
           <label htmlFor="name">
-           Imię<span className=" ">*</span>
+           Imię<span className="text-fade">*</span>
           </label>
           <input
            id="name"
            type="text"
-           className="p-2 border rounded"
+           className="p-2 border border-secondary-muted rounded bg-bg-content"
            value={name}
            onChange={(e) => setName(e.target.value)}
            required
@@ -124,12 +122,12 @@ const Checkout = () => {
          </div>
          <div className="flex flex-col">
           <label htmlFor="lastName">
-           Nazwisko<span className=" ">*</span>
+           Nazwisko<span className="text-fade">*</span>
           </label>
           <input
            type="text"
            id="lastName"
-           className="p-2 border rounded"
+           className="p-2 border border-secondary-muted rounded bg-bg-content"
            value={lastName}
            onChange={(e) => setLastName(e.target.value)}
            required
@@ -137,12 +135,12 @@ const Checkout = () => {
          </div>
          <div className="flex flex-col">
           <label htmlFor="email">
-           Email<span className=" ">*</span>
+           Email<span className="text-fade">*</span>
           </label>
           <input
            type="email"
            id="email"
-           className="p-2 border rounded"
+           className="p-2 border border-secondary-muted rounded bg-bg-content"
            value={email}
            onChange={(e) => setEmail(e.target.value)}
            required
@@ -150,14 +148,14 @@ const Checkout = () => {
          </div>
          <div className="flex flex-col">
           <label htmlFor="phoneNumber">
-           Numer telefonu<span className=" ">*</span>
+           Numer telefonu<span className="text-fade">*</span>
           </label>
           <InputMask
            mask="+99 999 999 999"
            id="phoneNumber"
            value={phoneNumber}
            onChange={(e) => setPhoneNumber(e.target.value)}
-           className="p-2 border rounded"
+           className="p-2 border border-secondary-muted rounded bg-bg-content"
            required
           />
          </div>
@@ -166,12 +164,12 @@ const Checkout = () => {
        {selectedItems.map((item) => (
         <div
          key={item.id}
-         className="flex flex-col border rounded-lg p-4"
+         className="flex flex-col border bg-secondary border-secondary-muted rounded-lg p-4"
         >
          <div className="flex flex-col justify-between">
           <h2 className="text-xl font-semibold">{item.name}</h2>
-          <p className="text-sm text-zinc-500">{item.category}</p>
-          <p className="text-lg font-semibold mr-4  ">
+          <p className="text-sm text-muted">{item.category}</p>
+          <p className="text-lg font-semibold mr-4 text-fade w-max">
            {Number(item.price).toFixed(2)} PLN
           </p>
           {item.accountLink && <p>{item.accountLink}</p>}
@@ -181,7 +179,7 @@ const Checkout = () => {
        ))}
       </div>
       <div className="w-full md:w-1/3">
-       <div className="p-4 border rounded-lg bg-white">
+       <div className="p-4 border rounded-lg bg-secondary border-accent">
         <h2 className="text-2xl font-semibold">Podsumowanie</h2>
         <div className="mt-4">
          {selectedItems.map((item) => (
@@ -194,9 +192,9 @@ const Checkout = () => {
           </div>
          ))}
         </div>
-        <div className="flex justify-between items-center mt-4 pt-4 border-t border-zinc-300">
+        <div className="flex justify-between items-center mt-4 pt-4 border-t border-secondary-muted">
          <span className="text-xl font-bold">Razem</span>
-         <span className="text-xl font-bold">
+         <span className="text-xl font-bold text-fade">
           {calculateTotal().toFixed(2)} PLN
          </span>
         </div>

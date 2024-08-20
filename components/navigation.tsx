@@ -54,8 +54,13 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
      className="h-full"
     >
      <img
-      className="w-full h-full"
+      className="w-full h-full hidden dark:block"
       src="/logos/mb-logo-dark-fade-3.svg"
+      alt="Logo"
+     />
+     <img
+      className="w-full h-full dark:hidden"
+      src="/logos/mb-logo-light-fade-3.svg"
       alt="Logo"
      />
     </a>
@@ -73,50 +78,50 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
       </button>
       <div
        className={twMerge(
-        "absolute p-2 top-[calc(100%+8px)] flex flex-col gap-2 rounded-[0_0_8px_8px] opacity-0 transition duration-500 origin-top scale-y-0 z-[-1] bg-[#250f4a] shadow-xl",
+        "absolute p-2 top-[calc(100%+8px)] flex flex-col gap-2 rounded-[0_0_8px_8px] opacity-0 transition duration-500 origin-top scale-y-0 z-[-1] bg-bg-nav shadow-xl",
         showed && "opacity-100 scale-y-100"
        )}
       >
        <a
         href="/services/all"
-        className="px-4 py-2 rounded-lg hover:bg-[#3d1a79] transition-colors"
+        className="px-4 py-2 rounded-lg hover:bg-black/15 transition-colors"
        >
         Wszystkie
        </a>
        <a
         href="/services/instagram"
-        className="px-4 py-2 rounded-lg hover:bg-[#3d1a79] transition-colors"
+        className="px-4 py-2 rounded-lg hover:bg-black/15 transition-colors"
        >
         Instagram
        </a>
        <a
         href="/services/tiktok"
-        className="px-4 py-2 rounded-lg hover:bg-[#3d1a79] transition-colors"
+        className="px-4 py-2 rounded-lg hover:bg-black/15 transition-colors"
        >
         TikTok
        </a>
        <a
         href="/services/other"
-        className="px-4 py-2 rounded-lg hover:bg-[#3d1a79] transition-colors"
+        className="px-4 py-2 rounded-lg hover:bg-black/15 transition-colors"
        >
         Pozostałe
        </a>
       </div>
      </div>
-      <a
-       href="/cart"
-       className="relative"
-      >
-       <FaShoppingBag className="h-6 w-6" />
-       {cartCount > 0 && (
-        <span className="absolute top-[-4px] right-[-4px] bg-rose-500 text-white text-xs rounded-full px-1">
-         {cartCount}
-        </span>
-       )}
-      </a>
-      <ModeToggle />
-     </div>
+     <a
+      href="/cart"
+      className="relative"
+     >
+      <FaShoppingBag className="h-6 w-6" />
+      {cartCount > 0 && (
+       <span className="absolute top-[-4px] right-[-4px] bg-rose-500 text-white text-xs rounded-full px-1">
+        {cartCount}
+       </span>
+      )}
+     </a>
+     <ModeToggle />
     </div>
+   </div>
   </nav>
  );
 };

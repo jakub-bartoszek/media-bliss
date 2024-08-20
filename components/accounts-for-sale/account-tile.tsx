@@ -15,7 +15,7 @@ interface AccountTile {
 
 export const AccountTile = ({ account, onSelect }: AccountTile) => {
  return (
-  <div className="relative box-border flex w-full flex-shrink flex-col justify-between overflow-hidden rounded-md border-2 border-neon-purple bg-white dark:bg-ebony md:min-w-[260px] md:basis-0">
+  <div className="relative box-border flex w-full flex-shrink flex-col justify-between overflow-hidden rounded-md border-2 border-accent bg-bg-content shadow-lg md:min-w-[260px] md:basis-0">
    <div className="p-4">
     <div className="pb-4">
      <div className="text-xl font-bold">{`Konto ${account.category}`}</div>
@@ -23,7 +23,7 @@ export const AccountTile = ({ account, onSelect }: AccountTile) => {
       {parseFloat(account.price.toString())} PLN
      </div>
     </div>
-    <div className="flex flex-col gap-4 border-t-2 border-zinc-300 dark:border-zinc-700 pt-4">
+    <div className="flex flex-col gap-4 border-t-2 border-secondary-muted pt-4">
      <div className="text-center text-xl">
       <span className="font-bold text-fade">{account.followerCount}</span>{" "}
       obserwacji
@@ -36,7 +36,7 @@ export const AccountTile = ({ account, onSelect }: AccountTile) => {
        <div className="h-20 w-20 md:h-auto md:w-auto">
         <CircularProgressbarWithChildren
          value={account.genderPercentage}
-         styles={buildStyles({ pathColor: "#eb07ff", trailColor: "#00000040" })}
+         styles={buildStyles({ pathColor: "#eb07ff", trailColor: "#00000055" })}
         >
          <span className="font-bold">{`${account.genderPercentage}%`}</span>
         </CircularProgressbarWithChildren>
@@ -47,7 +47,7 @@ export const AccountTile = ({ account, onSelect }: AccountTile) => {
        <div className="h-20 w-20 md:h-auto md:w-auto">
         <CircularProgressbarWithChildren
          value={account.polishPercentage}
-         styles={buildStyles({ pathColor: "#eb07ff", trailColor: "#00000030" })}
+         styles={buildStyles({ pathColor: "#eb07ff", trailColor: "#00000055" })}
         >
          <span className="font-bold">{`${account.polishPercentage}%`}</span>
         </CircularProgressbarWithChildren>
@@ -58,7 +58,7 @@ export const AccountTile = ({ account, onSelect }: AccountTile) => {
        <div className="h-20 w-20 md:h-auto md:w-auto">
         <CircularProgressbarWithChildren
          value={account.age18To24Percentage}
-         styles={buildStyles({ pathColor: "#eb07ff", trailColor: "#00000030" })}
+         styles={buildStyles({ pathColor: "#eb07ff", trailColor: "#00000055" })}
         >
          <span className="font-bold">{`${account.age18To24Percentage}%`}</span>
         </CircularProgressbarWithChildren>
