@@ -90,7 +90,7 @@ const CartTile = ({
     </div>
     <div className="w-full py-4 pr-4">
      <div className="flex justify-between">
-      <div className="mb-4 w-full">
+      <div className="md:mb-4 w-full">
        <h2 className="text-xl font-semibold">{item.name}</h2>
        <p className="text-sm text-zinc-500">{item.category}</p>
        <span className="text-lg font-semibold mr-4 text-primary">
@@ -108,7 +108,7 @@ const CartTile = ({
      {item.requireLink ? (
       <div className="flex flex-col gap-2 relative">
        {errors[item.id] && (
-        <div className="text-red-500 text-xs mt-1 absolute top-[-20px]">
+        <div className="text-red-500 text-xs md:mt-1 md:absolute top-[-20px]">
          {errors[item.id]}
         </div>
        )}
