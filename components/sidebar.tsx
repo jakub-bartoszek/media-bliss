@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { MenuIcon, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { twMerge } from "tailwind-merge";
@@ -11,6 +12,17 @@ interface SidebarProps {
 
 export const Sidebar = ({ isSidebarOpen, toggleSidebar }: SidebarProps) => {
  const { theme, setTheme } = useTheme();
+ const [mounted, setMounted] = useState(false);
+
+ // Ensures the component is only mounted on the client
+ useEffect(() => {
+  setMounted(true);
+ }, []);
+
+ // Avoid rendering until mounted to prevent hydration errors
+ if (!mounted) {
+  return null;
+ }
 
  return (
   <div>

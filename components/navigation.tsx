@@ -19,7 +19,6 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
 
  const toggleSidebar = () => {
   setIsSidebarOpen(() => !isSidebarOpen);
-  console.log(isSidebarOpen);
  };
 
  useEffect(() => {
