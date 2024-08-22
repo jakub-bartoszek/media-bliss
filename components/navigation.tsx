@@ -4,6 +4,8 @@ import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { FaShoppingBag } from "react-icons/fa";
 import { ModeToggle } from "./mode-toggle";
+import { Sidebar } from "./sidebar";
+import { MenuIcon } from "lucide-react";
 
 interface NavigationProps {
  setShowed: Dispatch<SetStateAction<boolean>>;
@@ -13,6 +15,12 @@ interface NavigationProps {
 const Navigation = ({ setShowed, showed }: NavigationProps) => {
  const [cartCount, setCartCount] = useState(0);
  const dropdownRef = useRef<HTMLDivElement>(null);
+ const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+ const toggleSidebar = () => {
+  setIsSidebarOpen(() => !isSidebarOpen);
+  console.log(isSidebarOpen);
+ };
 
  useEffect(() => {
   const handleClickOutside = (event: MouseEvent) => {
@@ -49,23 +57,31 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
  return (
   <nav className="ml-auto mr-auto max-w-[1400px] w-full h-full z-30 relative">
    <div className="w-full h-full p-4 flex justify-between items-center">
-    <a
-     href="/"
-     className="h-full"
-    >
-     <img
-      className="w-full h-full hidden dark:block"
-      src="/logos/mb-logo-dark-fade-3.svg"
-      alt="Logo"
-     />
-     <img
-      className="w-full h-full dark:hidden"
-      src="/logos/mb-logo-light-fade-3.svg"
-      alt="Logo"
-     />
-    </a>
+    <div className="h-6 items-center flex gap-4 justify-center">
+     <button
+      className="sm:hidden"
+      onClick={toggleSidebar}
+     >
+      <MenuIcon className="h-8 w-8" />
+     </button>
+     <a
+      href="/"
+      className="h-full"
+     >
+      <img
+       className="w-full h-full hidden dark:block"
+       src="/logos/mb-logo-dark-fade-3.svg"
+       alt="Logo"
+      />
+      <img
+       className="w-full h-full dark:hidden"
+       src="/logos/mb-logo-light-fade-3.svg"
+       alt="Logo"
+      />
+     </a>
+    </div>
 
-    <div className="flex items-center gap-4">
+    <div className="hidden sm:flex items-center gap-4">
      <div
       className="relative flex flex-col items-center justify-center"
       ref={dropdownRef}
@@ -122,6 +138,10 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
      <ModeToggle />
     </div>
    </div>
+   <Sidebar
+    isSidebarOpen={isSidebarOpen}
+    toggleSidebar={toggleSidebar}
+   />
   </nav>
  );
 };
