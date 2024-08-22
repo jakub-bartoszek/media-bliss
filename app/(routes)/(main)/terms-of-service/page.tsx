@@ -15,10 +15,8 @@ export default function TermsOfServicePage() {
  return (
   <div className="w-full pt-20">
    <div className="prose p-4">
-    <h1>Terms of Service</h1>
-    <ReactMarkdown remarkPlugins={[remarkGfm]}>
-     {termsOfService}
-    </ReactMarkdown>
+    <h1>Regulamin</h1>
+    <ReactMarkdown remarkPlugins={[remarkGfm]}>{termsOfService}</ReactMarkdown>
    </div>
   </div>
  );
