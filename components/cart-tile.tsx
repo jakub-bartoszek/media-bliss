@@ -108,7 +108,7 @@ const CartTile = ({
      {item.requireLink ? (
       <div className="flex flex-col gap-2 relative">
        {errors[item.id] && (
-        <div className="text-red-500 text-xs mt-1 absolute top-[-20px]">
+        <div className="text-red-500 text-xs md:mt-1 md:absolute top-[-20px]">
          {errors[item.id]}
         </div>
        )}
