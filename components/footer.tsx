@@ -39,7 +39,7 @@ const Footer = () => {
        <div>
         <FaInstagram className="w-6 h-6" />
        </div>
-       <span>mediabliss</span>
+       <span>mediabliss_pl</span>
       </a>
      </div>
      <a
