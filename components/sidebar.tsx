@@ -28,7 +28,7 @@ export const Sidebar = ({ isSidebarOpen, toggleSidebar }: SidebarProps) => {
   <div>
    <div
     className={twMerge(
-     "fixed left-0 top-0 w-screen h-screen bg-black/80 backdrop-blur-sm transition-opacity duration-500",
+     "fixed sm:hidden left-0 top-0 w-screen h-screen bg-black/80 backdrop-blur-sm transition-opacity duration-500",
      isSidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"
     )}
     onClick={toggleSidebar}
@@ -101,6 +101,14 @@ export const Sidebar = ({ isSidebarOpen, toggleSidebar }: SidebarProps) => {
         className="px-4 py-2 rounded-lg hover:bg-black/15 transition-colors"
        >
         Koszyk
+       </a>
+      </div>{" "}
+      <div className="flex flex-col gap-2 py-4 border-t-2 border-secondary-zinc-300 dark:border-bg-nav">
+       <a
+        href="/terms-of-service"
+        className="px-4 py-2 rounded-lg hover:bg-black/15 transition-colors"
+       >
+        Regulamin
        </a>
       </div>
      </div>
