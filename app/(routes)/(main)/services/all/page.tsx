@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { PackagesSection } from "@/components/packages/packages";
 import { Services } from "@/components/services/services";

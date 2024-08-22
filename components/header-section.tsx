@@ -1,9 +1,9 @@
 import { Category } from "@prisma/client";
 import { LuLoader2 } from "react-icons/lu";
-import { PackageTile } from "./packages/package-tile";
 import usePackages from "@/lib/hooks/usePackages";
-import Button from "./button";
 import { CartItem } from "@/types";
+import { PackageTile } from "./packages/package-tile";
+import Button from "./button";
 
 interface HeaderSectionProps {
  category: Category;
@@ -39,45 +39,50 @@ export const HeaderSection = ({
  };
 
  return (
-  <div className="w-full h-screen flex items-center gap-16 p-8">
-   <div className="w-full lg:w-1/2 flex flex-col items-center md:items-start">
-    <h1 className="text-primary text-center md:text-left text-5xl md:text-6xl font-bold mb-4">
+  <div className="flex h-screen w-full items-center gap-16 p-8">
+   <div className="flex w-full flex-col items-center md:items-start lg:w-1/2">
+    <h1 className="mb-4 py-2 text-center text-5xl font-bold text-fade md:text-left md:text-6xl">
      Usługi {category}
     </h1>
-    <p className="text-lg md:text-2xl mb-4 text-center md:text-left">
+    <p className="mb-4 text-center text-lg md:text-left md:text-2xl">
      Poszerz swoje zasięgi i zyskaj nową popularność, która pozwoli ci dotrzeć
      do niespotykanej dotąd ilości osób.
     </p>
-    <Button onClick={scrollToPackages}>Poznaj naszą ofertę</Button>
+    <Button
+     className="text-xl bg-fade"
+     onClick={scrollToPackages}
+    >
+     Poznaj naszą ofertę
+    </Button>
    </div>
 
-   <div className="w-1/2 h-full relative hidden lg:flex items-center justify-center">
-    {loading && <LuLoader2 className="animate-spin w-16 h-16 text-primary" />}
+   <div className="relative hidden h-full w-1/2 items-center justify-center lg:flex">
+    {loading && <LuLoader2 className="h-16 w-16 animate-spin text-accent" />}
 
     {packages && (
      <>
       {starterPackage && (
        <PackageTile
-        className="w-[300px] h-[450px] absolute left-0 scale-[80%]"
+        className="absolute left-0 h-[450px] w-[300px] scale-[80%] opacity-50"
         pkg={starterPackage}
         onSelect={handleAddToCart}
+        fake
        />
       )}
       {proPackage && (
        <PackageTile
-        className="w-[300px] h-[450px] absolute right-0 scale-[80%]"
+        className="absolute right-0 h-[450px] w-[300px] scale-[80%] opacity-50"
         pkg={proPackage}
         onSelect={handleAddToCart}
+        fake
        />
       )}
       {highPackage && (
-       <div className="absolute bg-white w-full flex justify-center bg-opacity-40">
-        <PackageTile
-         className="w-[300px] h-[450px]"
-         pkg={highPackage}
-         onSelect={handleAddToCart}
-        />
-       </div>
+       <PackageTile
+        className="h-[450px] w-[300px]"
+        pkg={highPackage}
+        onSelect={handleAddToCart}
+       />
       )}
      </>
     )}

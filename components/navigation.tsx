@@ -3,6 +3,9 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { FaShoppingBag } from "react-icons/fa";
+import { ModeToggle } from "./mode-toggle";
+import { Sidebar } from "./sidebar";
+import { MenuIcon } from "lucide-react";
 
 interface NavigationProps {
  setShowed: Dispatch<SetStateAction<boolean>>;
@@ -12,6 +15,11 @@ interface NavigationProps {
 const Navigation = ({ setShowed, showed }: NavigationProps) => {
  const [cartCount, setCartCount] = useState(0);
  const dropdownRef = useRef<HTMLDivElement>(null);
+ const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+ const toggleSidebar = () => {
+  setIsSidebarOpen(() => !isSidebarOpen);
+ };
 
  useEffect(() => {
   const handleClickOutside = (event: MouseEvent) => {
@@ -47,18 +55,31 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
 
  return (
   <nav className="ml-auto mr-auto max-w-[1400px] w-full h-full z-30 relative">
-   <div className="w-full h-full p-4 flex justify-between items-center bg-white">
-    <a
-     href="/"
-     className="h-full"
-    >
-     <img
-      className="w-full h-full"
-      src="/logos/mb-logo-light-3.svg"
-      alt="Logo"
-     />
-    </a>
-    <div className="flex items-center gap-4 md:gap-8">
+   <div className="w-full h-full p-4 flex justify-between items-center">
+    <div className="h-6 items-center flex justify-center">
+     <button
+      className="sm:hidden"
+      onClick={toggleSidebar}
+     >
+      <MenuIcon className="h-8 w-8" />
+     </button>
+     <a
+      href="/"
+      className="h-full"
+     >
+      <img
+       className="w-full h-full hidden dark:block"
+       src="/logos/mb-logo-dark-fade-3.svg"
+       alt="Logo"
+      />
+      <img
+       className="w-full h-full dark:hidden"
+       src="/logos/mb-logo-light-fade-3.svg"
+       alt="Logo"
+      />
+     </a>
+    </div>
+    <div className="hidden sm:flex items-center gap-4">
      <div
       className="relative flex flex-col items-center justify-center"
       ref={dropdownRef}
@@ -69,6 +90,37 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
       >
        Usługi
       </button>
+      <div
+       className={twMerge(
+        "absolute p-2 top-[calc(100%+8px)] flex flex-col gap-2 rounded-[0_0_8px_8px] opacity-0 transition duration-500 origin-top scale-y-0 z-[-1] bg-bg-nav shadow-xl",
+        showed && "opacity-100 scale-y-100"
+       )}
+      >
+       <a
+        href="/services/all"
+        className="px-4 py-2 rounded-lg hover:bg-black/15 transition-colors"
+       >
+        Wszystkie
+       </a>
+       <a
+        href="/services/instagram"
+        className="px-4 py-2 rounded-lg hover:bg-black/15 transition-colors"
+       >
+        Instagram
+       </a>
+       <a
+        href="/services/tiktok"
+        className="px-4 py-2 rounded-lg hover:bg-black/15 transition-colors"
+       >
+        TikTok
+       </a>
+       <a
+        href="/services/other"
+        className="px-4 py-2 rounded-lg hover:bg-black/15 transition-colors"
+       >
+        Pozostałe
+       </a>
+      </div>
      </div>
      <a
       href="/cart"
@@ -81,39 +133,13 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
        </span>
       )}
      </a>
+     <ModeToggle />
     </div>
    </div>
-   <div
-    className={twMerge(
-     "absolute top-[54px] right-[50px] bg-white p-2 flex flex-col gap-2 rounded-[0_0_8px_8px] opacity-0 transition duration-500 origin-top scale-y-0 z-[-1] shadow-[0_10px_40px_rgba(0,0,0,0.2)]",
-     showed && "opacity-100 scale-y-100"
-    )}
-   >
-    <a
-     href="/services/all"
-     className="px-4 py-2 hover:bg-zinc-200 rounded-lg"
-    >
-     Wszystkie
-    </a>
-    <a
-     href="/services/instagram"
-     className="px-4 py-2 hover:bg-zinc-200 rounded-lg"
-    >
-     Instagram
-    </a>
-    <a
-     href="/services/tiktok"
-     className="px-4 py-2 hover:bg-zinc-200 rounded-lg"
-    >
-     TikTok
-    </a>
-    <a
-     href="/services/other"
-     className="px-4 py-2 hover:bg-zinc-200 rounded-lg"
-    >
-     Pozostałe
-    </a>
-   </div>
+   <Sidebar
+    isSidebarOpen={isSidebarOpen}
+    toggleSidebar={toggleSidebar}
+   />
   </nav>
  );
 };

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import ToasterProvider from "@/components/toaster-provider";
 import CookieBanner from "@/components/cookie-banner";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const roboto = Roboto({
  weight: "400",
@@ -44,7 +45,7 @@ export default function RootLayout({
     />
     <noscript>
      <img
-     alt="Piksel Facebooka"
+      alt="Piksel Facebooka"
       height="1"
       width="1"
       style={{ display: "none" }}
@@ -53,9 +54,16 @@ export default function RootLayout({
     </noscript>
    </head>
    <body className={roboto.className}>
-    <ToasterProvider />
-    {children}
-    <CookieBanner />
+    <ThemeProvider
+     attribute="class"
+     defaultTheme="dark"
+     enableSystem={true}
+     storageKey="discord-theme"
+    >
+     <ToasterProvider />
+     {children}
+     <CookieBanner />
+    </ThemeProvider>
    </body>
   </html>
  );

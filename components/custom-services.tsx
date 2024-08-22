@@ -61,9 +61,9 @@ export const CustomServices = ({
  if (error) return <Error />;
 
  return (
-  <section className="m-4 flex flex-col justify-between gap-4 rounded-md border-2 p-4 md:flex-row-reverse">
+  <section className="m-4 my-32 flex flex-col justify-between gap-4 md:flex-row-reverse">
    <div className="flex w-full flex-col gap-4 md:w-2/3">
-    <h2 className="text-center text-5xl font-bold text-primary md:text-left">
+    <h2 className="text-center text-5xl font-bold md:text-left">
      Własna usługa
     </h2>
     <p className="text-center text-xl md:text-left">
@@ -71,7 +71,7 @@ export const CustomServices = ({
      możliwość dostosowania naszych usług do twoich potrzeb.
     </p>
     <select
-     className="rounded-md border-2 p-2"
+     className="rounded-md border-2 border-accent bg-bg-content p-2"
      onChange={handleServiceChange}
      value={selectedService?.name || ""}
     >
@@ -86,15 +86,17 @@ export const CustomServices = ({
      ))}
     </select>
    </div>
-   <div className="w-full rounded-md border-2 p-4 md:w-[250px]">
+   <div className="w-full rounded-md border-2 border-accent bg-bg-content p-4 shadow-lg md:w-[250px]">
     <div>
      <p className="text-xl font-bold">
       {selectedService ? selectedService.name : "Twoja usługa"}
      </p>
-     <p className="break-words text-3xl font-bold">{totalPrice} PLN</p>
+     <p className="break-words text-3xl font-bold text-fade">
+      {totalPrice} PLN
+     </p>
     </div>
     <input
-     className="mt-20 w-full rounded-md border-2 p-2"
+     className="mt-20 w-full rounded-md border-2 border-accent bg-bg-content p-2"
      onBlur={handleQuantityBlur}
      onChange={handleQuantityChange}
      value={quantity}
@@ -114,7 +116,7 @@ export const CustomServices = ({
       })
      }
      disabled={!selectedService || quantity < 100}
-     className="w-full mt-4"
+     className="mt-4 w-full bg-fade"
     >
      Dodaj do koszyka
     </Button>

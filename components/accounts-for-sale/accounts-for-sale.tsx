@@ -21,9 +21,7 @@ export const AccountsForSale = ({
 
  return (
   <section className="flex flex-col gap-4 p-4">
-   <h2 className="text-center text-5xl font-bold text-primary">
-    Konta na sprzedaż
-   </h2>
+   <h2 className="text-center text-5xl font-bold">Konta na sprzedaż</h2>
    {loading && <Loader />}
    {error && <Error />}
    <div className="mb-16 flex flex-wrap justify-center gap-4">

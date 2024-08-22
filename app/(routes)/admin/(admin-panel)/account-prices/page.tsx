@@ -73,7 +73,7 @@ const AdminAccounts = () => {
       key={account.id}
       className="p-4 flex flex-col gap-2"
      >
-      <h1 className="font-bold text-primary text-2xl">{account.category}</h1>
+      <h1 className="font-bold   text-2xl">{account.category}</h1>
       <div className="flex gap-2 items-center">
        <input
        className="rounded-lg bg-zinc-800 px-4 py-2"

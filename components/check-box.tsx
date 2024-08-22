@@ -12,16 +12,15 @@ const CheckBox = ({ onClick, className, checked }: CheckBoxProps) => {
   <div
    onClick={onClick}
    className={twMerge(
-    "group w-min h-min p-1 border-2 border-primary rounded-lg flex items-center justify-center transition cursor-pointer",
-    checked &&
-     "bg-primary bg-gradient-to-bl from-white/20 hover:brightness-125",
+    "group w-min h-min p-1 border-2 border-accent rounded-lg flex items-center justify-center transition cursor-pointer",
+    checked && "bg-accent hover:brightness-125 text-white",
     className
    )}
   >
    <FaCheck
     className={twMerge(
-     "text-white h-3 w-3 transition group-hover:text-primary group-hover:scale-75 scale-0",
-     checked && "scale-100 group-hover:text-white group-hover:scale-100"
+     "h-3 w-3 transition group-hover:scale-75 scale-0",
+     checked && "scale-100 group-hover:scale-100"
     )}
    />
   </div>

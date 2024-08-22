@@ -18,7 +18,7 @@ export const Services = ({ category, handleAddToCart }: ServicesProps) => {
 
  return (
   <section className="flex flex-col gap-4 p-4">
-   <h2 className="text-center text-5xl font-bold text-primary">Usługi</h2>
+   <h2 className="text-center text-5xl font-bold">Usługi</h2>
    {loading && <Loader />}
    {error && <Error />}
    <div className="mb-16 flex flex-wrap justify-center gap-4">

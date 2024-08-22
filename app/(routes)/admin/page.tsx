@@ -13,7 +13,7 @@ const AdminRedirect = () => {
 
  return (
   <div className="text-white flex flex-col items-center justify-center h-screen gap-2">
-   <LuLoader2 className="animate-spin h-20 w-20 text-primary" />
+   <LuLoader2 className="animate-spin h-20 w-20  " />
    <span className="text-xl">Redirecting to login page...</span>
   </div>
  );

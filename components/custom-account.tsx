@@ -64,27 +64,29 @@ export const CustomAccountSection = ({
  if (error) return <Error />;
 
  return (
-  <section className="m-4 flex flex-col justify-between gap-4 rounded-md border-2 p-4 md:flex-row mb-32">
+  <section className="m-4 my-32 flex flex-col justify-between md:flex-row ">
    <div className="flex w-full flex-col gap-4 md:w-2/3">
-    <h2 className="text-center text-5xl font-bold text-primary md:text-left">
+    <h2 className="text-center text-5xl font-bold md:text-left">
      Konto {category} na zamówienie
     </h2>
-    <p className="text-center text-xl md:text-left">
+    <p className="text-center text-xl md:text-left mb-4">
      Potrzebujesz konta o wybranej liczbie obserwacji? Zajmiemy się tym!
     </p>
-    <p className="mb-0 mt-auto text-center italic text-zinc-500 md:text-left">
+    <p className="hidden md:block text-center italic text-muted md:text-left">
      Dostarczone konto nie będzie miało dokładnej liczby obserwujących jaką
      podałeś/aś.
     </p>
    </div>
-   <div className="w-full rounded-md border-2 p-4 md:w-[250px]">
+   <div className="w-full rounded-md border-2 border-accent bg-bg-content p-4 shadow-lg md:w-[250px]">
     <div>
      <p className="text-xl font-bold">Konto {category}</p>
-     <p className="break-words text-3xl font-bold">{totalPrice} PLN</p>
+     <p className="break-words text-3xl font-bold text-fade">
+      {totalPrice} PLN
+     </p>
     </div>
     <div>
      <input
-      className="border-2 rounded-md p-2 mt-20 w-full"
+      className="border-2 rounded-md p-2 mt-20 w-full border-accent bg-bg-content"
       onBlur={handleQuantityBlur}
       onChange={handleQuantityChange}
       value={quantity}
@@ -105,7 +107,7 @@ export const CustomAccountSection = ({
       })
      }
      disabled={quantity < 100}
-     className="mt-4 w-full"
+     className="mt-4 w-full bg-fade"
     >
      Dodaj do koszyka
     </Button>
