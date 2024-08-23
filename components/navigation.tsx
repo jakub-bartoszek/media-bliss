@@ -79,9 +79,9 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
       />
      </a>
     </div>
-    <div className="hidden items-center gap-4 sm:flex">
+    <div className="items-center gap-4 flex">
      <div
-      className="relative flex flex-col items-center justify-center"
+      className="relative hidden flex-col items-center justify-center sm:flex"
       ref={dropdownRef}
      >
       <button
@@ -133,7 +133,9 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
        </span>
       )}
      </a>
-     <ModeToggle />
+     <div className="hidden sm:flex">
+      <ModeToggle />
+     </div>
     </div>
    </div>
    <Sidebar
