@@ -56,7 +56,7 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
  return (
   <nav className="ml-auto mr-auto max-w-[1400px] w-full h-full z-30 relative">
    <div className="w-full h-full p-4 flex justify-between items-center">
-    <div className="h-6 items-center flex justify-center">
+    <div className="h-6 items-center flex gap-4 justify-center">
      <button
       className="sm:hidden"
       onClick={toggleSidebar}
