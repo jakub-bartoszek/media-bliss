@@ -2,9 +2,9 @@
 
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
-import { FaShoppingBag } from "react-icons/fa";
 import { ModeToggle } from "./mode-toggle";
 import { Sidebar } from "./sidebar";
+import { FaShoppingBag } from "react-icons/fa";
 import { MenuIcon } from "lucide-react";
 
 interface NavigationProps {
@@ -54,9 +54,9 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
  }, []);
 
  return (
-  <nav className="ml-auto mr-auto max-w-[1400px] w-full h-full z-30 relative">
-   <div className="w-full h-full p-4 flex justify-between items-center">
-    <div className="h-6 items-center flex gap-4 justify-center">
+  <nav className="relative z-30 ml-auto mr-auto h-full w-full max-w-[1400px]">
+   <div className="flex h-full w-full items-center justify-between p-4">
+    <div className="flex h-6 items-center justify-center gap-4">
      <button
       className="sm:hidden"
       onClick={toggleSidebar}
@@ -68,18 +68,18 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
       className="h-full"
      >
       <img
-       className="w-full h-full hidden dark:block"
+       className="hidden h-full w-full dark:block"
        src="/logos/mb-logo-dark-fade-3.svg"
        alt="Logo"
       />
       <img
-       className="w-full h-full dark:hidden"
+       className="h-full w-full dark:hidden"
        src="/logos/mb-logo-light-fade-3.svg"
        alt="Logo"
       />
      </a>
     </div>
-    <div className="hidden sm:flex items-center gap-4">
+    <div className="hidden items-center gap-4 sm:flex">
      <div
       className="relative flex flex-col items-center justify-center"
       ref={dropdownRef}
@@ -92,31 +92,31 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
       </button>
       <div
        className={twMerge(
-        "absolute p-2 top-[calc(100%+8px)] flex flex-col gap-2 rounded-[0_0_8px_8px] opacity-0 transition duration-500 origin-top scale-y-0 z-[-1] bg-bg-nav shadow-xl",
+        "absolute top-[calc(100%+8px)] z-[-1] flex origin-top scale-y-0 flex-col gap-2 rounded-[0_0_8px_8px] bg-bg-nav p-2 opacity-0 shadow-xl transition duration-500",
         showed && "opacity-100 scale-y-100"
        )}
       >
        <a
         href="/services/all"
-        className="px-4 py-2 rounded-lg hover:bg-black/15 transition-colors"
+        className="rounded-lg px-4 py-2 transition-colors hover:bg-black/15"
        >
         Wszystkie
        </a>
        <a
         href="/services/instagram"
-        className="px-4 py-2 rounded-lg hover:bg-black/15 transition-colors"
+        className="rounded-lg px-4 py-2 transition-colors hover:bg-black/15"
        >
         Instagram
        </a>
        <a
         href="/services/tiktok"
-        className="px-4 py-2 rounded-lg hover:bg-black/15 transition-colors"
+        className="rounded-lg px-4 py-2 transition-colors hover:bg-black/15"
        >
         TikTok
        </a>
        <a
         href="/services/other"
-        className="px-4 py-2 rounded-lg hover:bg-black/15 transition-colors"
+        className="rounded-lg px-4 py-2 transition-colors hover:bg-black/15"
        >
         Pozostałe
        </a>
@@ -128,7 +128,7 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
      >
       <FaShoppingBag className="h-6 w-6" />
       {cartCount > 0 && (
-       <span className="absolute top-[-4px] right-[-4px] bg-rose-500 text-white text-xs rounded-full px-1">
+       <span className="absolute right-[-4px] top-[-4px] rounded-full bg-rose-500 px-1 text-xs text-white">
         {cartCount}
        </span>
       )}
