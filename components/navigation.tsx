@@ -85,7 +85,7 @@ const Navigation = ({ setShowed, showed }: NavigationProps) => {
       ref={dropdownRef}
      >
       <button
-       className="px-4 py-2"
+       className="px-2 py-2"
        onClick={() => setShowed(!showed)}
       >
        Usługi
