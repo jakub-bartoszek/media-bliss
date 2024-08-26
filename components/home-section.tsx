@@ -3,17 +3,11 @@
 import { useRef } from "react";
 import { twMerge } from "tailwind-merge";
 import { useIsVisible } from "@/lib/hooks/useIsVisible";
-import { Inter } from "next/font/google";
 
 interface HomeSectionProps {
  header: string;
  description: string;
 }
-
-const inter = Inter({
- weight: "400",
- subsets: ["latin"]
-});
 
 const HomeSection = ({ header, description }: HomeSectionProps) => {
  const sectionRef = useRef(null);
@@ -24,12 +18,11 @@ const HomeSection = ({ header, description }: HomeSectionProps) => {
    ref={sectionRef}
    className={twMerge(
     "text-center mb-64 transition-opacity ease-in duration-700 opacity-0 p-4",
-    isVisible && "opacity-100",
-    inter.className
+    isVisible && "opacity-100"
    )}
   >
    <h1 className="text-4xl font-bold mb-8">{header}</h1>
-   <p className="text-muted">{description}</p>
+   <p className="text-lg text-muted">{description}</p>
   </div>
  );
 };

@@ -9,7 +9,7 @@ export default function RootLayout({
  return (
   <>
    <Header />
-   <main className="max-w-[1400px] ml-auto mr-auto">
+   <main className="max-w-[1400px] mx-auto">
     <div className="w-full min-h-screen h-full flex flex-col items-center">
      {children}
     </div>
