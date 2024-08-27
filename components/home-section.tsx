@@ -22,7 +22,7 @@ const HomeSection = ({ header, description }: HomeSectionProps) => {
    )}
   >
    <h1 className="text-4xl font-bold mb-8">{header}</h1>
-   <p className="text-lg text-muted">{description}</p>
+   <p className="text-sm text-muted sm:text-base md:text-lg">{description}</p>
   </div>
  );
 };
