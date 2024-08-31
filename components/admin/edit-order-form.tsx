@@ -71,7 +71,6 @@ const EditOrderForm = ({ order }: { order: OrderWithCustomer }) => {
   }
  };
 
- // Format dateOfPurchase for display
  const formattedDate = new Date(order.dateOfPurchase).toLocaleDateString(
   "pl-PL",
   {

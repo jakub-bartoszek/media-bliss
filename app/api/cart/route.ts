@@ -13,7 +13,6 @@ export async function POST(req: NextRequest) {
    throw new Error("Invalid cart items structure");
   }
 
-  // Parsing package, service, custom service, account, and custom account IDs
   const packageIds = cartItems
    .filter((item: CartItem) => item.id.startsWith("package-"))
    .map((item: CartItem) => parseInt(item.id.split("-")[2]));
@@ -34,32 +33,26 @@ export async function POST(req: NextRequest) {
    .filter((item: CartItem) => item.id.startsWith("customAccount-"))
    .map((item: CartItem) => parseInt(item.id.split("-")[2]));
 
-  // Validate packages
   const validPackages = await prisma.package.findMany({
    where: { id: { in: packageIds } }
   });
 
-  // Validate services
   const validServices = await prisma.service.findMany({
    where: { id: { in: serviceIds } }
   });
 
-  // Validate custom services
   const validCustomServices = await prisma.customService.findMany({
    where: { id: { in: customServiceIds } }
   });
 
-  // Validate accounts
   const validAccounts = await prisma.accountForSale.findMany({
    where: { id: { in: accountIds } }
   });
 
-  // Validate custom accounts
   const validCustomAccounts = await prisma.customAccount.findMany({
    where: { id: { in: customAccountIds } }
   });
 
-  // Filter valid items
   const validCartItems = cartItems.filter((item: CartItem) => {
    const itemId = parseInt(item.id.split("-")[2]);
 
@@ -79,7 +72,6 @@ export async function POST(req: NextRequest) {
    return false;
   });
 
-  // Log valid cart items for debugging
   console.log({ validCartItems });
 
   return NextResponse.json({ validCartItems });
