@@ -1,5 +1,4 @@
 import { AccountForSale } from "@prisma/client";
-import { nanoid } from "nanoid";
 import Button from "../button";
 import {
  buildStyles,
@@ -10,7 +9,7 @@ import { CartItem } from "@/types";
 
 interface AccountTile {
  account: AccountForSale;
- onSelect: ({ name, category, price, requireLink }: CartItem) => void;
+ onSelect: ({ id, name, category, price, requireLink }: CartItem) => void;
 }
 
 export const AccountTile = ({ account, onSelect }: AccountTile) => {
@@ -36,7 +35,10 @@ export const AccountTile = ({ account, onSelect }: AccountTile) => {
        <div className="h-20 w-20 md:h-auto md:w-auto">
         <CircularProgressbarWithChildren
          value={account.genderPercentage}
-         styles={buildStyles({ pathColor: "#eb07ff", trailColor: "#00000055" })}
+         styles={buildStyles({
+          pathColor: "#eb07ff",
+          trailColor: "#00000055"
+         })}
         >
          <span className="font-bold">{`${account.genderPercentage}%`}</span>
         </CircularProgressbarWithChildren>
@@ -47,7 +49,10 @@ export const AccountTile = ({ account, onSelect }: AccountTile) => {
        <div className="h-20 w-20 md:h-auto md:w-auto">
         <CircularProgressbarWithChildren
          value={account.polishPercentage}
-         styles={buildStyles({ pathColor: "#eb07ff", trailColor: "#00000055" })}
+         styles={buildStyles({
+          pathColor: "#eb07ff",
+          trailColor: "#00000055"
+         })}
         >
          <span className="font-bold">{`${account.polishPercentage}%`}</span>
         </CircularProgressbarWithChildren>
@@ -58,7 +63,10 @@ export const AccountTile = ({ account, onSelect }: AccountTile) => {
        <div className="h-20 w-20 md:h-auto md:w-auto">
         <CircularProgressbarWithChildren
          value={account.age18To24Percentage}
-         styles={buildStyles({ pathColor: "#eb07ff", trailColor: "#00000055" })}
+         styles={buildStyles({
+          pathColor: "#eb07ff",
+          trailColor: "#00000055"
+         })}
         >
          <span className="font-bold">{`${account.age18To24Percentage}%`}</span>
         </CircularProgressbarWithChildren>
@@ -72,7 +80,7 @@ export const AccountTile = ({ account, onSelect }: AccountTile) => {
      className="w-full bg-fade"
      onClick={() =>
       onSelect({
-       id: nanoid(),
+       id: `account-${account.category}-${account.id}`,
        name: `Konto ${account.category} × ${account.followerCount} obserwujących`,
        category: account.category,
        price: parseFloat(account.price.toString()),

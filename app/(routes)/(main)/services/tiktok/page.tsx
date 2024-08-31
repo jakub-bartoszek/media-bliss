@@ -25,6 +25,7 @@ const TikTokServicesPage = () => {
     handleAddToCart={handleAddToCart}
    />
    <PackagesSection
+    id="tiktok-packages"
     category="TikTok"
     handleAddToCart={handleAddToCart}
    />

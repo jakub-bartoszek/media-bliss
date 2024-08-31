@@ -50,7 +50,7 @@ export const PackageTile = ({
       className="w-full bg-fade"
       onClick={() =>
        onSelect({
-        id: nanoid(),
+        id: `package-${pkg.category}-${pkg.id}`,
         name: pkg.name,
         category: pkg.category,
         price: parseFloat(pkg.price.toString()),

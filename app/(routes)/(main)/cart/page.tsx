@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import { useEffect, useState } from "react";
 import { CartItem } from "@/types";
@@ -6,7 +6,6 @@ import toast from "react-hot-toast";
 import Button from "@/components/button";
 import { FaShoppingCart } from "react-icons/fa";
 import { useRouter } from "next/navigation";
-import { nanoid } from "nanoid";
 import CartTile from "@/components/cart-tile";
 
 const Cart = () => {
@@ -15,10 +14,32 @@ const Cart = () => {
  const router = useRouter();
 
  useEffect(() => {
-  const storedCart = JSON.parse(localStorage.getItem("cart") || "[]").map(
-   (item: CartItem) => ({ ...item, selected: false })
-  );
-  setCartItems(storedCart);
+  const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+  const validateCartItems = async () => {
+   try {
+    const response = await fetch("/api/cart", {
+     method: "POST",
+     headers: {
+      "Content-Type": "application/json"
+     },
+     body: JSON.stringify({ cartItems: storedCart })
+    });
+
+    if (response.ok) {
+     const { validCartItems } = await response.json();
+     setCartItems(validCartItems);
+     localStorage.setItem("cart", JSON.stringify(validCartItems));
+    } else {
+     toast.error("Failed to validate cart items.");
+    }
+   } catch (error) {
+    toast.error("An error occurred during validation.");
+    console.error("Validation error:", error);
+   }
+  };
+
+  validateCartItems();
  }, []);
 
  const removeItemFromCart = (cartId: string) => {
@@ -30,24 +51,26 @@ const Cart = () => {
 
  const validateAllLinks = () => {
   let valid = true;
+  const updatedErrors: { [key: string]: string } = {};
+
   cartItems.forEach((item) => {
    if (item.selected && item.requireLink === true) {
     const regex =
      item.category === "Instagram"
       ? /^(https?:\/\/)?(www\.)?instagram\.com\/[a-zA-Z0-9(_)\.]+\/?$/
       : /^(https?:\/\/)?(www\.)?tiktok\.com\/@[a-zA-Z0-9(_)\.]+\/?$/;
+
     if (!regex.test(item.accountLink || "")) {
      valid = false;
-     setErrors((prev) => ({
-      ...prev,
-      [item.id]:
-       item.category === "Instagram"
-        ? "Please enter a valid Instagram account link."
-        : "Please enter a valid TikTok account link."
-     }));
+     updatedErrors[item.id] =
+      item.category === "Instagram"
+       ? "Please enter a valid Instagram account link."
+       : "Please enter a valid TikTok account link.";
     }
    }
   });
+
+  setErrors(updatedErrors);
   return valid;
  };
 

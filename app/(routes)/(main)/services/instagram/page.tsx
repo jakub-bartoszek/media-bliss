@@ -25,6 +25,7 @@ const InstagramServicesPage = () => {
     handleAddToCart={handleAddToCart}
    />
    <PackagesSection
+    id="instagram-packages"
     category="Instagram"
     handleAddToCart={handleAddToCart}
    />

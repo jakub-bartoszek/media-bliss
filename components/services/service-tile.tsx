@@ -64,7 +64,7 @@ export const ServiceTile = ({ service, onSelect }: ServiceTileProps) => {
      className="w-full bg-fade"
      onClick={() =>
       onSelect({
-       id: nanoid(),
+       id: `service-${service.category}-${service.id}`,
        name: service.name,
        category: service.category,
        price: parseFloat(service.price.toString()),

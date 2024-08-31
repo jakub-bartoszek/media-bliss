@@ -99,9 +99,9 @@ export const CustomAccountSection = ({
      onClick={() =>
       selectedAccount &&
       handleAddToCart({
-       id: nanoid(),
-       name: `Konto ${selectedAccount.category} × ${quantity} obserwujących`,
-       category: selectedAccount.category,
+       id: `customAccount-${selectedAccount?.category}-${selectedAccount?.id}`,
+       name: `Konto ${selectedAccount?.category} × ${quantity} obserwujących`,
+       category: selectedAccount?.category,
        price: parseFloat(totalPrice),
        requireLink: false
       })
