@@ -52,7 +52,9 @@ export async function POST(req: NextRequest) {
    mode: "payment",
    success_url: `${
     req.nextUrl.origin
-   }/success?session_id={CHECKOUT_SESSION_ID}&value=${totalAmount / 100}`,
+   }/success?session_id={CHECKOUT_SESSION_ID}&value=${
+    totalAmount / 100
+   }&item_ids=${cartItems.map((item) => item.id).join(",")}`,
    cancel_url: `${req.nextUrl.origin}/cancel`
   });
 

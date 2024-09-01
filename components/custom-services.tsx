@@ -108,7 +108,7 @@ export const CustomServices = ({
      onClick={() =>
       selectedService &&
       handleAddToCart({
-       id: `customService-${selectedService?.category}-${selectedService?.id}`,
+       id: `customService-${selectedService?.category}-${selectedService?.id}-${nanoid()}`,
        name: `${selectedService?.name} × ${quantity}`,
        category: selectedService?.category,
        price: parseFloat(totalPrice),

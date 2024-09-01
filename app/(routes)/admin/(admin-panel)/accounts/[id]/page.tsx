@@ -16,8 +16,6 @@ const AccountIdPage = ({ params }: AccountIdPageProps) => {
  const accountId = parseInt(params.id);
  const { account, loading, error } = useAccount(accountId);
 
- console.log(account);
-
  if (loading) {
   return <Loader />;
  }

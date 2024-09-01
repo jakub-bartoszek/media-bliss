@@ -6,6 +6,7 @@ import {
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { CartItem } from "@/types";
+import { nanoid } from "nanoid";
 
 interface AccountTile {
  account: AccountForSale;
@@ -80,7 +81,7 @@ export const AccountTile = ({ account, onSelect }: AccountTile) => {
      className="w-full bg-fade"
      onClick={() =>
       onSelect({
-       id: `account-${account.category}-${account.id}`,
+       id: `account-${account.category}-${account.id}-${nanoid()}`,
        name: `Konto ${account.category} × ${account.followerCount} obserwujących`,
        category: account.category,
        price: parseFloat(account.price.toString()),

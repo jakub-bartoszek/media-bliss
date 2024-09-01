@@ -1,20 +1,24 @@
 "use client";
 
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Button from "@/components/button";
-import { trackPixelEvent } from "@/lib/utils/facebookPixel";
 
 const Success = () => {
+ const router = useRouter();
+
  useEffect(() => {
-  localStorage.removeItem("cart");
-
   const params = new URLSearchParams(window.location.search);
-  const purchaseValue = params.get("value") || "0.00";
+  const itemIds = params.get("item_ids")?.split(",") || [];
 
-  trackPixelEvent("Purchase", {
-   value: parseFloat(purchaseValue),
-   currency: "PLN"
-  });
+  const storedCartItems = JSON.parse(localStorage.getItem("cart") || "[]");
+  const updatedCartItems = storedCartItems.filter(
+   (item: any) => !itemIds.includes(item.id)
+  );
+
+  localStorage.setItem("cart", JSON.stringify(updatedCartItems));
+
+  localStorage.removeItem("selectedCartItems");
  }, []);
 
  return (

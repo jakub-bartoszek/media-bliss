@@ -67,7 +67,8 @@ const Checkout = () => {
   try {
    const response = await axios.post("/api/checkout", {
     cartItems: selectedItems.map(
-     ({ name, price, accountLink, additionalInfo, category }) => ({
+     ({ id, name, price, accountLink, additionalInfo, category }) => ({
+      id,
       name,
       price,
       accountLink,
