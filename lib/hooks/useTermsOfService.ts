@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState, useEffect } from "react";
 
 const useTermsOfService = () => {
@@ -8,13 +9,10 @@ const useTermsOfService = () => {
  useEffect(() => {
   const fetchTermsOfService = async () => {
    try {
-    const response = await fetch("/api/terms-of-service");
-    if (!response.ok)
-     throw new Error("Failed to fetch terms of service");
-    const data = await response.text();
-    setTermsOfService(data);
+    const response = await axios.get("/api/terms-of-service");
+    setTermsOfService(response.data);
    } catch (err: any) {
-    setError(err.message);
+    setError(err.message || "Failed to fetch terms of service");
    } finally {
     setLoading(false);
    }
@@ -26,18 +24,10 @@ const useTermsOfService = () => {
  const updateTermsOfService = async (newTerms: string) => {
   setLoading(true);
   try {
-   const response = await fetch("/api/terms-of-service", {
-    method: "PATCH",
-    headers: {
-     "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ termsOfService: newTerms })
-   });
-   if (!response.ok)
-    throw new Error("Failed to update terms of service");
+   await axios.patch("/api/terms-of-service", { termsOfService: newTerms });
    setTermsOfService(newTerms);
   } catch (err: any) {
-   setError(err.message);
+   setError(err.message || "Failed to update terms of service");
   } finally {
    setLoading(false);
   }

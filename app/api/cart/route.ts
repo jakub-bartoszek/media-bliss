@@ -72,8 +72,6 @@ export async function POST(req: NextRequest) {
    return false;
   });
 
-  console.log({ validCartItems });
-
   return NextResponse.json({ validCartItems });
  } catch (error: any) {
   console.error("Error validating cart items:", error.message);

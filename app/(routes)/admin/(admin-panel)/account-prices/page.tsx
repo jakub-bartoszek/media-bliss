@@ -8,6 +8,7 @@ import Button from "@/components/button";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { CustomAccount } from "@prisma/client";
+import axios from "axios";
 
 type EditedAccounts = {
  [key: number]: number;
@@ -30,13 +31,7 @@ const AdminAccounts = () => {
   try {
    await Promise.all(
     Object.entries(editedAccounts).map(async ([id, pricePerFollow]) => {
-     await fetch(`/api/custom-accounts/${id}`, {
-      method: "PATCH",
-      headers: {
-       "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ pricePerFollow })
-     });
+     await axios.patch(`/api/custom-accounts/${id}`, { pricePerFollow });
     })
    );
    setEditedAccounts({});
@@ -76,8 +71,8 @@ const AdminAccounts = () => {
       <h1 className="font-bold   text-2xl">{account.category}</h1>
       <div className="flex gap-2 items-center">
        <input
-       className="rounded-lg bg-zinc-800 px-4 py-2"
-       type="number"
+        className="rounded-lg bg-zinc-800 px-4 py-2"
+        type="number"
         value={
          editedAccounts[account.id] !== undefined
           ? editedAccounts[account.id].toString()

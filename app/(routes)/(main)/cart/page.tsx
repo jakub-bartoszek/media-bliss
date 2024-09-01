@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect, useState } from "react";
 import { CartItem } from "@/types";
@@ -7,6 +7,7 @@ import Button from "@/components/button";
 import { FaShoppingCart } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import CartTile from "@/components/cart-tile";
+import axios from "axios";
 
 const Cart = () => {
  const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -18,16 +19,10 @@ const Cart = () => {
 
   const validateCartItems = async () => {
    try {
-    const response = await fetch("/api/cart", {
-     method: "POST",
-     headers: {
-      "Content-Type": "application/json"
-     },
-     body: JSON.stringify({ cartItems: storedCart })
-    });
+    const response = await axios.post("/api/cart", { cartItems: storedCart });
 
-    if (response.ok) {
-     const { validCartItems } = await response.json();
+    if (response.status === 200) {
+     const { validCartItems } = response.data;
      setCartItems(validCartItems);
      localStorage.setItem("cart", JSON.stringify(validCartItems));
     } else {
