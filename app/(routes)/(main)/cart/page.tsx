@@ -1,48 +1,26 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { CartItem } from "@/types";
+import { useRouter } from "next/navigation";
+import { FaShoppingCart } from "react-icons/fa";
 import toast from "react-hot-toast";
 import Button from "@/components/button";
-import { FaShoppingCart } from "react-icons/fa";
-import { useRouter } from "next/navigation";
 import CartTile from "@/components/cart-tile";
-import axios from "axios";
+import useCart from "@/lib/hooks/useCart";
+import { useState } from "react";
+import { Loader2 } from "lucide-react";
+import { BiError } from "react-icons/bi";
 
 const Cart = () => {
- const [cartItems, setCartItems] = useState<CartItem[]>([]);
+ const {
+  cartItems,
+  loading,
+  error,
+  removeItemFromCart,
+  calculateTotal,
+  setCartItems
+ } = useCart();
  const [errors, setErrors] = useState<{ [key: string]: string }>({});
  const router = useRouter();
-
- useEffect(() => {
-  const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
-
-  const validateCartItems = async () => {
-   try {
-    const response = await axios.post("/api/cart", { cartItems: storedCart });
-
-    if (response.status === 200) {
-     const { validCartItems } = response.data;
-     setCartItems(validCartItems);
-     localStorage.setItem("cart", JSON.stringify(validCartItems));
-    } else {
-     toast.error("Failed to validate cart items.");
-    }
-   } catch (error) {
-    toast.error("An error occurred during validation.");
-    console.error("Validation error:", error);
-   }
-  };
-
-  validateCartItems();
- }, []);
-
- const removeItemFromCart = (cartId: string) => {
-  const updatedCart = cartItems.filter((item) => item.id !== cartId);
-  setCartItems(updatedCart);
-  localStorage.setItem("cart", JSON.stringify(updatedCart));
-  window.dispatchEvent(new Event("storage"));
- };
 
  const validateAllLinks = () => {
   let valid = true;
@@ -69,17 +47,6 @@ const Cart = () => {
   return valid;
  };
 
- const calculateTotal = () => {
-  return cartItems.reduce((total, item) => {
-   if (item.selected) {
-    const price =
-     typeof item.price === "number" ? item.price : Number(item.price);
-    return total + price;
-   }
-   return total;
-  }, 0);
- };
-
  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
   event.preventDefault();
 
@@ -94,64 +61,89 @@ const Cart = () => {
   router.push("/checkout");
  };
 
+ const renderCartContent = () => {
+  if (loading) {
+   return (
+    <div className="flex items-center justify-center h-full">
+     <Loader2 className="animate-spin w-16 h-16 text-accent" />
+    </div>
+   );
+  }
+  if (error) {
+   return (
+    <div className="flex flex-col items-center justify-center h-full">
+     <BiError className="w-16 h-16 text-accent" />
+     <p className="text-xl font-bold text-muted">Coś poszło nie tak...</p>
+    </div>
+   );
+  }
+  if (cartItems.length === 0)
+   return (
+    <div className="flex flex-col items-center justify-center h-full">
+     <FaShoppingCart className="w-16 h-16 text-muted" />
+     <p className="text-xl font-bold text-secondary-muted">
+      Twój koszyk jest pusty
+     </p>
+    </div>
+   );
+  return (
+   <>
+    {cartItems.map((item) => (
+     <CartTile
+      key={item.id}
+      item={item}
+      removeItemFromCart={removeItemFromCart}
+      cartItems={cartItems}
+      setCartItems={setCartItems}
+      errors={errors}
+      setErrors={setErrors}
+     />
+    ))}
+   </>
+  );
+ };
+
  return (
   <div className="w-full h-full flex flex-col justify-center">
-   {cartItems.length === 0 ? (
-    <div className="w-full h-screen flex items-center justify-center flex-col ">
-     <FaShoppingCart className="w-24 h-24 text-black/50" />
-     <div>Brak produktów w koszyku</div>
-    </div>
-   ) : (
-    <form
-     onSubmit={handleSubmit}
-     className="p-4 pt-16"
-    >
-     <h1 className="text-3xl font-bold mb-8 mt-8">Twój koszyk</h1>
-     <div className="w-full flex flex-col md:flex-row gap-4">
-      <div className="w-full md:w-2/3 flex flex-col gap-4">
-       {cartItems.map((item) => (
-        <CartTile
-         key={item.id}
-         item={item}
-         removeItemFromCart={removeItemFromCart}
-         cartItems={cartItems}
-         setCartItems={setCartItems}
-         errors={errors}
-         setErrors={setErrors}
-        />
-       ))}
-      </div>
-      <div className="w-full md:w-1/3">
-       <div className="p-4 border bg-bg-content border-accent rounded-lg">
-        <h2 className="text-2xl font-semibold">Podsumowanie</h2>
-        <div className="mt-4">
-         <div className="flex justify-between">
-          <span>Wartość produktów</span>
-          <span>{calculateTotal().toFixed(2)} PLN</span>
-         </div>
+   <form
+    onSubmit={handleSubmit}
+    className="p-4 pt-16"
+   >
+    <h1 className="text-3xl font-bold mb-8 mt-8">Your Cart</h1>
+    <div className="w-full flex flex-col md:flex-row gap-4">
+     <div className="w-full md:w-2/3 flex flex-col gap-4">
+      {renderCartContent()}
+     </div>
+     <div className="w-full md:w-1/3">
+      <div className="p-4 border bg-bg-content border-accent rounded-lg">
+       <h2 className="text-2xl font-semibold">Summary</h2>
+       <div className="mt-4">
+        <div className="flex justify-between">
+         <span>Product Value</span>
+         <span>{calculateTotal().toFixed(2)} PLN</span>
         </div>
-        <div className="flex justify-between items-center mt-4 pt-4 border-t border-secondary-muted">
-         <span className="text-xl font-bold">Razem</span>
-         <span className="text-xl font-bold">
-          {calculateTotal().toFixed(2)} PLN
-         </span>
-        </div>
-        <div className="mt-6">
-         <Button
-          disabled={
-           cartItems.filter((item) => item.selected === true).length === 0
-          }
-          className="w-full bg-fade"
-          type="submit"
-         >
-          Przejdź do kasy
-         </Button>
-        </div>
+       </div>
+       <div className="flex justify-between items-center mt-4 pt-4 border-t border-secondary-muted">
+        <span className="text-xl font-bold">Total</span>
+        <span className="text-xl font-bold">
+         {calculateTotal().toFixed(2)} PLN
+        </span>
+       </div>
+       <div className="mt-6">
+        <Button
+         disabled={
+          cartItems.filter((item) => item.selected === true).length === 0
+         }
+         className="w-full bg-fade"
+         type="submit"
+        >
+         Proceed to Checkout
+        </Button>
        </div>
       </div>
      </div>
-    </form>
-   )}
+    </div>
+   </form>
   </div>
  );
 };
