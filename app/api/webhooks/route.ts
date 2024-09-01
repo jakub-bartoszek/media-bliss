@@ -97,6 +97,26 @@ export async function POST(req: NextRequest) {
 
    console.log("Order created successfully!", order);
 
+   for (const item of cartItems) {
+    if (item.id.startsWith("account-")) {
+     const accountId = parseInt(item.id.split("-")[2]);
+     try {
+      await prisma.accountForSale.delete({
+       where: { id: accountId }
+      });
+      console.log(`Account with ID ${accountId} removed from sale.`);
+     } catch (err: any) {
+      console.error(
+       `Failed to remove account with ID ${accountId}:`,
+       err.message
+      );
+      return new NextResponse("Failed to remove account: " + err.message, {
+       status: 500
+      });
+     }
+    }
+   }
+
    globalThis.sessions.delete(sessionId);
   } catch (err: any) {
    console.error("Error creating order:", err.message);
