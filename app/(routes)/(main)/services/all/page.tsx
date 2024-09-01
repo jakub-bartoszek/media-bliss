@@ -7,7 +7,7 @@ import { CustomAccountSection } from "@/components/custom-account";
 import { AccountsForSale } from "@/components/accounts-for-sale/accounts-for-sale";
 import { HeaderSection } from "@/components/header-section";
 import CartModal from "@/components/cart-modal";
-import { useCart } from "@/lib/hooks/useCart";
+import { useAddToCart } from "@/lib/hooks/useAddToCart";
 
 const AllServicesPage = () => {
  const {
@@ -16,7 +16,7 @@ const AllServicesPage = () => {
   handleAddToCart,
   handleViewCart,
   closeModal
- } = useCart();
+ } = useAddToCart();
 
  return (
   <div className="w-full flex flex-col gap-4">

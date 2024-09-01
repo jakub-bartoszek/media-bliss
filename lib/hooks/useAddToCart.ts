@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { CartItem } from "@/types";
 
-export const useCart = () => {
+export const useAddToCart = () => {
  const [isCartModalOpen, setCartModalOpen] = useState(false);
  const [latestItem, setLatestItem] = useState<CartItem | null>(null);
 
