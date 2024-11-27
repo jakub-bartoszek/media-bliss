@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# MediaBliss
 
-## Getting Started
+MediaBliss is a website designed for selling services like views, likes, and engagement metrics for platforms such as Instagram and TikTok. The site is built using modern technologies to ensure performance, scalability, and ease of use.
 
-First, run the development server:
+[App is live here.](https://mediabliss.pl)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Table of Contents
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- [Features](#features)
+- [Technologies used](#technologies-used)
+- [Contact](#contact)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Purchase views, likes, and engagement for Instagram and TikTok.
+- Secure payment integration using Stripe.
+- Responsive design with modern UI components.
+- User-friendly experience with dynamic content rendering.
 
-## Learn More
+## Technologies Used
 
-To learn more about Next.js, take a look at the following resources:
+### Core Technologies
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Next.js
+- React
+- Typescript
+- Tailwind
+- Prisma
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Libraries
 
-## Deploy on Vercel
+- JWT
+- Bcrypt
+- Oslo
+- Pino
+- Axios
+- React Hot Toast
+- Node loader
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Contact
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+For issues, questions, or suggestions, please open an issue in the repository or contact:
+
+- Email: jakub.bartoszek.dev@gmail.com
+- Linkedin: [jbartoszek-dev](https://www.linkedin.com/in/jbartoszek-dev)
+- GitHub: [jakub-bartoszek](https://github.com/jakub-bartoszek)
